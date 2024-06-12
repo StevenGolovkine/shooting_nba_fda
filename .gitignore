@@ -14,8 +14,10 @@
 *.out
 *.synctex.gz
 *.sta 
+
 # MacOS files
 ._*
+.DS_Store
 
 # Jupyter
 ./ipynb_checkpoints/*
@@ -27,3 +29,4 @@ notebooks/*
 
 # Data
 *.pkl
+
