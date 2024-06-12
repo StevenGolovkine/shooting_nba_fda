@@ -1,0 +1,29 @@
+# .gitignore file
+
+# Sublime text files
+*.sublime-workspace
+*.sublime-project
+
+# Latex files
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.sta 
+# MacOS files
+._*
+
+# Jupyter
+./ipynb_checkpoints/*
+notebooks/*
+
+# Private folder
+./comments/*
+./sts/*
+
+# Data
+*.pkl
