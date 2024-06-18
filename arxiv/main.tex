@@ -1,0 +1,56 @@
+\documentclass{article}
+
+\usepackage[english]{babel}
+\usepackage[a4paper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+
+% -------------
+% Some commands
+% -------------
+\providecommand{\keywords}[1]{\textbf{\textit{Keywords---}} #1}
+
+% -------------
+
+\title{Is Stephen Curry really a guard? A functional data analysis perspective}
+\author{%
+Steven Golovkine\thanks{MACSI, Department of Mathematics and Statistics, University of Limerick, Ireland \href{mailto:steven.golovkine@ul.ie}{steven.golovkine@ul.ie}}
+\and
+Edward Gunning\thanks{Department of Biostatistics and Epidemiology, University of Pennsylvania, USA \href{mailto:edward.gunning@pennmedicine.upenn.edu}{edward.gunning@pennmedicine.upenn.edu}}
+}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Your abstract.
+\end{abstract}
+
+\keywords{Basketball, Sport Analytics}
+
+% MAIN --------
+\input{main/introduction}
+
+\input{main/dataset}
+
+\input{main/method}
+
+\input{main/results}
+
+\input{main/discussion}
+
+
+% ACKNOWLEDGMENT -------
+\section*{Acknowledgment}
+
+S. Golovkine is partially supported by Science Foundation Ireland under Grant No. 19/FFP/7002 and co-funded under the European Regional Development Fund.
+
+% REFERENCES ---------
+\bibliographystyle{abbrv}
+\bibliography{./biblio.bib}
+
+\end{document}
+
