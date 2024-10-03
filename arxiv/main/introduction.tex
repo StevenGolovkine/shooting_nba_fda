@@ -2,20 +2,86 @@
 \section{Introduction} % (fold)
 \label{sec:introduction}
 
+\textcolor{red}{Look at \cite{huZeroinflatedPoissonModel2023} for the skeleton of a paper.}
 
-\cite{millerFactorizedPointProcess2014}
-\cite{jiaoBayesianMarkedSpatial2021}
-\cite{franksCharacterizingSpatialStructure2015}
-\cite{maddoxBayesianEstimationIngame2022}
-\cite{ternerModelingPlayerTeam2021}
-\cite{cervoneMultiresolutionStochasticProcess2016}
-\cite{fuHoopInSightAnalyzingComparing2024}
-\cite{liuChangesBasketballShooting1999}
-\cite{csataljayEffectsDefensivePressure2013}
-\cite{okazakiReviewBasketballJump2015}
-\cite{zuccolottoSpatialPerformanceAnalysis2023}
-\cite{reichSpatialAnalysisBasketball2006}
+
+\textcolor{red}{
+In recent years, the field of sports analytics has witnessed a significant transformation, driven by the increasing availability of detailed performance data and advancements in statistical methodologies. Among the various sports, basketball stands out as a prime candidate for analytical exploration due to its fast-paced nature and the critical role of shooting efficiency in determining game outcomes. The National Basketball Association (NBA), with its wealth of data on player performance and shooting patterns, provides an exceptional opportunity to delve into the intricacies of scoring behavior.}
+
+\textcolor{red}{
+This paper aims to analyze shooting patterns in the NBA through the lens of functional data analysis (FDA) and clustering techniques. Functional data analysis offers a robust framework for examining shooting performance by treating shot attempts as continuous functions rather than discrete observations. This approach allows for a nuanced understanding of how shooting accuracy varies across different court locations, shot types, and game contexts. By employing FDA, we can capture the underlying trends and variations in shooting behavior that traditional statistical methods may overlook.}
+
+\textcolor{red}{
+Moreover, clustering techniques will be utilized to group players based on their shooting patterns, revealing similarities and differences in their scoring tendencies. Identifying distinct clusters of shooters can provide valuable insights into player development, coaching strategies, and team dynamics. For instance, understanding whether a player excels in specific areas of the court or struggles under defensive pressure can inform targeted training interventions and game strategies.}
+
+\textcolor{red}{
+The implications of this research extend beyond individual player analysis; they have the potential to enhance team performance optimization and inform coaching decisions. As basketball continues to evolve into a more data-driven sport, leveraging advanced analytical techniques will be crucial for teams seeking a competitive edge.}
+
+\textcolor{red}{
+In this paper, we will outline our methodology for collecting and analyzing NBA shooting data, present our findings on shooting patterns through functional data analysis, and discuss the clustering results that emerge from our analysis. Ultimately, this study aims to contribute to the growing body of knowledge in sports analytics by providing actionable insights that can influence player development and strategic decision-making within the realm of professional basketball.}
+
+\textcolor{red}{-----}
+
+\textcolor{red}{
+Basketball is a dynamic sport where player performance, particularly shooting accuracy and patterns, plays a crucial role in determining the outcome of games. Among the myriad skills that contribute to a player's effectiveness, the ability to consistently make successful shots from various locations on the court stands out as a critical factor. Understanding shooting patterns is not only essential for evaluating individual player performance but also for developing team strategies and game plans.}
+
+\textcolor{red}{
+Traditional statistical methods have provided valuable insights into shooting performance by analyzing metrics such as shooting percentage, shot distribution, and efficiency from different areas of the court. However, these methods often treat shooting events as isolated points, failing to capture the continuous nature of player behavior and the temporal and spatial dependencies inherent in the game. This limitation poses a challenge when trying to understand the more intricate aspects of shooting patterns, such as hot zones, streaks, and variability over time.}
+
+\textcolor{red}{
+Functional Data Analysis (FDA) offers a robust framework to address these challenges by treating shooting data as continuous functions rather than discrete points. FDA allows for the modeling of shooting patterns as smooth curves, which can represent the underlying processes more accurately and reveal subtle trends and patterns that traditional methods might overlook. By converting shot locations and outcomes into functional data objects, we can apply FDA techniques to analyze the smooth trajectories of shooting performance across different contexts and time frames.}
+
+\textcolor{red}{
+In this study, we leverage FDA to analyze the shooting patterns of NBA players. Our approach involves collecting detailed shooting data, including shot locations, outcomes, and contextual variables, and then applying FDA methods to convert this data into continuous curves. This enables us to examine how shooting patterns evolve over time, identify consistent shooting tendencies, and compare these patterns across different players and game situations.}
+
+\textcolor{red}{
+The primary objective of this research is to demonstrate the efficacy of FDA in capturing the complexities of shooting behavior in basketball. By providing a more nuanced understanding of shooting patterns, we aim to offer valuable insights for coaches, analysts, and players. Additionally, this study seeks to bridge the gap between traditional shooting analysis and advanced statistical techniques, showcasing how FDA can be integrated into sports analytics to enhance performance evaluation and strategic decision-making.}
+
+\textcolor{red}{
+Through this research, we contribute to the growing field of sports analytics by introducing a novel application of FDA to basketball shooting data. Our findings have the potential to inform coaching strategies, player development programs, and analytical models, ultimately contributing to a deeper understanding of the game and its players.}
+
+
+\textcolor{red}{Question: Is Stephen Curry really a guard? It poses the questions of the characterisation of the players through their shooting patterns. Does all guards, forwards, ... shoot at the same locations? Can we find another typology of the players based on their shooting patterns?}
+
+\cite{millerFactorizedPointProcess2014} factorized point process intensities. They represent and analyze the underlying spatial structure that governs shot selection. They model shot attempt as a point process. They create a low-dimensional representation using non-negative matrix factorization.
+
+\cite{jiaoBayesianMarkedSpatial2021} proposes a Bayesian marked spatial point processes model. Study if the sucess rate of shot is higher at locations where players makes more shots. Interested by shots intensity. Clustering of players intensity.
+
+
+\cite{franksCharacterizingSpatialStructure2015} are interesed by the defensive aspect of basketball. Use matrix factorization techniques.
+
+
+\cite{maddoxBayesianEstimationIngame2022} propose Bayesian methods to estimate in-game home team win probabilities.
+
+
+\cite{ternerModelingPlayerTeam2021} review methods to modeling player and team performance in basketball.
+
+
+\cite{cervoneMultiresolutionStochasticProcess2016} present a multiresolution stochastic process model for predicting basketball possession outcomes. They are interested by the expected possission value.
+
+
+\cite{fuHoopInSightAnalyzingComparing2024} use (interactive) data visualization to analyze and compare basketball shooting performance. 
+
+
+\cite{liuChangesBasketballShooting1999} examines the effect of distance on the accuracy and movement form in shooting. Non-professional players.
+
+
+\cite{csataljayEffectsDefensivePressure2013} are interested by defensive pressure.
+
+
+\cite{okazakiReviewBasketballJump2015} reviews of the mechanics of shooting.
+
+
+\cite{zuccolottoSpatialPerformanceAnalysis2023} aims at representing maps of the court visualizing areas with different levels of scoring probability,
+
+
+\cite{reichSpatialAnalysisBasketball2006} uses shots data to infer other players abilities. Hierarhical spatial model with spatially varying effect of covariates.
+
+
 \cite{wong-toiJointAnalysisField2022}
 \cite{yinAnalysisProfessionalBasketball2023}
+
+
+\cite{huZeroinflatedPoissonModel2023} uses zero-inflated Poisson model with clustered regression coefficients.
 
 % section introduction (end)
