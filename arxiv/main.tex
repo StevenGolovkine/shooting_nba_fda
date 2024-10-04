@@ -4,8 +4,19 @@
 \usepackage[a4paper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
 
 \usepackage{amsmath}
-\usepackage{graphicx}
-\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{xcolor,graphicx}
+\usepackage{hyperref}
+\hypersetup{%
+  colorlinks=true,
+  breaklinks=true,
+  linkcolor=red,
+  anchorcolor=black,
+  citecolor=brown,
+  filecolor=blue,
+  menucolor=red,
+  urlcolor=red,
+}
+\usepackage[authoryear]{natbib}
 
 % -------------
 % Some commands
@@ -49,7 +60,7 @@ Your abstract.
 S. Golovkine is partially supported by Science Foundation Ireland under Grant No. 19/FFP/7002 and co-funded under the European Regional Development Fund.
 
 % REFERENCES ---------
-\bibliographystyle{abbrv}
+\bibliographystyle{apalike}
 \bibliography{./biblio.bib}
 
 \end{document}
