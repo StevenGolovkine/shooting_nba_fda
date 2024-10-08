@@ -179,22 +179,23 @@ class ShotCharts:
         ax: mpl.axes,
         df: pd.DataFrame,
         name: str,
+        position: str,
         add_headshot: bool = True
     ) -> mpl.axes:
         cond = df.PLAYER_NAME == name
         X = df[cond]['LOC_X'].to_numpy()
         Y = df[cond]['LOC_Y'].to_numpy()
-        MADE = df[cond]['SHOT_MADE_FLAG'].to_numpy()
+        MADE = df[cond]['SHOT_MADE_FLAG'].to_numpy().astype('bool')
         idx = df[cond]['PLAYER_ID'].iloc[0]
 
         ax = ShotCharts.create_court(ax, 'black')
-        scatter = ax.scatter(X, Y, c=MADE, alpha=1, s=0.2, cmap='viridis')
+        ax.scatter(X[~MADE], Y[~MADE], c='#D81B60', marker='x', alpha=0.8, s=5, linewidth=0.2, label='Missed')
+        ax.scatter(X[MADE], Y[MADE], edgecolors='#1E88E5', alpha=0.8, s=5, linewidth=0.2, facecolors='none', label='Made')
         
-        ax.text(0.03, 0.925, f"Shots chart", fontsize='large', transform=ax.transAxes)
-        #ax.text(0.03, 0.875, f"{name}", fontsize='medium', transform=ax.transAxes)
-
-        new_legend = (scatter.legend_elements()[0], ['Missed', 'Made'])
-        leg = ax.legend(*new_legend, loc="upper right", title="")
+        ax.text(0.03, 0.925, f"{name}", fontsize='large', transform=ax.transAxes)
+        ax.text(0.03, 0.875, f"{position}", fontsize='medium', transform=ax.transAxes)
+        
+        leg = ax.legend(loc="upper right", title="")
         ax.add_artist(leg)
         
         if add_headshot:
@@ -272,7 +273,6 @@ class ShotCharts:
         XX, YY = np.mgrid[X_MIN:X_MAX:201j, Y_MIN:Y_MAX:201j]
 
         midnorm = MidpointNormalize(vmin=-1., vcenter=0, vmax=1)
-        ax = ShotCharts.create_court(ax, 'black')
         ax.contourf(
             XX, YY, mean / np.max(np.abs(mean)),
             levels=30,
@@ -281,11 +281,12 @@ class ShotCharts:
         ax.text(
             0.03, 0.925, f"{title}", fontsize='large', transform=ax.transAxes
         )
-        ax.text(
-            0.03, 0.87,
-            f"$\mu^{{({{{idx_c + 1}}})}}$",
-            fontsize='medium', transform=ax.transAxes
-        )
+        ax = ShotCharts.create_court(ax, 'black')
+        # ax.text(
+        #     0.03, 0.87,
+        #     f"$\mu^{{({{{idx_c + 1}}})}}$",
+        #     fontsize='medium', transform=ax.transAxes
+        # )
         return ax
 
     def components_chart(
@@ -307,7 +308,7 @@ class ShotCharts:
         XX, YY = np.mgrid[X_MIN:X_MAX:201j, Y_MIN:Y_MAX:201j]
 
         midnorm = MidpointNormalize(vmin=-1., vcenter=0, vmax=1)
-        ax = ShotCharts.create_court(ax, 'black')
+        
         ax.contourf(
             XX, YY, eigenfunctions / np.max(np.abs(eigenfunctions)),
             levels=30,
@@ -316,11 +317,12 @@ class ShotCharts:
         ax.text(
             0.03, 0.925, f"{title}", fontsize='large', transform=ax.transAxes
         )
-        ax.text(
-            0.03, 0.87,
-            f"$\phi_{{{idx + 1}}}^{{({{{idx_c + 1}}})}} ({pct[idx]:.1f}\%)$",
-            fontsize='medium', transform=ax.transAxes
-        )
+        ax = ShotCharts.create_court(ax, 'black')
+        # ax.text(
+        #     0.03, 0.87,
+        #     f"$\phi_{{{idx + 1}}}^{{({{{idx_c + 1}}})}} ({pct[idx]:.1f}\%)$",
+        #     fontsize='medium', transform=ax.transAxes
+        # )
         return ax
 
     def shots_decomposition_chart(
