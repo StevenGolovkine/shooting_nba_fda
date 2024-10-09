@@ -218,7 +218,6 @@ class ShotCharts:
         XX, YY = np.mgrid[X_MIN:X_MAX:201j, Y_MIN:Y_MAX:201j]
 
         midnorm = MidpointNormalize(vmin=-1., vcenter=0, vmax=1)
-        ax = ShotCharts.create_court(ax, 'black')
         ax.contourf(
             XX, YY, density / np.max(np.abs(density)),
             levels=30,
@@ -226,6 +225,7 @@ class ShotCharts:
         )
         ax.text(0.03, 0.925, f"{title}", fontsize='large', transform=ax.transAxes)
         #ax.text(0.03, 0.875, f"{name}", fontsize='medium', transform=ax.transAxes)
+        ax = ShotCharts.create_court(ax, 'black')
         if add_headshot:
             ax = ShotCharts.add_headshot(ax, idx)
         return ax
@@ -248,14 +248,14 @@ class ShotCharts:
         XX, YY = np.mgrid[X_MIN:X_MAX:201j, Y_MIN:Y_MAX:201j]
 
         midnorm = MidpointNormalize(vmin=-1., vcenter=0, vmax=1)
-        ax = ShotCharts.create_court(ax, 'black')
         ax.contourf(
             XX, YY, density / np.max(np.abs(density)),
             levels=30,
             cmap='seismic', norm=midnorm
         )
         ax.text(0.03, 0.925, f"{title}", fontsize='large', transform=ax.transAxes)
-        ax.text(0.03, 0.875, f"{name}", fontsize='medium', transform=ax.transAxes)
+        #ax.text(0.03, 0.875, f"{name}", fontsize='medium', transform=ax.transAxes)
+        ax = ShotCharts.create_court(ax, 'black')
         if add_headshot:
             ax = ShotCharts.add_headshot(ax, idx)
         return ax
@@ -349,16 +349,47 @@ class ShotCharts:
         XX, YY = np.mgrid[X_MIN:X_MAX:201j, Y_MIN:Y_MAX:201j]
         
         midnorm = MidpointNormalize(vmin=-1., vcenter=0, vmax=1)
-        ax = ShotCharts.create_court(ax, 'black')
         ax.contourf(
             XX, YY, fpc / maximum,
             levels=30,
             cmap='seismic', norm=midnorm,
         )
+        ax = ShotCharts.create_court(ax, 'black')
         ax.text(0.03, 0.925, f"{title}", fontsize='large', transform=ax.transAxes)
-        ax.text(
-            0.03, 0.87,
-            f"$\mathfrak{{c}}_{{{idx + 1}}}\phi_{{{idx + 1}}}^{{({{{idx_c + 1}}})}} ({pct[idx]:.1f}\%)$",
-            fontsize='medium', transform=ax.transAxes
+        # ax.text(
+        #     0.03, 0.87,
+        #     f"$\mathfrak{{c}}_{{{idx + 1}}}\phi_{{{idx + 1}}}^{{({{{idx_c + 1}}})}} ({pct[idx]:.1f}\%)$",
+        #     fontsize='medium', transform=ax.transAxes
+        # )
+        return ax
+
+    def shots_decomposition_cluster(
+        ax: mpl.axes,
+        mfpca: MFPCA,
+        score: np.ndarray,
+        idx: int,
+        idx_c: int,
+        title: str,
+        maximum: float
+    ) -> plt.figure:
+        if isinstance(mfpca.eigenfunctions.data[idx_c], BasisFunctionalData):
+            eigenfunctions = mfpca.eigenfunctions.data[idx_c].to_grid()
+        else:
+            eigenfunctions = mfpca.eigenfunctions.data[idx_c]
+        eigenfunctions = eigenfunctions[idx].values.squeeze()
+        pct = 100 * mfpca.eigenvalues / np.sum(mfpca.eigenvalues)
+        fpc = score * eigenfunctions
+        
+        X_MIN, X_MAX = (-250, 250) 
+        Y_MIN, Y_MAX = (0, 422.5)
+        XX, YY = np.mgrid[X_MIN:X_MAX:201j, Y_MIN:Y_MAX:201j]
+        
+        midnorm = MidpointNormalize(vmin=-1., vcenter=0, vmax=1)
+        ax.contourf(
+            XX, YY, fpc / maximum,
+            levels=30,
+            cmap='seismic', norm=midnorm,
         )
+        ax = ShotCharts.create_court(ax, 'black')
+        ax.text(0.03, 0.925, f"{title}", fontsize='large', transform=ax.transAxes)
         return ax
