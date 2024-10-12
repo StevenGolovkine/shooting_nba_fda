@@ -4,18 +4,11 @@
 
 The primary thing to consider to convert the shots charts into functional datasets. To do so, we employed a 2-dimensional kernel density estimation for both the attempted and made shots, utilizing Silverman's rule \cite{silvermanDensityEstimationStatistics1986} for the estimation of the bandwith. The density estimation is conducted on a regularly spaced grid consisting of $201 \times 201$ points. We obtain observations of bivariate functional data, where both features are defined on a two-dimensional rectangular domain, and observed on an equidistant grid of size $201 \times 201$. Figure~\ref{fig:examples_shooting_density} presents the density estimation of the same five players than for the shots charts in Figure~\ref{fig:examples_shooting_charts}. 
 
-\textcolor{red}{The method can be summarized with these steps:
-\begin{enumerate}
-    \item 2D Kernel density estimation
-    \item MFPCA
-    \item Clustering
-\end{enumerate}}
-
-
-\textcolor{red}{We estimate the functional principal components using the \texttt{Gram}, \texttt{(Tensor) PCA} and \texttt{2D/1D B-Splines} methods. For the \texttt{Gram} method, we directly use the estimated densities to estimate the eigencomponents. For the \texttt{(Tensor) PCA} method, the estimation of the multivariate eigenimages is based on the univariate estimation of $30$ univariate eigenimages. The estimation of the (univariate) eigenimages is performed with the FCP-TPA where the smoothing parameters are chosen via cross-validation in $[10^{-5}, 10^5]$. For the \texttt{2D/1D B-splines} method, the two components are expanded in tensor products of $13 \times 13$ B-splines. We do not add a smoothing penalty in that case, as the smoothing step is performed in the kernel density estimation.}
-
-\textcolor{red}{Clustering of the scores in the FPCA basis. I would probably use $k$-means with $k = 5$, it makes sense to have $k = 5$ because there are $5$ players of the court.}
-
+The idea is then to decompose each of the estimated density into a common basis of functions. Let $X$ denote an observation of the density. We aim to find the basis of $\{\phi_k\}_{1 \leq k \leq K}$ that represent the most accurately possible $X$ as
+\begin{equation}
+    X(s, t) = \mu(s, t) + \sum_{k = 1}^K c_k\phi_k(s, t), \quad s, t \in ...
+\end{equation}
+To do so, we do a multivariate functional principal components analysis (MFPCA), developed in \cite{golovkineUseGramMatrix2024}. We choose to estimate four components ($K = 4$) as these explain around $90\%$ of the variance in the data and they are explainable. The coefficients $c_k$ are then estimated as the projection of the observations onto the eigenfunctions.  To create a typology of players, we run a $k$-means clustering algorithm (\cite{macqueenMethodsClassificationAnalysis1967}) with $5$ clusters, as the number of players on the court. 
 
 \begin{figure}
     \centering

@@ -2,12 +2,10 @@
 \section{Results} % (fold)
 \label{sec:results}
 
+\subsection{Decomposition of the densities} % (fold)
+\label{sub:decomposition_of_the_densities}
 
-\textcolor{red}{Figure~\ref{fig:eigenfunctions_gram} shows the estimated mean surfaces and eigenfunctions for the \texttt{Gram} method. The functional principal components, as a representation of the deviation from the mean surface function, may take negative values, while densities can only take positive values. For presentation purposes, the functional principal components have been normalized between $-1$ and $1$. Blue areas correspond to negative values of the functional components, and thus contribute negatively to the density, while red area corresponds to positive values of the functional components, and thus contribute positively to the density. The decomposition of the density of made shots is similar that of attempted shots. The obtained functional components can be explained as different shooting behavior. The first component, accounting for $56.9\%$ of the variance explained, contrasts two-point and three-point shooting. A player with a positive score for $\phi_1$ will tend to take/attempt shots more behind the three-point line, while if he has a negative score, he will prefer shooting within the two-points zone. For the second component ($11.5\%$ of the variance explained), the contrast is between the left and right sides of the court. Similarly, if a player has a positive (resp. negative) score for $\phi_2$, he will prefer to shoot on the right (resp. left) side of the court while looking at the hoop. The third component ($9.4\%$ of the variance explained) contrasts shooting from the wing with shooting in the axis of the hoop. Positive (resp. negative) score players will shot in the axis of the hoop (resp. from the wing). The fourth component ($4.7\%$ of the variance explained) is more difficult to explain from a shooting behavior perspective. It may be linked to players having a preferred shooting location so that most of their shots are taken from the same position. The estimation of the eigencomponents with the \texttt{(Tensor) PCA} and \texttt{2D/1D B-Splines} methods are similar to the results with the \texttt{Gram} method and are thus provided in the Appendix \ref{sec:more_results}.}
-
-
-\textcolor{red}{Maybe it is possible to add something on huge shooters that miss a lot.}
-
+Figure~\ref{fig:mean_eigenfunctions} shows the estimated mean surfaces and eigenfunctions. The functional principal components, as a representation of the deviation from the mean surface function, may take negative values, while densities can only take positive values. For presentation purposes, the functional principal components have been normalized between $-1$ and $1$. Blue areas correspond to negative values of the functional components, and thus contribute negatively to the density, while red area corresponds to positive values of the functional components, and thus contribute positively to the density. The decomposition of the density of made shots is similar that of attempted shots. The mean chart represent the shooting behavior of the average player in the NBA. Lots of shots are taken in the paint, then the most common position is behind the three-point line, in the wings and the corners. We remark that the elbows and the short-corners are not particularly important shooting spots. The obtained functional components can be explained as different shooting behavior. The first component, accounting for $69.8\%$ of the variance explained, contrasts players above and below the average player. A player with a positive score for $\phi_1$ will tend to take/attempt more shots than the average player, while if he has a negative score, he will prefer shooting within the two-points zone. For the second component ($8.4\%$ of the variance explained), the contrast is between inside and outside the three-pointer line. If a player has a positive (resp. negative) score for $\phi_2$, he will prefer to shoot close to the basket (resp. behind the three-point line). The third component ($7.7\%$ of the variance explained) constrasts players that shoot in the paint and the others. Positive scores will tend to shoots more in that paint than the other players than negative scores would prefer to shoot farther from the basket. The fourth component ($3.3\%$ of the variance explained) contrasts shooting from the wing with shooting in the axis of the hoop. Positive (resp. negative) score players will shot in the axis of the hoop (resp. from the wing). 
 \begin{figure}
     \centering
     \includegraphics[scale=0.35]{figures/mean.eps}
@@ -17,11 +15,12 @@
     \includegraphics[scale=0.35]{figures/eigenfunction_4.eps}
     \\
     \includegraphics[scale=0.35]{figures/colorbar2.eps}
-    \caption{Mean + eigenfunctions}
+    \caption{Estimation of the mean surface and the eigenfunctions of the density shots charts. The eigenfunctions represent deviation from the mean surface and are defined up to a sign. Their values at specific points are thus not interpretable \emph{per se}. Note that the mean surface and eigenfunctions have been normalized between $-1$ and $1$ for presentation purpose.}
     \label{fig:mean_eigenfunctions}
 \end{figure}
 
 
+As an example, Figure~\ref{fig:examples_players} presents the decomposition of Stephen Curry. We remark that he shots and scores more than the average player as his first coefficient $c_1$ is positive. He does not have a preference for shooting close to the basket, or specifically in the paint, or not as his second and third coefficient are close to $0$. However, he prefers to shoots in the axis of the basket (positive coefficient $c_4$) compare to the other players. 
 \begin{figure}
     \centering
     \includegraphics[scale=0.295]{figures/curry_reconstruction.eps}
@@ -30,7 +29,7 @@
     \includegraphics[scale=0.295]{figures/curry_eigenfunction_2.eps}
     \includegraphics[scale=0.295]{figures/curry_eigenfunction_3.eps}
     \includegraphics[scale=0.295]{figures/curry_eigenfunction_4.eps}
-    \caption{Examples of players decomposition - Curry}
+    \caption{Example of the decomposition of Stephen Curry into the eigenfunctions basis.}
     \label{fig:examples_players}
 \end{figure}
 
@@ -42,9 +41,16 @@
     \includegraphics[scale=0.95]{figures/scores_3.eps}
     \includegraphics[scale=0.95]{figures/scores_4.eps}
     \includegraphics[scale=0.95]{figures/legend.eps}
-    \caption{Scatter plots of FPCs colored by groups}
+    \caption{Scatter plots of the coefficients colored using the NBA defined typology of players. We highlight one player per position.}
     \label{fig:clusters}
 \end{figure}
+
+
+% subsection decomposition_of_the_densities (end)
+
+\subsection{Clustering} % (fold)
+\label{sub:clustering}
+
 
 \begin{figure}
     \centering
@@ -110,5 +116,6 @@
 \end{tabular}
 \end{table}
 
+% subsection clustering (end)
 
 % section results (end)
