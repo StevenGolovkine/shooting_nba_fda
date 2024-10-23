@@ -13,6 +13,10 @@
     \item What do we propose. An estimation of the density of the shoots + MFPCA + Clustering
 \end{itemize}
 
+Shooting charts have been widely analysed in the basketball litterature. Most of the work in this area concern the modelling of the shooting charts as point process. We aim to challenge the typology of players as given by the NBA. 
+
+To tackle these challenges, we propose to estimate the density of the shots continuously on the offensive half-court and to model these densities as functional data. We consider both attempted and made shots modeled as multivariate functional data. Functional data analysis concerns the analysis of realisations of a stochastic process, recorded at discrete times and defined on compact intervals. Considering the density of the shoots as a stochastic process defined over the rectangle of the offensive half-court, we view the denisty of the shoots of any individual player as a realisation of this process. We aim to the variability of this stochastic process. To do so, we perform dimension reduction using multivariate functional principal components analysis. We can then characterise the shooting style of the players using the eigencomponents. Finally, we can determine which players are similar to each other using the projection of the data into the basis defined by the eigencomponents and clustering techniques.
+
 The rest of the article is organized as follows. In Section~\ref{sec:dataset}, we introduce the motivating dataset from the 2018 to 2019 regular season to the 2022 to 2023 regular season. In Section~\ref{sec:method}, we present our methodology. Application of the methodology to NBA player data are reported in Section~\ref{sec:results}. We conclude the article in Section~\ref{sec:discussion} with a discussion.
 
 

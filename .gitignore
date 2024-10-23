@@ -22,6 +22,7 @@
 # Jupyter
 ./ipynb_checkpoints/*
 notebooks/*
+__pycache__/*
 
 # Private folder
 ./comments/*
@@ -29,4 +30,4 @@ notebooks/*
 
 # Data
 *.pkl
-
+*.pickle

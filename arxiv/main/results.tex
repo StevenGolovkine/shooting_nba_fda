@@ -33,7 +33,7 @@ As an example, Figure~\ref{fig:examples_players} presents the decomposition of S
     \label{fig:examples_players}
 \end{figure}
 
-
+Figure~\ref{fig:clusters} presents the estimated scores $c_k$ from~\eqref{eq:kl_decomp} colored by their type according to the NBA. We highlighted the scores of one player per position. We remark that no score can recover the players typology defined by the NBA as the scores of each type are overlapping each others. 
 \begin{figure}
     \centering
     \includegraphics[scale=0.95]{figures/scores_1.eps}
@@ -41,7 +41,7 @@ As an example, Figure~\ref{fig:examples_players} presents the decomposition of S
     \includegraphics[scale=0.95]{figures/scores_3.eps}
     \includegraphics[scale=0.95]{figures/scores_4.eps}
     \includegraphics[scale=0.95]{figures/legend.eps}
-    \caption{Scatter plots of the coefficients colored using the NBA defined typology of players. We highlight one player per position.}
+    \caption{Scatter plots of the coefficients colored using the NBA defined typology of players. We highlighted one player per position. The scores have been jittered on the y-axis for visualisation purposes.}
     \label{fig:clusters}
 \end{figure}
 
@@ -110,9 +110,13 @@ As an example, Figure~\ref{fig:examples_players} presents the decomposition of S
 \caption{Example of players in each clusters}
 \label{tab:example_players_clusters}
 \begin{tabular}{ cccccc } 
- Cluster 1 & Cluster 2 & Cluster 3 & Cluster 4 & Cluster 4 \\ 
+ Cluster 1 & Cluster 2 & Cluster 3 & Cluster 4 & Cluster 5 \\ 
  \hline
- & & & & \\
+ B. Adebayo & S. Curry & D. Boker & J. Crowder &  L. James \\
+ G. Antetokounmpo & E. Fournier & L. Dončić & J. Holiday & N. Jokić \\
+ A. Davis & K. Love & J. Harden & P. Mills & J. Tatum \\
+ R. Gobert & K. Lowry & K. Irving & D. Robinson & K.-A. Towns \\
+ M. Robinson & C. Paul & K. Leonard & L. Shamet & J. Embiid \\
 \end{tabular}
 \end{table}
 
