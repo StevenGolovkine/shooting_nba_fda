@@ -15,6 +15,13 @@
 
 Shooting charts have been widely analysed in the basketball litterature. Most of the work in this area concern the modelling of the shooting charts as point process. We aim to challenge the typology of players as given by the NBA. 
 
+
+It is possible to model the counts directly without intensity surface \cite{huZeroinflatedPoissonModel2023}. To do so, they fit a Bayesian zero-inflated Poisson model to model shoot attempts of players with different shooting preference. The court is discretized. 
+
+A tool to analyze shooting charts is to construct a count matrix of the number of shots by player on a discretized court, fit an intensity surface for each each player over the discretized court using a log-Gaussian Cox process and find a low-rank approximation of all players' intensity surface using non-negative matrix factorization \cite{millerFactorizedPointProcess2014,franksCharacterizingSpatialStructure2015}. Non-parametric estimation of the intensity surface \cite{yinBayesianNonparametricLearning2022}. \cite{huBayesianGroupLearning2021} also use a log-Gaussian Cox process but then define a similarity measure to compare the players.
+
+
+
 To tackle these challenges, we propose to estimate the density of the shots continuously on the offensive half-court and to model these densities as functional data. We consider both attempted and made shots modeled as multivariate functional data. Functional data analysis concerns the analysis of realisations of a stochastic process, recorded at discrete times and defined on compact intervals. Considering the density of the shoots as a stochastic process defined over the rectangle of the offensive half-court, we view the denisty of the shoots of any individual player as a realisation of this process. We aim to the variability of this stochastic process. To do so, we perform dimension reduction using multivariate functional principal components analysis. We can then characterise the shooting style of the players using the eigencomponents. Finally, we can determine which players are similar to each other using the projection of the data into the basis defined by the eigencomponents and clustering techniques.
 
 The rest of the article is organized as follows. In Section~\ref{sec:dataset}, we introduce the motivating dataset from the 2018 to 2019 regular season to the 2022 to 2023 regular season. In Section~\ref{sec:method}, we present our methodology. Application of the methodology to NBA player data are reported in Section~\ref{sec:results}. We conclude the article in Section~\ref{sec:discussion} with a discussion.
@@ -61,12 +68,8 @@ Through this research, we contribute to the growing field of sports analytics by
 
 \textcolor{red}{Question: Is Stephen Curry really a guard? It poses the questions of the characterisation of the players through their shooting patterns. Does all guards, forwards, ... shoot at the same locations? Can we find another typology of the players based on their shooting patterns?}
 
-\cite{millerFactorizedPointProcess2014} factorized point process intensities. They represent and analyze the underlying spatial structure that governs shot selection. They model shot attempt as a point process. They create a low-dimensional representation using non-negative matrix factorization.
 
 \cite{jiaoBayesianMarkedSpatial2021} proposes a Bayesian marked spatial point processes model. Study if the sucess rate of shot is higher at locations where players makes more shots. Interested by shots intensity. Clustering of players intensity.
-
-
-\cite{franksCharacterizingSpatialStructure2015} are interesed by the defensive aspect of basketball. Use matrix factorization techniques.
 
 
 \cite{maddoxBayesianEstimationIngame2022} propose Bayesian methods to estimate in-game home team win probabilities.
@@ -102,6 +105,5 @@ Through this research, we contribute to the growing field of sports analytics by
 \cite{yinAnalysisProfessionalBasketball2023} proposes a Bayesian nonparametric matrix clustering approach to analyze the structure in the shot selection. Use a mixture of matrix normal distribution representation. Estimated intensity maps.
 
 
-\cite{huZeroinflatedPoissonModel2023} uses zero-inflated Poisson model with clustered regression coefficients.
 
 % section introduction (end)
