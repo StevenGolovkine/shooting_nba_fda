@@ -13,12 +13,14 @@
     \item What do we propose. An estimation of the density of the shoots + MFPCA + Clustering
 \end{itemize}
 
+Basketball has been widely analyzed from different perspective. Shooting movements have been analyzed in \cite{millerRelationshipBasketballShooting1996,liuChangesBasketballShooting1999,okazakiReviewBasketballJump2015}. Estimating game probability or in-game win probability (e.g. \cite{maddoxBayesianEstimationIngame2022}). See \cite{ternerModelingPlayerTeam2021} for a review.
+
 Shooting charts have been widely analysed in the basketball litterature. Most of the work in this area concern the modelling of the shooting charts as point process. We aim to challenge the typology of players as given by the NBA. 
 
 
 It is possible to model the counts directly without intensity surface \cite{huZeroinflatedPoissonModel2023}. To do so, they fit a Bayesian zero-inflated Poisson model to model shoot attempts of players with different shooting preference. The court is discretized. 
 
-A tool to analyze shooting charts is to construct a count matrix of the number of shots by player on a discretized court, fit an intensity surface for each each player over the discretized court using a log-Gaussian Cox process and find a low-rank approximation of all players' intensity surface using non-negative matrix factorization \cite{millerFactorizedPointProcess2014,franksCharacterizingSpatialStructure2015}. Non-parametric estimation of the intensity surface \cite{yinBayesianNonparametricLearning2022}. \cite{huBayesianGroupLearning2021} also use a log-Gaussian Cox process but then define a similarity measure to compare the players.
+A tool to analyze shooting charts is to construct a count matrix of the number of shots by player on a discretized court, fit an intensity surface for each each player over the discretized court using a log-Gaussian Cox process and find a low-rank approximation of all players' intensity surface using non-negative matrix factorization \cite{millerFactorizedPointProcess2014,franksCharacterizingSpatialStructure2015}. Non-parametric estimation of the intensity surface \cite{yinBayesianNonparametricLearning2022}. \cite{huBayesianGroupLearning2021} also use a log-Gaussian Cox process but then define a similarity measure to compare the players. \cite{reichSpatialAnalysisBasketball2006} proposes hierarchical spatial models.
 
 
 
@@ -72,8 +74,6 @@ Through this research, we contribute to the growing field of sports analytics by
 \cite{jiaoBayesianMarkedSpatial2021} proposes a Bayesian marked spatial point processes model. Study if the sucess rate of shot is higher at locations where players makes more shots. Interested by shots intensity. Clustering of players intensity.
 
 
-\cite{maddoxBayesianEstimationIngame2022} propose Bayesian methods to estimate in-game home team win probabilities.
-
 
 \cite{ternerModelingPlayerTeam2021} review methods to modeling player and team performance in basketball.
 
@@ -84,19 +84,11 @@ Through this research, we contribute to the growing field of sports analytics by
 \cite{fuHoopInSightAnalyzingComparing2024} use (interactive) data visualization to analyze and compare basketball shooting performance. 
 
 
-\cite{liuChangesBasketballShooting1999} examines the effect of distance on the accuracy and movement form in shooting. Non-professional players.
-
-
 \cite{csataljayEffectsDefensivePressure2013} are interested by defensive pressure.
-
-
-\cite{okazakiReviewBasketballJump2015} reviews of the mechanics of shooting.
 
 
 \cite{zuccolottoSpatialPerformanceAnalysis2023} aims at representing maps of the court visualizing areas with different levels of scoring probability,
 
-
-\cite{reichSpatialAnalysisBasketball2006} uses shots data to infer other players abilities. Hierarhical spatial model with spatially varying effect of covariates.
 
 
 \cite{wong-toiJointAnalysisField2022} analyzes shooting patterns among different players. They quantify the shooting patterns using a discretisation of the field. Perform Bayesian nonparametric mixture model to find latent clusters of players.
