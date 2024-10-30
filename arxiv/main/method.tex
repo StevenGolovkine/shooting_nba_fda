@@ -2,13 +2,24 @@
 \section{Method} % (fold)
 \label{sec:method}
 
-The primary thing to consider to convert the shots charts into functional datasets. To do so, we employed a 2-dimensional kernel density estimation for both the attempted and made shots, utilizing Silverman's rule \cite{silvermanDensityEstimationStatistics1986} for the estimation of the bandwith. The density estimation is conducted on a regularly spaced grid consisting of $201 \times 201$ points. We obtain observations of bivariate functional data, where both features are defined on a two-dimensional rectangular domain, and observed on an equidistant grid of size $201 \times 201$. Figure~\ref{fig:examples_shooting_density} presents the density estimation of the same five players than for the shots charts in Figure~\ref{fig:examples_shooting_charts}. 
+%The primary thing to consider to convert the shots charts into functional datasets. 
+The first step in our approach is to convert the raw shots charts into smooth functions for analysis. 
+To achieve this, we employ a 2-dimensional kernel density estimation for both the attempted and made shots, utilizing Silverman's rule \cite{silvermanDensityEstimationStatistics1986} for the estimation of the bandwidth. 
+The density estimation is conducted on a equally-spaced grid of $201 \times 201$ points.
+We then treat the smoothed attempted and made shots densities for each player as the two features of a bivariate functional observation, where both features are defined on a two-dimensional rectangular domain, and observed on an equidistant grid of size $201 \times 201$. Figure~\ref{fig:examples_shooting_density} presents the density estimates of the same five players displayed in the shots charts in Figure~\ref{fig:examples_shooting_charts}. 
 
-The idea is then to decompose each of the estimated density into a common basis of functions. Let $X$ denote an observation of the density. We aim to find the basis of $\{\phi_k\}_{1 \leq k \leq K}$ that represent the most accurately possible $X$ as
+We then employ multivariate functional principal components analysis (MFPCA), developed in \cite{golovkineUseGramMatrix2024}, to decompose each estimated density into a common set of basis of functions and player-specific basis coefficients (i.e., scores). 
+Let $X$ denote an observation of the density. 
+We aim to find the basis functions $\{\phi_k\}_{1 \leq k \leq K}$ that provide the most parsimonious representation of $X$ as 
 \begin{equation}\label{eq:kl_decomp}
-    X(s, t) = \mu(s, t) + \sum_{k = 1}^K c_k\phi_k(s, t), \quad s, t \in ...
+    X(s, t) = \mu(s, t) + \sum_{k = 1}^K c_k\phi_k(s, t), \quad s, t \in ...,
 \end{equation}
-To do so, we do a multivariate functional principal components analysis (MFPCA), developed in \cite{golovkineUseGramMatrix2024}. We choose to estimate four components ($K = 4$) as these explain around $90\%$ of the variance in the data and they are explainable. The coefficients $c_k$ are then estimated as the projection of the observations onto the eigenfunctions.  To create a typology of players, we run a $k$-means clustering algorithm (\cite{macqueenMethodsClassificationAnalysis1967}) with $5$ clusters, as the number of players on the court. 
+where $\mu(s, t)$ is the mean (average) function, and $c_k$ are the player-specific basis coefficients, known as the scores.
+The weighted sum in Equation \eqref{eq:kl_decomp} means that we can view each eigenfunction as characterising a shift away from the mean function for each player, where the player-specific score defines the magnitude and direction of the shift.
+We choose to estimate four components ($K = 4$) as these explain around $90\%$ of the variance in the data and they are explainable. 
+The coefficients $c_k$ are then estimated as the projection of the observations onto the eigenfunctions.
+These provide a finite-dimensional representation of the functional data and can be used as scalar variables in subsequent analysis, as they will capture player-specific characteristics.
+To create a typology of players, we run a $k$-means clustering algorithm (\cite{macqueenMethodsClassificationAnalysis1967}) with $5$ clusters, as the number of players on the court. 
 
 \begin{figure}
     \centering
