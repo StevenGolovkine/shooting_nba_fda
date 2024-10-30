@@ -3,7 +3,7 @@
 \label{sec:dataset}
 
 
-We consider data from the National Basketball Association (NBA). To access comprehensive game data, we use the Python package \texttt{nba\_api}\footnote{\url{https://github.com/swar/nba_api/}}, which provides access to the APIs of \url{nba.com}. 
+Our motivating dataset emanates from the National Basketball Association (NBA). To access comprehensive game data, we use the Python package \texttt{nba\_api}\footnote{\url{https://github.com/swar/nba_api/}}, which provides access to the APIs of \url{nba.com}. 
 The dataset consists of both made and missed field goal attempt locations from the offensive half-court from all NBA games spanning the seasons between $2018-2019$ and $2022-2024$. 
 Filtering the dataset, we focus solely on players who have made more than $1000$ field goal attempts during this six-season period, resulting in a cohort of $173$ players. These players accounted for a total of $717381$ shots attempted, of which $340466$ ($47\%$) were successful. Subsequently, we exclude shots deemed impossible (e.g., out-of-bounds), leaving us with a dataset comprising $715734$ shots, of which $340391$ ($47\%$) were successful.
 

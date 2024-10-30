@@ -2,7 +2,6 @@
 \section{Methodology} % (fold)
 \label{sec:method}
 
-%The primary thing to consider to convert the shots charts into functional datasets. 
 The first step in our approach is to convert the raw shots charts into smooth functions for analysis. 
 To achieve this, we employ a 2-dimensional kernel density estimation for both the attempted and made shots, utilizing Silverman's rule \cite{silvermanDensityEstimationStatistics1986} for the estimation of the bandwidth. 
 The density estimation is conducted on a equally-spaced grid of $201 \times 201$ points.
@@ -30,7 +29,7 @@ To create a typology of players, we run a $k$-means clustering algorithm (\cite{
     \includegraphics[scale=0.35]{figures/jokic_density.eps}
     \\
     \includegraphics[scale=0.35]{figures/colorbar.eps}
-    \caption{Shots charts density for five selected NBA players. Note that the densities have been individually normalized between $0$ and $1$.}
+    \caption{Shot chart densities for five selected NBA players. The densities have been individually normalized between $0$ and $1$.}
     \label{fig:examples_shooting_density}
 \end{figure}
 
