@@ -16,9 +16,9 @@ We aim to find the basis functions $\{\phi_k\}_{1 \leq k \leq K}$ that provide t
 \end{equation}
 where $\mu(s, t)$ is the mean (average) function, and $c_k$ are the player-specific basis coefficients, known as the scores.
 The weighted sum in Equation \eqref{eq:kl_decomp} means that we can view each eigenfunction as characterising a shift away from the mean function for each player, where the player-specific score defines the magnitude and direction of the shift.
-We choose to estimate four components ($K = 4$) as these explain around $90\%$ of the variance in the data and they are explainable. 
-The coefficients $c_k$ are then estimated as the projection of the observations onto the eigenfunctions.
-These provide a finite-dimensional representation of the functional data and can be used as scalar variables in subsequent analysis, as they will capture player-specific characteristics.
+We choose to estimate four components ($K = 4$) as these explain around $90\%$ of the variance in the data. 
+The scores $c_k$ are then estimated as the projection of the observations onto the eigenfunctions.
+These scores provide a finite-dimensional representation of the functional data and can be used as scalar variables in subsequent analysis, as they capture player-specific characteristics.
 To create a typology of players, we run a $k$-means clustering algorithm (\cite{macqueenMethodsClassificationAnalysis1967}) with $5$ clusters, as the number of players on the court. 
 
 \begin{figure}
