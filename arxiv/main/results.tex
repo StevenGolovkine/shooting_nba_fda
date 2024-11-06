@@ -5,7 +5,20 @@
 \subsection{Decomposition of the densities} % (fold)
 \label{sub:decomposition_of_the_densities}
 
-Figure~\ref{fig:mean_eigenfunctions} shows the estimated mean surfaces and eigenfunctions. The functional principal components, as a representation of the deviation from the mean surface function, may take negative values, while densities can only take positive values. For presentation purposes, the functional principal components have been normalized between $-1$ and $1$. Blue areas correspond to negative values of the functional components, and thus contribute negatively to the density, while red area corresponds to positive values of the functional components, and thus contribute positively to the density. The decomposition of the density of made shots is similar that of attempted shots. The mean chart represent the shooting behavior of the average player in the NBA. Lots of shots are taken in the paint, then the most common position is behind the three-point line, in the wings and the corners. We remark that the elbows and the short-corners are not particularly important shooting spots. The obtained functional components can be explained as different shooting behavior. The first component, accounting for $69.8\%$ of the variance explained, contrasts players above and below the average player. A player with a positive score for $\phi_1$ will tend to take/attempt more shots than the average player, while if he has a negative score, he will prefer shooting within the two-points zone. For the second component ($8.4\%$ of the variance explained), the contrast is between inside and outside the three-pointer line. If a player has a positive (resp. negative) score for $\phi_2$, he will prefer to shoot close to the basket (resp. behind the three-point line). The third component ($7.7\%$ of the variance explained) constrasts players that shoot in the paint and the others. Positive scores will tend to shoots more in that paint than the other players than negative scores would prefer to shoot farther from the basket. The fourth component ($3.3\%$ of the variance explained) contrasts shooting from the wing with shooting in the axis of the hoop. Positive (resp. negative) score players will shot in the axis of the hoop (resp. from the wing). 
+Figure~\ref{fig:mean_eigenfunctions} displays the estimated mean and eigenfunctions. 
+The functional principal components, which represent deviations around the mean function, may take negative values, while the densities themselves can only take positive values.
+For presentation purposes, the functional principal components have been normalized between $-1$ and $1$. Blue areas correspond to negative values of the functional components, and thus contribute negatively to the density, while red area corresponds to positive values of the functional components, and thus contribute positively to the density. 
+The decomposition of the density of made shots is similar that of attempted shots. 
+The mean chart represents the shooting behavior of the average player in the NBA. 
+Many shots are taken in the paint, then the most common position is behind the three-point line, in the wings and the corners. 
+We remark that the elbows and the short-corners are not particularly important shooting spots. 
+The obtained functional components can be explained as characterising different shooting behaviors.
+The first component, accounting for $69.8\%$ of the variance explained, contrasts players above and below the average player. 
+A player with a positive score for $\phi_1$ will tend to take/attempt more shots than the average player, while if he has a negative score, {\color{red}he will prefer shooting within the two-points zone -- I'm not sure of this.}. 
+For the second component ($8.4\%$ of the variance explained), the contrast is between inside and outside the three-pointer line. 
+If a player has a positive (resp. negative) score for $\phi_2$, he will prefer to shoot close to the basket (resp. behind the three-point line). 
+The third component ($7.7\%$ of the variance explained) contrasts players that shoot in the paint and the others. Positive scores will tend to shoot more in that paint than the other players than negative scores would prefer to shoot farther from the basket. 
+The fourth component ($3.3\%$ of the variance explained) contrasts shooting from the wing with shooting in the axis of the hoop. Positive (resp. negative) score players will shot in the axis of the hoop (resp. from the wing). 
 \begin{figure}
     \centering
     \includegraphics[scale=0.35]{figures/mean.eps}
@@ -20,7 +33,9 @@ Figure~\ref{fig:mean_eigenfunctions} shows the estimated mean surfaces and eigen
 \end{figure}
 
 
-As an example, Figure~\ref{fig:examples_players} presents the decomposition of Stephen Curry. We remark that he shots and scores more than the average player as his first coefficient $c_1$ is positive. He does not have a preference for shooting close to the basket, or specifically in the paint, or not as his second and third coefficient are close to $0$. However, he prefers to shoots in the axis of the basket (positive coefficient $c_4$) compare to the other players. 
+As an example, Figure~\ref{fig:examples_players} presents the decomposition of Stephen Curry. We remark that he shots and scores more than the average player as his first coefficient $c_1$ is positive. 
+He does not have a preference for shooting close to the basket, or specifically in the paint, or not as his second and third coefficient are close to $0$. 
+However, he prefers to shoots in the axis of the basket (positive coefficient $c_4$) compare to the other players. 
 \begin{figure}
     \centering
     \includegraphics[scale=0.295]{figures/curry_reconstruction.eps}
@@ -33,7 +48,9 @@ As an example, Figure~\ref{fig:examples_players} presents the decomposition of S
     \label{fig:examples_players}
 \end{figure}
 
-Figure~\ref{fig:clusters} presents the estimated scores $c_k$ from~\eqref{eq:kl_decomp} colored by their type according to the NBA. We highlighted the scores of one player per position. We remark that no score can recover the players typology defined by the NBA as the scores of each type are overlapping each others. 
+Figure~\ref{fig:clusters} presents the estimated scores $c_k$ from~\eqref{eq:kl_decomp} colored by their type according to the NBA. 
+We highlight the scores of one player per position. 
+We remark that no score can distinguish the players typology as defined by the NBA as the scores of each type are overlapping one another.
 \begin{figure}
     \centering
     \includegraphics[scale=0.95]{figures/scores_1.eps}
