@@ -31,7 +31,7 @@ To compare players shooting behaviors, more specific methods have been developed
 The investigated whether the success rate of shots is higher at locations where players makes more shots and also clustered players.
 \cite{wong-toiJointAnalysisField2022} analyze shooting patterns among different players. They quantify the shooting patterns using a discretisation of the field by performing a Bayesian nonparametric mixture model to find latent clusters of players. \cite{yinAnalysisProfessionalBasketball2023} propose a Bayesian nonparametric matrix clustering approach on estimated intensity maps to analyze shot selection characteristics. All of these approach require a discretization of the court onto a grif. 
 
-To alleviate the requirement of discretizing the court, we propose to estimate the density of the shots continuously on the offensive half-court and then to model these densities as functional data {\color{red}(add references, e.g., Ramsay, Happ)}.
+To alleviate the requirement of discretizing the court, we propose to estimate the density of the shots continuously on the offensive half-court and then to model these densities as functional data \citep{ramsayFunctionalDataAnalysis2005,kokoszkaIntroductionFunctionalData2017}.
 We consider both attempted and made shot charts collectively as multivariate functional data, defined on a two dimensional domain (i.e., the offensive half-court).
 Functional data analysis concerns the analysis of realisations of a stochastic process, recorded at discrete times and defined on compact intervals.
 Considering the density of the shoots as a stochastic process defined over the rectangle of the offensive half-court, we view the density of the shots of any individual player as a realisation of this process. 

@@ -5,7 +5,7 @@
 The first step in our approach is to convert the raw shots charts into smooth functions for analysis. 
 To achieve this, we employ a 2-dimensional kernel density estimation for both the attempted and made shots, utilizing Silverman's rule \citep{silvermanDensityEstimationStatistics1986} for the estimation of the bandwidth. 
 The density estimation is conducted on a equally-spaced grid of $201 \times 201$ points.
-We then treat the smoothed attempted and made shots densities for each player as the two features of a bivariate functional observation, where both features are defined on a two-dimensional rectangular domain, and observed on an equidistant grid of size $201 \times 201$. Figure~\ref{fig:examples_shooting_density} presents the density estimates of the same five players displayed in the shots charts in Figure~\ref{fig:examples_shooting_charts}. 
+We then treat the smoothed attempted and made shots densities for each player as the two features of a bivariate functional observation, where both features are defined on a two-dimensional rectangular domain, and observed on an equidistant grid of size $201 \times 201$. Note that the choice of a $201 \times 201$ is arbitrary and could be change to something else. Figure~\ref{fig:examples_shooting_density} presents the density estimates of the same five players displayed in the shots charts in Figure~\ref{fig:examples_shooting_charts}. 
 
 We then employ multivariate functional principal components analysis (MFPCA), developed in \cite{golovkineUseGramMatrix2024}, to decompose each estimated density into a common set of basis of functions and player-specific basis coefficients (i.e., scores). 
 Let $X$ denote an observation of the density. 
@@ -14,7 +14,7 @@ We aim to find the basis functions $\{\phi_k\}_{1 \leq k \leq K}$ that provide t
     X(s, t) = \mu(s, t) + \sum_{k = 1}^K c_k\phi_k(s, t), \quad s, t \in ...,
 \end{equation}
 where $\mu(s, t)$ is the mean (average) function, and $c_k$ are the player-specific basis coefficients, known as the scores.
-The weighted sum in Equation \eqref{eq:kl_decomp} means that we can view each eigenfunction as characterising a shift away from the mean function for each player, where the player-specific score defines the magnitude and direction of the shift.
+The weighted sum in \eqref{eq:kl_decomp} means that we can view each eigenfunction as characterising a shift away from the mean function for each player, where the player-specific score defines the magnitude and direction of the shift.
 We choose to estimate four components ($K = 4$) as these explain around $90\%$ of the variance in the data. 
 The scores $c_k$ are then estimated as the projection of the observations onto the eigenfunctions.
 These scores provide a finite-dimensional representation of the functional data and can be used as scalar variables in subsequent analysis, as they capture player-specific characteristics.
