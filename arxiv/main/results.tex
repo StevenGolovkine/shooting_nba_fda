@@ -73,75 +73,126 @@ From Figure~\ref{fig:clusters}, we remark that some players exhibit scores (coef
 \label{sub:clustering}
 
 The $k$-means algorithm has been applied to the coefficients plotted in Figure~\ref{fig:clusters} as described in Section~\ref{sec:method}. We are aiming for $5$ clusters as the number of players on the court for each team. Examples of players in each cluster are given in Table~\ref{tab:example_players_clusters}. To explain the clusters, we compute the mean coefficients per cluster and multiply by the eigenfunctions. It results in the decomposition of the average player within each cluster. The decompositions differ noticeably between the clusters. Figures~\ref{fig:clusters_1} to~\ref{fig:clusters_5} represent the decomposition for the average player of each cluster. For the interpretation of each cluster, we recall that the decomposition must be interpreted with respect to an average player, and the eigenfunctions represent a deviation from the mean. 
-\begin{table}
-\centering
-\caption{Example of players in each clusters}
-\label{tab:example_players_clusters}
-\begin{tabular}{ cccccc } 
- Cluster 1 & Cluster 2 & Cluster 3 & Cluster 4 & Cluster 5 \\ 
- \hline
- B. Adebayo & S. Curry & D. Boker & J. Crowder &  L. James \\
- G. Antetokounmpo & E. Fournier & L. Dončić & J. Holiday & N. Jokić \\
- B. Simmons & K. Love & J. Harden & P. Mills & J. Tatum \\
- R. Gobert & K. Lowry & K. Irving & D. Robinson & K.-A. Towns \\
- M. Robinson & C. Paul & K. Leonard & L. Shamet & J. Embiid \\
-\end{tabular}
-\end{table}
 
-From Figure~\ref{fig:clusters_1}, the average player in cluster $1$ tend to shot less than the other players (coefficient from the first eigenfunction is negative).
+
 \begin{figure}
     \centering
-    \includegraphics[scale=0.4]{figures/cluster_1_eigenfunction_1.eps}
-    \includegraphics[scale=0.4]{figures/cluster_1_eigenfunction_2.eps}
-    \includegraphics[scale=0.4]{figures/cluster_1_eigenfunction_3.eps}
-    \includegraphics[scale=0.4]{figures/cluster_1_eigenfunction_4.eps}
-    \caption{Cluster 1}
-    \label{fig:clusters_1}
+    \includegraphics[scale=0.35]{figures/average_cluster_1.eps}
+    \includegraphics[scale=0.35]{figures/average_cluster_2.eps}
+    \includegraphics[scale=0.35]{figures/average_cluster_3.eps}
+    \includegraphics[scale=0.35]{figures/average_cluster_4.eps}
+    \includegraphics[scale=0.35]{figures/average_cluster_5.eps}
+    \caption{Cluster without weights}
+    \label{fig:average_cluster_no_weight}
 \end{figure}
 
-From Figure~\ref{fig:clusters_2}, the average player in cluster $2$ tend to shot more than the other players (coefficient from the first eigenfunction is positive). These players do not have shooting preference as the coefficients of the second to fourth eigenfunctions is close to $0$.
 \begin{figure}
     \centering
-    \includegraphics[scale=0.4]{figures/cluster_2_eigenfunction_1.eps}
-    \includegraphics[scale=0.4]{figures/cluster_2_eigenfunction_2.eps}
-    \includegraphics[scale=0.4]{figures/cluster_2_eigenfunction_3.eps}
-    \includegraphics[scale=0.4]{figures/cluster_2_eigenfunction_4.eps}
-    \caption{Cluster 2}
-    \label{fig:clusters_2}
+    \includegraphics[scale=0.35]{figures/average_cluster_1_w.eps}
+    \includegraphics[scale=0.35]{figures/average_cluster_2_w.eps}
+    \includegraphics[scale=0.35]{figures/average_cluster_3_w.eps}
+    \includegraphics[scale=0.35]{figures/average_cluster_4_w.eps}
+    \includegraphics[scale=0.35]{figures/average_cluster_5_w.eps}
+    \caption{Cluster with weights}
+    \label{fig:average_cluster_weight}
 \end{figure}
 
-From Figure~\ref{fig:clusters_3}, players in cluster $3$ are average players in the NBA. Their coefficients for each eigenfunction is close to $0$.
+
 \begin{figure}
     \centering
-    \includegraphics[scale=0.4]{figures/cluster_3_eigenfunction_1.eps}
-    \includegraphics[scale=0.4]{figures/cluster_3_eigenfunction_2.eps}
-    \includegraphics[scale=0.4]{figures/cluster_3_eigenfunction_3.eps}
-    \includegraphics[scale=0.4]{figures/cluster_3_eigenfunction_4.eps}
-    \caption{Cluster 3}
-    \label{fig:clusters_3}
+    \begin{subfigure}{0.32\textwidth}
+        \centering
+        \includegraphics[scale=0.5]{figures/confusion_mat_no_weights.eps}
+        \caption{Multivariate functional data.}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.32\textwidth}
+        \centering
+        \includegraphics[scale=0.5]{figures/confusion_mat_weights.eps}
+        \caption{A}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.32\textwidth}
+        \centering
+        \includegraphics[scale=0.5]{figures/confusion_mat_w_no_w.eps}
+        \caption{B}
+    \end{subfigure}
+    \caption{Confusion matrices.}
+    \label{fig:confusion_mat}
 \end{figure}
 
-From Figure~\ref{fig:clusters_4}, the average player in cluster $4$ shots more than the other player in the NBA (large positive coefficient). They prefer to shots 3-pointers than 2-pointers (negative coefficients for $\phi_2$ and $\phi_3$). They also prefer to shot in the corners (negative coefficients for $\phi_4$).
-\begin{figure}
-    \centering
-    \includegraphics[scale=0.4]{figures/cluster_4_eigenfunction_1.eps}
-    \includegraphics[scale=0.4]{figures/cluster_4_eigenfunction_2.eps}
-    \includegraphics[scale=0.4]{figures/cluster_4_eigenfunction_3.eps}
-    \includegraphics[scale=0.4]{figures/cluster_4_eigenfunction_4.eps}
-    \caption{Cluster 4}
-    \label{fig:clusters_4}
-\end{figure}
 
-Players from the last cluster (see Figure~\ref{fig:clusters_5}) shot less than  the average NBA player without any particular preference for any position.
-\begin{figure}
-    \centering
-    \includegraphics[scale=0.4]{figures/cluster_5_eigenfunction_1.eps}
-    \includegraphics[scale=0.4]{figures/cluster_5_eigenfunction_2.eps}
-    \includegraphics[scale=0.4]{figures/cluster_5_eigenfunction_3.eps}
-    \includegraphics[scale=0.4]{figures/cluster_5_eigenfunction_4.eps}
-    \caption{Cluster 5}
-    \label{fig:clusters_5}
-\end{figure}
+
+
+% \begin{table}
+% \centering
+% \caption{Example of players in each clusters}
+% \label{tab:example_players_clusters}
+% \begin{tabular}{ cccccc } 
+%  Cluster 1 & Cluster 2 & Cluster 3 & Cluster 4 & Cluster 5 \\ 
+%  \hline
+%  B. Adebayo & S. Curry & D. Boker & J. Crowder &  L. James \\
+%  G. Antetokounmpo & E. Fournier & L. Dončić & J. Holiday & N. Jokić \\
+%  B. Simmons & K. Love & J. Harden & P. Mills & J. Tatum \\
+%  R. Gobert & K. Lowry & K. Irving & D. Robinson & K.-A. Towns \\
+%  M. Robinson & C. Paul & K. Leonard & L. Shamet & J. Embiid \\
+% \end{tabular}
+% \end{table}
+
+% From Figure~\ref{fig:clusters_1}, the average player in cluster $1$ tend to shot less than the other players (coefficient from the first eigenfunction is negative).
+% \begin{figure}
+%     \centering
+%     \includegraphics[scale=0.4]{figures/cluster_1_eigenfunction_1.eps}
+%     \includegraphics[scale=0.4]{figures/cluster_1_eigenfunction_2.eps}
+%     \includegraphics[scale=0.4]{figures/cluster_1_eigenfunction_3.eps}
+%     \includegraphics[scale=0.4]{figures/cluster_1_eigenfunction_4.eps}
+%     \caption{Cluster 1}
+%     \label{fig:clusters_1}
+% \end{figure}
+
+% From Figure~\ref{fig:clusters_2}, the average player in cluster $2$ tend to shot more than the other players (coefficient from the first eigenfunction is positive). These players do not have shooting preference as the coefficients of the second to fourth eigenfunctions is close to $0$.
+% \begin{figure}
+%     \centering
+%     \includegraphics[scale=0.4]{figures/cluster_2_eigenfunction_1.eps}
+%     \includegraphics[scale=0.4]{figures/cluster_2_eigenfunction_2.eps}
+%     \includegraphics[scale=0.4]{figures/cluster_2_eigenfunction_3.eps}
+%     \includegraphics[scale=0.4]{figures/cluster_2_eigenfunction_4.eps}
+%     \caption{Cluster 2}
+%     \label{fig:clusters_2}
+% \end{figure}
+
+% From Figure~\ref{fig:clusters_3}, players in cluster $3$ are average players in the NBA. Their coefficients for each eigenfunction is close to $0$.
+% \begin{figure}
+%     \centering
+%     \includegraphics[scale=0.4]{figures/cluster_3_eigenfunction_1.eps}
+%     \includegraphics[scale=0.4]{figures/cluster_3_eigenfunction_2.eps}
+%     \includegraphics[scale=0.4]{figures/cluster_3_eigenfunction_3.eps}
+%     \includegraphics[scale=0.4]{figures/cluster_3_eigenfunction_4.eps}
+%     \caption{Cluster 3}
+%     \label{fig:clusters_3}
+% \end{figure}
+
+% From Figure~\ref{fig:clusters_4}, the average player in cluster $4$ shots more than the other player in the NBA (large positive coefficient). They prefer to shots 3-pointers than 2-pointers (negative coefficients for $\phi_2$ and $\phi_3$). They also prefer to shot in the corners (negative coefficients for $\phi_4$).
+% \begin{figure}
+%     \centering
+%     \includegraphics[scale=0.4]{figures/cluster_4_eigenfunction_1.eps}
+%     \includegraphics[scale=0.4]{figures/cluster_4_eigenfunction_2.eps}
+%     \includegraphics[scale=0.4]{figures/cluster_4_eigenfunction_3.eps}
+%     \includegraphics[scale=0.4]{figures/cluster_4_eigenfunction_4.eps}
+%     \caption{Cluster 4}
+%     \label{fig:clusters_4}
+% \end{figure}
+
+% Players from the last cluster (see Figure~\ref{fig:clusters_5}) shot less than  the average NBA player without any particular preference for any position.
+% \begin{figure}
+%     \centering
+%     \includegraphics[scale=0.4]{figures/cluster_5_eigenfunction_1.eps}
+%     \includegraphics[scale=0.4]{figures/cluster_5_eigenfunction_2.eps}
+%     \includegraphics[scale=0.4]{figures/cluster_5_eigenfunction_3.eps}
+%     \includegraphics[scale=0.4]{figures/cluster_5_eigenfunction_4.eps}
+%     \caption{Cluster 5}
+%     \label{fig:clusters_5}
+% \end{figure}
 
 % subsection clustering (end)
 
