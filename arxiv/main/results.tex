@@ -72,27 +72,27 @@ From Figure~\ref{fig:clusters}, we remark that some players exhibit scores (coef
 \subsection{Clustering} % (fold)
 \label{sub:clustering}
 
-The $k$-means algorithm has been applied to the coefficients plotted in Figure~\ref{fig:clusters} as described in Section~\ref{sec:method}. We are aiming for $5$ clusters as the number of players on the court for each team. Examples of players in each cluster are given in Table~\ref{tab:example_players_clusters}. To explain the clusters, we compute the mean coefficients per cluster and multiply by the eigenfunctions. It results in the decomposition of the average player within each cluster. The decompositions differ noticeably between the clusters. Figures~\ref{fig:clusters_1} to~\ref{fig:clusters_5} represent the decomposition for the average player of each cluster. For the interpretation of each cluster, we recall that the decomposition must be interpreted with respect to an average player, and the eigenfunctions represent a deviation from the mean. 
+The $k$-medoids algorithm has been applied to the coefficients plotted in Figure~\ref{fig:clusters} as described in Section~\ref{sec:method}. We are aiming for $5$ clusters as the number of players on the court for each team. Examples of players in each cluster are given in Table~\ref{tab:example_players_clusters}. To explain the clusters, we compute the mean coefficients per cluster and multiply by the eigenfunctions. It results in the decomposition of the average player within each cluster. The decompositions differ noticeably between the clusters. Figures~\ref{fig:clusters_1} to~\ref{fig:clusters_5} represent the decomposition for the average player of each cluster. For the interpretation of each cluster, we recall that the decomposition must be interpreted with respect to an average player, and the eigenfunctions represent a deviation from the mean. 
 
 
 \begin{figure}
     \centering
-    \includegraphics[scale=0.35]{figures/average_cluster_1.eps}
-    \includegraphics[scale=0.35]{figures/average_cluster_2.eps}
-    \includegraphics[scale=0.35]{figures/average_cluster_3.eps}
-    \includegraphics[scale=0.35]{figures/average_cluster_4.eps}
-    \includegraphics[scale=0.35]{figures/average_cluster_5.eps}
-    \caption{Cluster without weights}
+    \includegraphics[scale=0.35]{figures/average_player_1.eps}
+    \includegraphics[scale=0.35]{figures/average_player_2.eps}
+    \includegraphics[scale=0.35]{figures/average_player_3.eps}
+    \includegraphics[scale=0.35]{figures/average_player_4.eps}
+    \includegraphics[scale=0.35]{figures/average_player_5.eps}
+    \caption{Most representative player of each cluster.}
     \label{fig:average_cluster_no_weight}
 \end{figure}
 
 \begin{figure}
     \centering
-    \includegraphics[scale=0.35]{figures/average_cluster_1_w.eps}
-    \includegraphics[scale=0.35]{figures/average_cluster_2_w.eps}
-    \includegraphics[scale=0.35]{figures/average_cluster_3_w.eps}
-    \includegraphics[scale=0.35]{figures/average_cluster_4_w.eps}
-    \includegraphics[scale=0.35]{figures/average_cluster_5_w.eps}
+    \includegraphics[scale=0.35]{figures/average_player_1_weighted.eps}
+    \includegraphics[scale=0.35]{figures/average_player_2_weighted.eps}
+    \includegraphics[scale=0.35]{figures/average_player_3_weighted.eps}
+    \includegraphics[scale=0.35]{figures/average_player_4_weighted.eps}
+    \includegraphics[scale=0.35]{figures/average_player_5_weighted.eps}
     \caption{Cluster with weights}
     \label{fig:average_cluster_weight}
 \end{figure}
@@ -102,20 +102,20 @@ The $k$-means algorithm has been applied to the coefficients plotted in Figure~\
     \centering
     \begin{subfigure}{0.32\textwidth}
         \centering
-        \includegraphics[scale=0.5]{figures/confusion_mat_no_weights.eps}
-        \caption{Multivariate functional data.}
+        \includegraphics[scale=0.5]{figures/confusion_mat_kmedoids_no_weights.eps}
+        \caption{NBA / No weights.}
     \end{subfigure}
     \hfill
     \begin{subfigure}{0.32\textwidth}
         \centering
-        \includegraphics[scale=0.5]{figures/confusion_mat_weights.eps}
-        \caption{A}
+        \includegraphics[scale=0.5]{figures/confusion_mat_kmedoids_weights.eps}
+        \caption{NBA / Weights.}
     \end{subfigure}
     \hfill
     \begin{subfigure}{0.32\textwidth}
         \centering
-        \includegraphics[scale=0.5]{figures/confusion_mat_w_no_w.eps}
-        \caption{B}
+        \includegraphics[scale=0.5]{figures/confusion_matk_medoids_w_no_w.eps}
+        \caption{Weights / No weights}
     \end{subfigure}
     \caption{Confusion matrices.}
     \label{fig:confusion_mat}
