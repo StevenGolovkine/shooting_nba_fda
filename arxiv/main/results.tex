@@ -5,20 +5,7 @@
 \subsection{Decomposition of the densities} % (fold)
 \label{sub:decomposition_of_the_densities}
 
-Figure~\ref{fig:mean_eigenfunctions} displays the estimated mean and eigenfunctions. 
-The functional principal components, which represent deviations around the mean function, may take negative values, while the densities themselves can only take positive values.
-For presentation purposes, the functional principal components have been normalized between $-1$ and $1$. Blue areas correspond to negative values of the functional components, and thus contribute negatively to the density, while red area corresponds to positive values of the functional components, and thus contribute positively to the density. 
-The decomposition of the density of made shots is similar that of attempted shots. 
-The mean chart represents the shooting behavior of the average player in the NBA. 
-Many shots are taken in the paint, then the most common position is behind the three-point line, in the wings and the corners. 
-We remark that the elbows and the short-corners are not particularly important shooting spots. 
-The obtained functional components can be explained as characterising different shooting behaviors.
-The first component, accounting for $67.9\%$ of the variance explained, contrasts players above and below the average player. 
-A player with a positive score for $\phi_1$ will tend to take/attempt more shots than the average player, while if he has a negative score, he will shoot and make fewer shots than average. These effects are mainly focused in the areas of the court that have high average shots made and shots taken (i.e., $\phi_1$ has a similar shape to the mean function). 
-For the second component ($8.5\%$ of the variance explained), the contrast is between inside and outside the three-pointer line. 
-If a player has a positive (resp. negative) score for $\phi_2$, he will prefer to shoot close to the basket (resp. behind the three-point line). 
-The third component ($6.1\%$ of the variance explained) contrasts players that shoot in the paint and the others. Positive scores will tend to shoot more in that paint than the other players than negative scores would prefer to shoot farther from the basket. 
-The fourth component ($4.0\%$ of the variance explained) contrasts shooting from the wing with shooting in the axis of the hoop. Positive (resp. negative) score players will shot in the axis of the hoop (resp. from the wing). 
+Figure~\ref{fig:mean_eigenfunctions} displays the estimated mean and eigenfunctions. The functional principal components, which represent deviations around the mean function, may take negative values, while the densities themselves can only take positive values. For presentation purposes, the functional principal components have been normalized between $-1$ and $1$. Blue areas correspond to negative values of the functional components, and thus contribute negatively to the density, while red area corresponds to positive values of the functional components, and thus contribute positively to the density. The decomposition of the density of made shots is similar that of missed shots. The mean chart represents the shooting behavior of the average player in the NBA. Many shots are taken in the paint, then the most common position is behind the three-point line, in the wings and the corners. We remark that the elbows and the short-corners are not particularly important shooting spots. The obtained functional components can be explained as characterising different shooting behaviors. The first component, accounting for $67.9\%$ of the variance explained, contrasts players above and below the average player. A player with a positive score for $\phi_1$ will tend to miss and make more shots than the average player (thus, he shots more than the average player), while if he has a negative score, he will miss and make fewer shots than average (thus, he shots less than the average player). These effects are mainly focused in the areas of the court that have high average shots missed and shots made (i.e., $\phi_1$ has a similar shape to the mean function). This eigenfunction also contrasts shots taken under the basket and other shots (the blue area under the basket). For the second component ($8.5\%$ of the variance explained), the contrast is between inside and outside the three-pointer line. If a player has a positive (resp. negative) score for $\phi_2$, he will prefer to shoot close to the basket (resp. behind the three-point line). The third component ($6.1\%$ of the variance explained) contrasts players that shoot in the paint and the others. Positive scores will tend to shoot more in that paint than the other players than negative scores would prefer to shoot farther from the basket. Players that scores a lot close to the basket, also try (and miss) a lot from the corner. The fourth component ($4.0\%$ of the variance explained) contrasts shooting from the wing with shooting in the axis of the hoop. Positive (resp. negative) score players will shot in the axis of the hoop (resp. from the wing). 
 \begin{figure}
     \centering
     \includegraphics[scale=0.35]{figures/mean.eps}
@@ -32,10 +19,7 @@ The fourth component ($4.0\%$ of the variance explained) contrasts shooting from
     \label{fig:mean_eigenfunctions}
 \end{figure}
 
-
-As an example, Figure~\ref{fig:examples_players} presents the decomposition of Stephen Curry. We remark that he shots and scores more than the average player as his first coefficient $c_1$ is positive. 
-He does not have a preference for shooting close to the basket, or specifically in the paint, or not as his second and third coefficient are close to $0$. 
-However, he prefers to shoots in the axis of the basket (positive coefficient $c_4$) compare to the other players. 
+As an example, Figure~\ref{fig:examples_players} presents the decomposition of Stephen Curry. We remark that he shots more than the average player, because he miss and make more shots that the average player, as his first coefficient $c_1$ is positive. He does have a little preference for shooting behind the three-points line as his second coefficient is close to $0$. Its coefficient $c_3$ is a small negative values, indicating that he is around average for this eigenfunction. However, he prefers to shoots in the axis of the basket (positive coefficient $c_4$) compare to the other players. 
 \begin{figure}
     \centering
     \includegraphics[scale=0.295]{figures/curry_reconstruction.eps}
@@ -50,9 +34,7 @@ However, he prefers to shoots in the axis of the basket (positive coefficient $c
     \label{fig:examples_players}
 \end{figure}
 
-Figure~\ref{fig:clusters} presents the estimated scores $c_k$ from~\eqref{eq:kl_decomp} colored by their type according to the NBA. 
-We highlight the scores of one player per position. 
-We remark that no score can distinguish the players typology as defined by the NBA as the scores of each type are overlapping one another.
+Figure~\ref{fig:clusters} presents the estimated scores $c_k$ from~\eqref{eq:kl_decomp} colored by their playing position according to the NBA. We highlight the scores of one player per position. We remark that no score can distinguish the players typology as defined by the NBA as the scores of each position are overlapping one another. From Figure~\ref{fig:clusters}, we remark that some players exhibit scores (coefficients) that are very different than the other players. For example, for the second eigenfunction, Chris Paul (with a large coefficient) and Duncan Robinson (with a large negative coefficient) may be designed as outliers. Similarly, for the third eigenfunction, Chris Paul has a large negative coefficient. It may seems contradictory for Chris Paul, as a positive $c_2$ is explained as a preference for shooting from the painted area and a negative $c_3$ is explained as a preference for shooting from the three-points line. However, this is explained by the fact that the most common shooting position of Chris Paul is the high post (between the three-point line and the painted area), and so the eigenfunctions are compensating each others. This situation is not common in today's NBA. Finally, for the fourth eigenfunction, Reggie Bullock Jr. has a large negative coefficient, indicating a large preference for shooting from the wings and corners.
 \begin{figure}
     \centering
     \includegraphics[scale=0.95]{figures/scores_1.eps}
@@ -64,15 +46,13 @@ We remark that no score can distinguish the players typology as defined by the N
     \label{fig:clusters}
 \end{figure}
 
-From Figure~\ref{fig:clusters}, we remark that some players exhibit scores (coefficients) that are very different than the other players. For example, for the second eigenfunction, Chris Paul (with a large coefficient) and Duncan Robinson (with a large negative coefficient) may be designed as outliers. Similarly, for the third eigenfunction, Chris Paul has a large negative coefficient. Finally, for the fourth eigenfunction, Devonte' Graham has a large positive coefficient and Reggie Bullock Jr. has a large negative coefficient.
-
 
 % subsection decomposition_of_the_densities (end)
 
 \subsection{Clustering} % (fold)
 \label{sub:clustering}
 
-The $k$-medoids algorithm has been applied to the coefficients plotted in Figure~\ref{fig:clusters} as described in Section~\ref{sec:method}. We are aiming for $5$ clusters as the number of players on the court for each team. Examples of players in each cluster are given in Table~\ref{tab:example_players_clusters}. To explain the clusters, we compute the mean coefficients per cluster and multiply by the eigenfunctions. It results in the decomposition of the average player within each cluster. The decompositions differ noticeably between the clusters. Figures~\ref{fig:clusters_1} to~\ref{fig:clusters_5} represent the decomposition for the average player of each cluster. For the interpretation of each cluster, we recall that the decomposition must be interpreted with respect to an average player, and the eigenfunctions represent a deviation from the mean. 
+The $k$-medoids algorithm has been applied to the coefficients plotted in Figure~\ref{fig:clusters} as described in Section~\ref{sec:method}. We are aiming for $5$ clusters as the number of players on the court for each team. The complete clustering results are given the Appendix~\ref{sec:clustering_results}. To explain the clusters, we compute the mean coefficients per cluster and multiply by the eigenfunctions. It results in the decomposition of the average player within each cluster. The decompositions differ noticeably between the clusters. Figures~\ref{fig:average_cluster_no_weight} and~\ref{fig:average_cluster_weight} represent the decomposition for the average player of each cluster. For the interpretation of each cluster, we recall that the decomposition must be interpreted with respect to an average player, and the eigenfunctions represent a deviation from the mean. 
 
 
 \begin{figure}
@@ -93,7 +73,7 @@ The $k$-medoids algorithm has been applied to the coefficients plotted in Figure
     \includegraphics[scale=0.35]{figures/average_player_3_weighted.eps}
     \includegraphics[scale=0.35]{figures/average_player_4_weighted.eps}
     \includegraphics[scale=0.35]{figures/average_player_5_weighted.eps}
-    \caption{Cluster with weights}
+    \caption{Most representative player of each cluster.}
     \label{fig:average_cluster_weight}
 \end{figure}
 
