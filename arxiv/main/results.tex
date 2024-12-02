@@ -15,11 +15,11 @@ We apply MFPCA to estimate the mean functions and eigenfunctions, providing a de
     \includegraphics[scale=0.35]{figures/eigenfunction_4.eps}
     \\
     \includegraphics[scale=0.35]{figures/colorbar2.eps}
-    \caption{Estimation of the mean surface and the eigenfunctions of the density shots charts. The eigenfunctions represent deviation from the mean surface and are defined up to a sign. Their values at specific points are thus not interpretable \emph{per se}. Note that the mean surface and eigenfunctions have been normalized between $-1$ and $1$ for presentation purpose.}
+    \caption{Estimation of the mean surface and the eigenfunctions of the shots density charts. The eigenfunctions represent deviation from the mean surface and are defined up to a sign, making their values at specific points not directly interpretable. Note that the mean surface and eigenfunctions have been normalized between $-1$ and $1$ for presentation purpose.}
     \label{fig:mean_eigenfunctions}
 \end{figure}
 
-As an example, Figure~\ref{fig:examples_players} presents the decomposition of Stephen Curry. We remark that he shots more than the average player, because he miss and make more shots that the average player, as his first coefficient $c_1$ is positive. He does have a little preference for shooting behind the three-points line as his second coefficient is close to $0$. Its coefficient $c_3$ is a small negative values, indicating that he is around average for this eigenfunction. However, he prefers to shoots in the axis of the basket (positive coefficient $c_4$) compare to the other players. 
+As an example, Figure~\ref{fig:examples_players} illustrates the decomposition of Stephen Curry's density shot chart. We remark that Curry shots more frequently than the average player, as indicated by his positive coefficient $c_1$, reflecting a higher number of both missed and made shots comparedto the average. His second coefficient $c_2$ is negative and close to zero, suggesting only a slight preference for shooting beyond the three-point line. The small negative value of his third coefficient $c_3$ indicates shooting behavior close to the average for this component. However, Curry prefers to shoots in the axis of the basket (fourth coefficient $c_4$ is positive) compare to the other players. 
 \begin{figure}
     \centering
     \includegraphics[scale=0.295]{figures/curry_reconstruction.eps}
@@ -34,7 +34,7 @@ As an example, Figure~\ref{fig:examples_players} presents the decomposition of S
     \label{fig:examples_players}
 \end{figure}
 
-Figure~\ref{fig:clusters} presents the estimated scores $c_k$ from~\eqref{eq:kl_decomp} colored by their playing position according to the NBA. We highlight the scores of one player per position. We remark that no score can distinguish the players typology as defined by the NBA as the scores of each position are overlapping one another. From Figure~\ref{fig:clusters}, we remark that some players exhibit scores (coefficients) that are very different than the other players. For example, for the second eigenfunction, Chris Paul (with a large coefficient) and Duncan Robinson (with a large negative coefficient) may be designed as outliers. Similarly, for the third eigenfunction, Chris Paul has a large negative coefficient. It may seems contradictory for Chris Paul, as a positive $c_2$ is explained as a preference for shooting from the painted area and a negative $c_3$ is explained as a preference for shooting from the three-points line. However, this is explained by the fact that the most common shooting position of Chris Paul is the high post (between the three-point line and the painted area), and so the eigenfunctions are compensating each others. This situation is not common in today's NBA. Finally, for the fourth eigenfunction, Reggie Bullock Jr. has a large negative coefficient, indicating a large preference for shooting from the wings and corners.
+Figure~\ref{fig:clusters} presents the estimated scores $c_k$ from~\eqref{eq:kl_decomp} colored by NBA-defined playing positions. One representative player from each position is highlighted (same as Figs~\ref{fig:examples_players} and~\ref{fig:examples_shooting_charts}). Notably, the scores do not separate players by position. From Figure~\ref{fig:clusters}, we remark that some players exhibit scores (coefficients) that substantially differ from the general distribution. For example, for the second eigenfunction, Chris Paul (with a large coefficient) and Duncan Robinson (with a large negative coefficient) may be designed as outliers. Similarly, for the third eigenfunction, Chris Paul has a large negative coefficient. Although a positive $c_2$ typically indicates a preference for shooting near the basket and a negative $c_3$ suggests a preference for shooting beyond the three-point line, Chris Paul's scoring pattern appears contradictory. This inconsistency arises because Chris Paul's most common shooting position is the high post, located between the three-point line and the painted area. In this case, the eigenfunctions compensate for one another to capture his unique shooting style, which is relatively rare in the modern NBA. Finally, for the fourth eigenfunction, Reggie Bullock Jr. has a large negative coefficient, indicating a strong preference for shooting from the wings and corners.
 \begin{figure}
     \centering
     \includegraphics[scale=0.95]{figures/scores_1.eps}
@@ -83,19 +83,19 @@ The $k$-medoids algorithm has been applied to the coefficients plotted in Figure
     \begin{subfigure}{0.32\textwidth}
         \centering
         \includegraphics[scale=0.5]{figures/confusion_mat_kmedoids_no_weights.eps}
-        \caption{NBA / No weights.}
+        \caption{NBA vs Clustering without weights.}
     \end{subfigure}
     \hfill
     \begin{subfigure}{0.32\textwidth}
         \centering
         \includegraphics[scale=0.5]{figures/confusion_mat_kmedoids_weights.eps}
-        \caption{NBA / Weights.}
+        \caption{NBA vs Clustering with weights.}
     \end{subfigure}
     \hfill
     \begin{subfigure}{0.32\textwidth}
         \centering
         \includegraphics[scale=0.5]{figures/confusion_matk_medoids_w_no_w.eps}
-        \caption{Weights / No weights}
+        \caption{Clustering with weights vs without weights.}
     \end{subfigure}
     \caption{Confusion matrices.}
     \label{fig:confusion_mat}
