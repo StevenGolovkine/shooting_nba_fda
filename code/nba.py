@@ -160,7 +160,7 @@ class ShotCharts:
         ax.set_yticks([])
         # Set axis limits
         ax.set_xlim(-250, 250)
-        ax.set_ylim(0, 422.5)
+        ax.set_ylim(0, 470)
         return ax
 
     def add_headshot(ax: mpl.axes, id: int) -> mpl.axes:
@@ -190,7 +190,11 @@ class ShotCharts:
 
         ax = ShotCharts.create_court(ax, 'black')
         ax.scatter(X[~MADE], Y[~MADE], c='#D81B60', marker='x', alpha=0.8, s=5, linewidth=0.2, label='Missed')
-        ax.scatter(X[MADE], Y[MADE], edgecolors='#1E88E5', alpha=0.8, s=5, linewidth=0.2, facecolors='none', label='Made')
+        ax.scatter(
+            X[MADE], Y[MADE],
+            edgecolors='#1E88E5', alpha=0.8, s=5,
+            linewidth=0.2, facecolors='none', label='Made'
+        )
         
         ax.text(0.03, 0.925, f"{name}", fontsize='large', transform=ax.transAxes)
         ax.text(0.03, 0.875, f"{position}", fontsize='medium', transform=ax.transAxes)
@@ -214,7 +218,7 @@ class ShotCharts:
         idx = df[cond]['PLAYER_ID'].iloc[0]
 
         X_MIN, X_MAX = (-250, 250) 
-        Y_MIN, Y_MAX = (0, 422.5)
+        Y_MIN, Y_MAX = (0, 470)
         XX, YY = np.mgrid[X_MIN:X_MAX:201j, Y_MIN:Y_MAX:201j]
 
         midnorm = MidpointNormalize(vmin=-1., vcenter=0, vmax=1)
@@ -228,6 +232,28 @@ class ShotCharts:
         ax = ShotCharts.create_court(ax, 'black')
         if add_headshot:
             ax = ShotCharts.add_headshot(ax, idx)
+        return ax
+
+    def shots_chart_fdata(
+        ax: mpl.axes,
+        fdata: DenseFunctionalData,
+        title: str,
+        maximum: float
+    ) -> mpl.axes:
+        density = fdata.values[0]
+    
+        X_MIN, X_MAX = (-250, 250) 
+        Y_MIN, Y_MAX = (0, 470)
+        XX, YY = np.mgrid[X_MIN:X_MAX:201j, Y_MIN:Y_MAX:201j]
+
+        midnorm = MidpointNormalize(vmin=-1., vcenter=0, vmax=1)
+        ax.contourf(
+            XX, YY, density / maximum,
+            levels=30,
+            cmap='seismic', norm=midnorm
+        )
+        ax.text(0.03, 0.925, f"{title}", fontsize='large', transform=ax.transAxes)
+        ax = ShotCharts.create_court(ax, 'black')
         return ax
 
     def shots_chart_reconstruction(
@@ -244,7 +270,7 @@ class ShotCharts:
         density = df_reconstruction[indice[0]].values.squeeze()
 
         X_MIN, X_MAX = (-250, 250) 
-        Y_MIN, Y_MAX = (0, 422.5)
+        Y_MIN, Y_MAX = (0, 470)
         XX, YY = np.mgrid[X_MIN:X_MAX:201j, Y_MIN:Y_MAX:201j]
 
         midnorm = MidpointNormalize(vmin=-1., vcenter=0, vmax=1)
@@ -269,7 +295,7 @@ class ShotCharts:
         mean = mfpca.mean.data[idx_c][0].values.squeeze()
 
         X_MIN, X_MAX = (-250, 250) 
-        Y_MIN, Y_MAX = (0, 422.5)
+        Y_MIN, Y_MAX = (0, 470)
         XX, YY = np.mgrid[X_MIN:X_MAX:201j, Y_MIN:Y_MAX:201j]
 
         midnorm = MidpointNormalize(vmin=-1., vcenter=0, vmax=1)
@@ -304,7 +330,7 @@ class ShotCharts:
         pct = 100 * mfpca.eigenvalues / np.sum(mfpca.eigenvalues)
 
         X_MIN, X_MAX = (-250, 250) 
-        Y_MIN, Y_MAX = (0, 422.5)
+        Y_MIN, Y_MAX = (0, 470)
         XX, YY = np.mgrid[X_MIN:X_MAX:201j, Y_MIN:Y_MAX:201j]
 
         midnorm = MidpointNormalize(vmin=-1., vcenter=0, vmax=1)
@@ -345,7 +371,7 @@ class ShotCharts:
         fpc = score * eigenfunctions
         
         X_MIN, X_MAX = (-250, 250) 
-        Y_MIN, Y_MAX = (0, 422.5)
+        Y_MIN, Y_MAX = (0, 470)
         XX, YY = np.mgrid[X_MIN:X_MAX:201j, Y_MIN:Y_MAX:201j]
         
         midnorm = MidpointNormalize(vmin=-1., vcenter=0, vmax=1)
@@ -381,7 +407,7 @@ class ShotCharts:
         fpc = score * eigenfunctions
         
         X_MIN, X_MAX = (-250, 250) 
-        Y_MIN, Y_MAX = (0, 422.5)
+        Y_MIN, Y_MAX = (0, 470)
         XX, YY = np.mgrid[X_MIN:X_MAX:201j, Y_MIN:Y_MAX:201j]
         
         midnorm = MidpointNormalize(vmin=-1., vcenter=0, vmax=1)
