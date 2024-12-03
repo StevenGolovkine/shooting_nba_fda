@@ -34,7 +34,7 @@ As an example, Figure~\ref{fig:examples_players} illustrates the decomposition o
     \label{fig:examples_players}
 \end{figure}
 
-Figure~\ref{fig:clusters} presents the estimated scores $c_k$ from~\eqref{eq:kl_decomp} colored by NBA-defined playing positions. One representative player from each position is highlighted (same as Figs~\ref{fig:examples_players} and~\ref{fig:examples_shooting_charts}). Notably, the scores do not separate players by position. From Figure~\ref{fig:clusters}, we remark that some players exhibit scores (coefficients) that substantially differ from the general distribution. For example, for the second eigenfunction, Chris Paul (with a large coefficient) and Duncan Robinson (with a large negative coefficient) may be designed as outliers. Similarly, for the third eigenfunction, Chris Paul has a large negative coefficient. Although a positive $c_2$ typically indicates a preference for shooting near the basket and a negative $c_3$ suggests a preference for shooting beyond the three-point line, Chris Paul's scoring pattern appears contradictory. This inconsistency arises because Chris Paul's most common shooting position is the high post, located between the three-point line and the painted area. In this case, the eigenfunctions compensate for one another to capture his unique shooting style, which is relatively rare in the modern NBA. Finally, for the fourth eigenfunction, Reggie Bullock Jr. has a large negative coefficient, indicating a strong preference for shooting from the wings and corners.
+Figure~\ref{fig:clusters} presents the estimated scores $c_k$ from~\eqref{eq:kl_decomp} colored by NBA-defined playing positions. One representative player from each position is highlighted (same as Figures~\ref{fig:examples_players} and~\ref{fig:examples_shooting_charts}). Notably, the scores do not separate players by position. From Figure~\ref{fig:clusters}, we remark that some players exhibit scores (coefficients) that substantially differ from the general distribution. For example, for the second eigenfunction, Chris Paul (with a large coefficient) and Duncan Robinson (with a large negative coefficient) may be designed as outliers. Similarly, for the third eigenfunction, Chris Paul has a large negative coefficient. Although a positive $c_2$ typically indicates a preference for shooting near the basket and a negative $c_3$ suggests a preference for shooting beyond the three-point line, Chris Paul's scoring pattern appears contradictory. This inconsistency arises because Chris Paul's most common shooting position is the high post, located between the three-point line and the painted area. In this case, the eigenfunctions compensate for one another to capture his shooting style, which is relatively rare in the modern NBA. Finally, for the fourth eigenfunction, Reggie Bullock Jr. has a large negative coefficient, indicating a strong preference for shooting from the wings and corners.
 \begin{figure}
     \centering
     \includegraphics[scale=0.95]{figures/scores_1.eps}
@@ -46,15 +46,12 @@ Figure~\ref{fig:clusters} presents the estimated scores $c_k$ from~\eqref{eq:kl_
     \label{fig:clusters}
 \end{figure}
 
-
 % subsection decomposition_of_the_densities (end)
 
 \subsection{Clustering} % (fold)
 \label{sub:clustering}
 
-The $k$-medoids algorithm has been applied to the coefficients plotted in Figure~\ref{fig:clusters} as described in Section~\ref{sec:method}. We are aiming for $5$ clusters as the number of players on the court for each team. The complete clustering results are given the Appendix~\ref{sec:clustering_results}. To explain the clusters, we compute the mean coefficients per cluster and multiply by the eigenfunctions. It results in the decomposition of the average player within each cluster. The decompositions differ noticeably between the clusters. Figures~\ref{fig:average_cluster_no_weight} and~\ref{fig:average_cluster_weight} represent the decomposition for the average player of each cluster. For the interpretation of each cluster, we recall that the decomposition must be interpreted with respect to an average player, and the eigenfunctions represent a deviation from the mean. 
-
-
+The $k$-medoids algorithm was applied to the coefficients plotted in Figure~\ref{fig:clusters}, grouping players into five clusters using an euclidean distance and different weighting schemes for the components. The choice of five clusters aligns with the number of players on the court for each team. Detailed clustering results, including player names and decomposition in eigenfunctions basis, are provided in Appendix~\ref{sec:clustering_results}. Figure~\ref{fig:average_cluster_no_weight} presents the medoids for each cluster when the components are weighted equally. The medoid, as the central observation in a cluster, represents the most representative player within that cluster. The decompositions of these representative players are given in Figure~\ref{fig:cluster_no_weight} in the Appendix. The clustering results can be interpreted based on shooting tendencies. Cluster $1$ groups high-volume shooters. Cluster $3$ includes players who primarily shoot from the center axis of the basket, while players in Cluster $4$ predominantly score from the corners. Clusters $2$ and $5$ are similar, comprising players who primarily score in the paint but also attempt shots from beyond the three-point line, albeit with limited success.
 \begin{figure}
     \centering
     \includegraphics[scale=0.35]{figures/average_player_1.eps}
@@ -62,10 +59,13 @@ The $k$-medoids algorithm has been applied to the coefficients plotted in Figure
     \includegraphics[scale=0.35]{figures/average_player_3.eps}
     \includegraphics[scale=0.35]{figures/average_player_4.eps}
     \includegraphics[scale=0.35]{figures/average_player_5.eps}
-    \caption{Most representative player of each cluster.}
+    \caption{Most representative player of each cluster according to the $k$-medoids algorithm using an euclidean distance with equal weights for each components.}
     \label{fig:average_cluster_no_weight}
 \end{figure}
 
+
+
+Figure~\ref{fig:average_cluster_weight} presents the cluster medoids for the results obtained with components weighted using the percentage of variance they explain. Since the first component accounts for approximately $70\%$ of the total variance, the clusters are primarily driven by the first score $c_1$, reflecting the overall shooting frequency of the players. The clusters span a spectrum of shooting behaviors, from players who predominantly score in the paint (Cluster $3$) to those who are prolific three-point shooters (Cluster $4$). This effect is also evident in the decomposition shown in Figure~\ref{fig:cluster_weight} in the Appendix. The clusters can be ranked relative to the average player’s shooting tendencies. Compared to the average player, Cluster $3$ players shoot more frequently in the paint and attempt fewer three-pointers. Players in cluster $1$ shoot slightly less than the average player, while those in Cluster $5$ align  with the average. Cluster $2$ comprises players who shoot slightly more than average, and Cluster $4$ players favor three-pointers significantly more.
 \begin{figure}
     \centering
     \includegraphics[scale=0.35]{figures/average_player_1_weighted.eps}
@@ -73,106 +73,24 @@ The $k$-medoids algorithm has been applied to the coefficients plotted in Figure
     \includegraphics[scale=0.35]{figures/average_player_3_weighted.eps}
     \includegraphics[scale=0.35]{figures/average_player_4_weighted.eps}
     \includegraphics[scale=0.35]{figures/average_player_5_weighted.eps}
-    \caption{Most representative player of each cluster.}
+    \caption{Most representative player of each cluster according to the $k$-medoids algorithm using an euclidean distance with weights defined using the percentage of variance explained by each components.}
     \label{fig:average_cluster_weight}
 \end{figure}
 
 
+Figure~\ref{fig:confusion_mat} presents the differences between the NBA-defined typology and the two clustering approaches we present. The NBA clusters are based on the usual player classification ($0$: center, $1$: forward, $2$: forward-center, $3$: forward-guard, $4$: guard). Overall, there is minimal agreement between the NBA clusters and the $k$-medoids clusters, whether weights are equal or based on the percentage of variance explained. The only  exception is the NBA-defined `center' category, which aligns with the cluster $2$ in the $k$-medoids results when weighted by the variance explained. Furthermore, there is little agreement between the two $k$-medoids clustering methods themselves.
 \begin{figure}
     \centering
-    \begin{subfigure}{0.32\textwidth}
-        \centering
-        \includegraphics[scale=0.5]{figures/confusion_mat_kmedoids_no_weights.eps}
-        \caption{NBA vs Clustering without weights.}
-    \end{subfigure}
+    \includegraphics[scale=0.55]{figures/confusion_mat_kmedoids_no_weights.eps}
     \hfill
-    \begin{subfigure}{0.32\textwidth}
-        \centering
-        \includegraphics[scale=0.5]{figures/confusion_mat_kmedoids_weights.eps}
-        \caption{NBA vs Clustering with weights.}
-    \end{subfigure}
+    \includegraphics[scale=0.55]{figures/confusion_mat_kmedoids_weights.eps}
     \hfill
-    \begin{subfigure}{0.32\textwidth}
-        \centering
-        \includegraphics[scale=0.5]{figures/confusion_matk_medoids_w_no_w.eps}
-        \caption{Clustering with weights vs without weights.}
-    \end{subfigure}
-    \caption{Confusion matrices.}
+    \includegraphics[scale=0.55]{figures/confusion_matk_medoids_w_no_w.eps}
+    \caption{Agreement between the different clustering. NBA clusters are based on the usual typology ($0$: center, $1$: forward, $2$: forward-center, $3$: forward-guard, $4$: guard).}
     \label{fig:confusion_mat}
 \end{figure}
 
 
-
-
-% \begin{table}
-% \centering
-% \caption{Example of players in each clusters}
-% \label{tab:example_players_clusters}
-% \begin{tabular}{ cccccc } 
-%  Cluster 1 & Cluster 2 & Cluster 3 & Cluster 4 & Cluster 5 \\ 
-%  \hline
-%  B. Adebayo & S. Curry & D. Boker & J. Crowder &  L. James \\
-%  G. Antetokounmpo & E. Fournier & L. Dončić & J. Holiday & N. Jokić \\
-%  B. Simmons & K. Love & J. Harden & P. Mills & J. Tatum \\
-%  R. Gobert & K. Lowry & K. Irving & D. Robinson & K.-A. Towns \\
-%  M. Robinson & C. Paul & K. Leonard & L. Shamet & J. Embiid \\
-% \end{tabular}
-% \end{table}
-
-% From Figure~\ref{fig:clusters_1}, the average player in cluster $1$ tend to shot less than the other players (coefficient from the first eigenfunction is negative).
-% \begin{figure}
-%     \centering
-%     \includegraphics[scale=0.4]{figures/cluster_1_eigenfunction_1.eps}
-%     \includegraphics[scale=0.4]{figures/cluster_1_eigenfunction_2.eps}
-%     \includegraphics[scale=0.4]{figures/cluster_1_eigenfunction_3.eps}
-%     \includegraphics[scale=0.4]{figures/cluster_1_eigenfunction_4.eps}
-%     \caption{Cluster 1}
-%     \label{fig:clusters_1}
-% \end{figure}
-
-% From Figure~\ref{fig:clusters_2}, the average player in cluster $2$ tend to shot more than the other players (coefficient from the first eigenfunction is positive). These players do not have shooting preference as the coefficients of the second to fourth eigenfunctions is close to $0$.
-% \begin{figure}
-%     \centering
-%     \includegraphics[scale=0.4]{figures/cluster_2_eigenfunction_1.eps}
-%     \includegraphics[scale=0.4]{figures/cluster_2_eigenfunction_2.eps}
-%     \includegraphics[scale=0.4]{figures/cluster_2_eigenfunction_3.eps}
-%     \includegraphics[scale=0.4]{figures/cluster_2_eigenfunction_4.eps}
-%     \caption{Cluster 2}
-%     \label{fig:clusters_2}
-% \end{figure}
-
-% From Figure~\ref{fig:clusters_3}, players in cluster $3$ are average players in the NBA. Their coefficients for each eigenfunction is close to $0$.
-% \begin{figure}
-%     \centering
-%     \includegraphics[scale=0.4]{figures/cluster_3_eigenfunction_1.eps}
-%     \includegraphics[scale=0.4]{figures/cluster_3_eigenfunction_2.eps}
-%     \includegraphics[scale=0.4]{figures/cluster_3_eigenfunction_3.eps}
-%     \includegraphics[scale=0.4]{figures/cluster_3_eigenfunction_4.eps}
-%     \caption{Cluster 3}
-%     \label{fig:clusters_3}
-% \end{figure}
-
-% From Figure~\ref{fig:clusters_4}, the average player in cluster $4$ shots more than the other player in the NBA (large positive coefficient). They prefer to shots 3-pointers than 2-pointers (negative coefficients for $\phi_2$ and $\phi_3$). They also prefer to shot in the corners (negative coefficients for $\phi_4$).
-% \begin{figure}
-%     \centering
-%     \includegraphics[scale=0.4]{figures/cluster_4_eigenfunction_1.eps}
-%     \includegraphics[scale=0.4]{figures/cluster_4_eigenfunction_2.eps}
-%     \includegraphics[scale=0.4]{figures/cluster_4_eigenfunction_3.eps}
-%     \includegraphics[scale=0.4]{figures/cluster_4_eigenfunction_4.eps}
-%     \caption{Cluster 4}
-%     \label{fig:clusters_4}
-% \end{figure}
-
-% Players from the last cluster (see Figure~\ref{fig:clusters_5}) shot less than  the average NBA player without any particular preference for any position.
-% \begin{figure}
-%     \centering
-%     \includegraphics[scale=0.4]{figures/cluster_5_eigenfunction_1.eps}
-%     \includegraphics[scale=0.4]{figures/cluster_5_eigenfunction_2.eps}
-%     \includegraphics[scale=0.4]{figures/cluster_5_eigenfunction_3.eps}
-%     \includegraphics[scale=0.4]{figures/cluster_5_eigenfunction_4.eps}
-%     \caption{Cluster 5}
-%     \label{fig:clusters_5}
-% \end{figure}
 
 % subsection clustering (end)
 
