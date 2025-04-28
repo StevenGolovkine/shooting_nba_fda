@@ -2,139 +2,130 @@
 \section{Clustering results} % (fold)
 \label{sec:clustering_results}
 
+In this section, we present the complete clustering results.
 
-Results of the clustering with normalization of the scores same weights.
+First, we present in which cluster each of the $173$ players belong when we assign equal weights to all components. Figure \ref{fig:cluster_no_weight} presents the decomposition of each cluster when the clustering is performed when equal weights are given to the components. We remark that players in the Cluster 1 are the huge shooters, players in the Cluster 2 are the average shooters, players in the Cluster 3 are the short-range shooters, players in the Cluster 4 are the shooters that prefers to shoot from the aisles, and players in the Cluster 5 are the shooters that prefers to shoot in the axis of the basket.
 
-\textbf{Cluster 1:} Grayson Allen, Malik Beasley, Pat Connaughton, Robert Covington, Jae Crowder, Stephen Curry, Donte DiVincenzo, Evan Fournier, Danilo Gallinari, Eric Gordon, Devonte' Graham, Tim Hardaway Jr., James Harden, Joe Harris, Buddy Hield, Kevin Huerter, Joe Ingles, Damian Lillard, Brook Lopez, Kevin Love, Kyle Lowry, Lauri Markkanen, Doug McDermott, Patty Mills, Royce O'Neale, Jordan Poole, Michael Porter Jr., Duncan Robinson, Landry Shamet, Anfernee Simons, Marcus Smart, Fred VanVleet, Coby White.
+\begin{description}
+	\item[Cluster 1] Grayson Allen, Malik Beasley, Pat Connaughton, Robert Covington, Jae Crowder, Stephen Curry, Donte DiVincenzo, Evan Fournier, Danilo Gallinari, Eric Gordon, Devonte' Graham, Tim Hardaway Jr., James Harden, Joe Harris, Buddy Hield, Kevin Huerter, Joe Ingles, Damian Lillard, Brook Lopez, Kevin Love, Kyle Lowry, Lauri Markkanen, Doug McDermott, Patty Mills, Royce O'Neale, Jordan Poole, Michael Porter Jr., Duncan Robinson, Landry Shamet, Anfernee Simons, Marcus Smart, Fred VanVleet, Coby White.
+	\item[Cluster 2]  Harrison Barnes, RJ Barrett, Chris Boucher, Miles Bridges, Bruce Brown, John Collins, Luguentz Dort, Aaron Gordon, Jerami Grant, Josh Hart, Keldon Johnson, Kyle Kuzma, Larry Nance Jr., Kelly Olynyk, Cedi Osman, Kelly Oubre Jr., Norman Powell, Delon Wright, Thaddeus Young.
+	\item[Cluster 3]  Bam Adebayo, Jarrett Allen, Deandre Ayton, Bradley Beal, Bogdan Bogdanović, Devin Booker, Dillon Brooks, Jalen Brunson, Alec Burks, Clint Capela, Brandon Clarke, Nic Claxton, Mike Conley, Seth Curry, Anthony Davis, DeMar DeRozan, Andre Drummond, Kevin Durant, Joel Embiid, De'Aaron Fox, Markelle Fultz, Daniel Gafford, Paul George, Shai Gilgeous-Alexander, Rudy Gobert, Tobias Harris, Gordon Hayward, Tyler Herro, Richaun Holmes, Brandon Ingram, Kyrie Irving, Reggie Jackson, Tyus Jones, Luke Kennard, Kawhi Leonard, CJ McCollum, T.J. McConnell, JaVale McGee, Khris Middleton, Dejounte Murray, Jamal Murray, Chris Paul, Mason Plumlee, Jakob Pöltl, Immanuel Quickley, Josh Richardson, Mitchell Robinson, Derrick Rose, D'Angelo Russell, Dennis Schröder, Collin Sexton, Pascal Siakam, Ben Simmons, Gary Trent Jr., Russell Westbrook, Andrew Wiggins, Ivica Zubac.
+	\item[Cluster 4] Kyle Anderson, OG Anunoby, Saddiq Bey, Bojan Bogdanović, Mikal Bridges, Reggie Bullock Jr., Jimmy Butler, Kentavious Caldwell-Pope, Dorian Finney-Smith, Jeff Green, Rui Hachimura, Gary Harris, Justin Holiday, De'Andre Hunter, Cameron Johnson, Terance Mann, Monté Morris, Marcus Morris Sr., Georges Niang, Bobby Portis, Taurean Prince, Terry Rozier, Lonnie Walker IV, T.J. Warren.
+	\item[Cluster 5]  Giannis Antetokounmpo, Marvin Bagley III, Malcolm Brogdon, Jaylen Brown, Thomas Bryant, Wendell Carter Jr., Jordan Clarkson, Spencer Dinwiddie, Luka Dončić, Darius Garland, Draymond Green, Tyrese Haliburton, Jrue Holiday, Al Horford, Jaren Jackson Jr., LeBron James, Nikola Jokić, Zach LaVine, Caris LeVert, De'Anthony Melton, Donovan Mitchell, Malik Monk, Ja Morant, Jusuf Nurkić, Kristaps Porziņģis, Dwight Powell, Julius Randle, Naz Reid, Domantas Sabonis, Dario Šarić, Jayson Tatum, Karl-Anthony Towns, Myles Turner, Jonas Valančiūnas, Nikola Vučević, Moritz Wagner, P.J. Washington, Derrick White, Christian Wood, Trae Young.
+\end{description}
+
 
 \begin{figure}
-    \centering
-    \begin{subfigure}{0.49\textwidth}
-        \centering
-        \includegraphics[scale=0.2]{figures/kmedoids_1_eigenfunction_1.eps}
-        \includegraphics[scale=0.2]{figures/kmedoids_1_eigenfunction_2.eps}
-        \includegraphics[scale=0.2]{figures/kmedoids_1_eigenfunction_3.eps}
-        \includegraphics[scale=0.2]{figures/kmedoids_1_eigenfunction_4.eps}
-        \caption{Cluster 1.}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}{0.49\textwidth}
-        \centering
-        \includegraphics[scale=0.2]{figures/kmedoids_2_eigenfunction_1.eps}
-        \includegraphics[scale=0.2]{figures/kmedoids_2_eigenfunction_2.eps}
-        \includegraphics[scale=0.2]{figures/kmedoids_2_eigenfunction_3.eps}
-        \includegraphics[scale=0.2]{figures/kmedoids_2_eigenfunction_4.eps}
-        \caption{Cluster 2}
-    \end{subfigure}
-    \\
-    \begin{subfigure}{0.49\textwidth}
-        \centering
-        \includegraphics[scale=0.2]{figures/kmedoids_3_eigenfunction_1.eps}
-        \includegraphics[scale=0.2]{figures/kmedoids_3_eigenfunction_2.eps}
-        \includegraphics[scale=0.2]{figures/kmedoids_3_eigenfunction_3.eps}
-        \includegraphics[scale=0.2]{figures/kmedoids_3_eigenfunction_4.eps}
-        \caption{Cluster 3.}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}{0.49\textwidth}
-        \centering
-        \includegraphics[scale=0.2]{figures/kmedoids_4_eigenfunction_1.eps}
-        \includegraphics[scale=0.2]{figures/kmedoids_4_eigenfunction_2.eps}
-        \includegraphics[scale=0.2]{figures/kmedoids_4_eigenfunction_3.eps}
-        \includegraphics[scale=0.2]{figures/kmedoids_4_eigenfunction_4.eps}
-        \caption{Cluster 4}
-    \end{subfigure}
-    \\
-    \begin{subfigure}{0.49\textwidth}
-        \centering
-        \includegraphics[scale=0.2]{figures/kmedoids_5_eigenfunction_1.eps}
-        \includegraphics[scale=0.2]{figures/kmedoids_5_eigenfunction_2.eps}
-        \includegraphics[scale=0.2]{figures/kmedoids_5_eigenfunction_3.eps}
-        \includegraphics[scale=0.2]{figures/kmedoids_5_eigenfunction_4.eps}
-        \caption{Cluster 5}
-    \end{subfigure}
-    \caption{Decomposition without weight.}
-    \label{fig:cluster_no_weight}
+	\centering
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\includegraphics[scale=0.2]{figures/kmedoids_1_eigenfunction_1.eps}
+		\includegraphics[scale=0.2]{figures/kmedoids_1_eigenfunction_2.eps}
+		\includegraphics[scale=0.2]{figures/kmedoids_1_eigenfunction_3.eps}
+		\includegraphics[scale=0.2]{figures/kmedoids_1_eigenfunction_4.eps}
+		\caption{Cluster 1.}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\includegraphics[scale=0.2]{figures/kmedoids_2_eigenfunction_1.eps}
+		\includegraphics[scale=0.2]{figures/kmedoids_2_eigenfunction_2.eps}
+		\includegraphics[scale=0.2]{figures/kmedoids_2_eigenfunction_3.eps}
+		\includegraphics[scale=0.2]{figures/kmedoids_2_eigenfunction_4.eps}
+		\caption{Cluster 2}
+	\end{subfigure}
+	\\
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\includegraphics[scale=0.2]{figures/kmedoids_3_eigenfunction_1.eps}
+		\includegraphics[scale=0.2]{figures/kmedoids_3_eigenfunction_2.eps}
+		\includegraphics[scale=0.2]{figures/kmedoids_3_eigenfunction_3.eps}
+		\includegraphics[scale=0.2]{figures/kmedoids_3_eigenfunction_4.eps}
+		\caption{Cluster 3.}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\includegraphics[scale=0.2]{figures/kmedoids_4_eigenfunction_1.eps}
+		\includegraphics[scale=0.2]{figures/kmedoids_4_eigenfunction_2.eps}
+		\includegraphics[scale=0.2]{figures/kmedoids_4_eigenfunction_3.eps}
+		\includegraphics[scale=0.2]{figures/kmedoids_4_eigenfunction_4.eps}
+		\caption{Cluster 4}
+	\end{subfigure}
+	\\
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\includegraphics[scale=0.2]{figures/kmedoids_5_eigenfunction_1.eps}
+		\includegraphics[scale=0.2]{figures/kmedoids_5_eigenfunction_2.eps}
+		\includegraphics[scale=0.2]{figures/kmedoids_5_eigenfunction_3.eps}
+		\includegraphics[scale=0.2]{figures/kmedoids_5_eigenfunction_4.eps}
+		\caption{Cluster 5}
+	\end{subfigure}
+	\caption{Decomposition without weight.}
+	\label{fig:cluster_no_weight}
 \end{figure}
 
 
-\textbf{Cluster 2:} Harrison Barnes, RJ Barrett, Chris Boucher, Miles Bridges, Bruce Brown, John Collins, Luguentz Dort, Aaron Gordon, Jerami Grant, Josh Hart, Keldon Johnson, Kyle Kuzma, Larry Nance Jr., Kelly Olynyk, Cedi Osman, Kelly Oubre Jr., Norman Powell, Delon Wright, Thaddeus Young.
-
-\textbf{Cluster 3:} Bam Adebayo, Jarrett Allen, Deandre Ayton, Bradley Beal, Bogdan Bogdanović, Devin Booker, Dillon Brooks, Jalen Brunson, Alec Burks, Clint Capela, Brandon Clarke, Nic Claxton, Mike Conley, Seth Curry, Anthony Davis, DeMar DeRozan, Andre Drummond, Kevin Durant, Joel Embiid, De'Aaron Fox, Markelle Fultz, Daniel Gafford, Paul George, Shai Gilgeous-Alexander, Rudy Gobert, Tobias Harris, Gordon Hayward, Tyler Herro, Richaun Holmes, Brandon Ingram, Kyrie Irving, Reggie Jackson, Tyus Jones, Luke Kennard, Kawhi Leonard, CJ McCollum, T.J. McConnell, JaVale McGee, Khris Middleton, Dejounte Murray, Jamal Murray, Chris Paul, Mason Plumlee, Jakob Pöltl, Immanuel Quickley, Josh Richardson, Mitchell Robinson, Derrick Rose, D'Angelo Russell, Dennis Schröder, Collin Sexton, Pascal Siakam, Ben Simmons, Gary Trent Jr., Russell Westbrook, Andrew Wiggins, Ivica Zubac.
+Second, we present in which cluster each of the $173$ players belong when we assign a weight to each component given the proportion of variance they explain. Figure \ref{fig:cluster_weight} presents the decomposition of each cluster when the clustering is performed when weigths reflect the proportion of the variance they explained. We remark that the cluster are mostly defined by the first components, reflecting the willingness of the player to shoot. We remark that players in the Cluster 4 are the huge shooters, while players in the Cluster 3 are the little shooters (except very close to the basket).
 
 
-\textbf{Cluster 4:} Kyle Anderson, OG Anunoby, Saddiq Bey, Bojan Bogdanović, Mikal Bridges, Reggie Bullock Jr., Jimmy Butler, Kentavious Caldwell-Pope, Dorian Finney-Smith, Jeff Green, Rui Hachimura, Gary Harris, Justin Holiday, De'Andre Hunter, Cameron Johnson, Terance Mann, Monté Morris, Marcus Morris Sr., Georges Niang, Bobby Portis, Taurean Prince, Terry Rozier, Lonnie Walker IV, T.J. Warren.
+\begin{description}
+	\item[Cluster 1] Kyle Anderson, OG Anunoby, RJ Barrett, Bradley Beal, Chris Boucher, Miles Bridges, Malcolm Brogdon, Bruce Brown, Jaylen Brown, Thomas Bryant, Wendell Carter Jr., John Collins, DeMar DeRozan, Joel Embiid, De'Aaron Fox, Shai Gilgeous-Alexander, Aaron Gordon, Jerami Grant, Draymond Green, Rui Hachimura, Tobias Harris, Jrue Holiday, Jaren Jackson Jr., LeBron James, Keldon Johnson, Zach LaVine, Caris LeVert, Terance Mann, Dejounte Murray, Larry Nance Jr., Kelly Oubre Jr., Bobby Portis, Julius Randle, Naz Reid, Derrick Rose, Dennis Schröder, Collin Sexton, Pascal Siakam, Karl-Anthony Towns, Nikola Vučević, Moritz Wagner, T.J. Warren, Christian Wood, Delon Wright.
+	\item[Cluster 2] Saddiq Bey, Alec Burks, Kentavious Caldwell-Pope, Jordan Clarkson, Mike Conley, Donte DiVincenzo, Luka Dončić, Kevin Durant, Dorian Finney-Smith, Paul George, Eric Gordon, Tyrese Haliburton, Joe Harris, Al Horford, Reggie Jackson, Tyus Jones, Brook Lopez, Lauri Markkanen, CJ McCollum, Doug McDermott, De'Anthony Melton, Khris Middleton, Malik Monk, Monté Morris, Jamal Murray, Kelly Olynyk, Cedi Osman, Jordan Poole, Taurean Prince, Josh Richardson, Fred VanVleet, Lonnie Walker IV, Coby White, Derrick White.
+	\item[Cluster 3] Bam Adebayo, Jarrett Allen, Giannis Antetokounmpo, Deandre Ayton, Marvin Bagley III, Jimmy Butler, Clint Capela, Brandon Clarke, Nic Claxton, Anthony Davis, Andre Drummond, Markelle Fultz, Daniel Gafford, Rudy Gobert, Richaun Holmes, Nikola Jokić, T.J. McConnell, JaVale McGee, Ja Morant, Jusuf Nurkić, Mason Plumlee, Jakob Pöltl, Dwight Powell, Mitchell Robinson, Domantas Sabonis, Ben Simmons, Jonas Valančiūnas, Russell Westbrook, Thaddeus Young, Ivica Zubac.
+	\item[Cluster 4] Grayson Allen, Malik Beasley, Bogdan Bogdanović, Reggie Bullock Jr., Pat Connaughton, Robert Covington, Jae Crowder, Seth Curry, Stephen Curry, Evan Fournier, Danilo Gallinari, Devonte' Graham, Tim Hardaway Jr., Tyler Herro, Buddy Hield, Justin Holiday, Kevin Huerter, Joe Ingles, Cameron Johnson, Luke Kennard, Kevin Love, Kyle Lowry, Patty Mills, Marcus Morris Sr., Georges Niang, Royce O'Neale, Chris Paul, Michael Porter Jr., Immanuel Quickley, Duncan Robinson, D'Angelo Russell, Landry Shamet, Anfernee Simons, Marcus Smart, Gary Trent Jr..
+	\item[Cluster 5] Harrison Barnes, Bojan Bogdanović, Devin Booker, Mikal Bridges, Dillon Brooks, Jalen Brunson, Spencer Dinwiddie, Luguentz Dort, Darius Garland, Jeff Green, James Harden, Gary Harris, Josh Hart, Gordon Hayward, De'Andre Hunter, Brandon Ingram, Kyrie Irving, Kyle Kuzma, Kawhi Leonard, Damian Lillard, Donovan Mitchell, Kristaps Porziņģis, Norman Powell, Terry Rozier, Dario Šarić, Jayson Tatum, Myles Turner, P.J. Washington, Andrew Wiggins, Trae Young.
+\end{description}
 
-
-\textbf{Cluster 5:} Giannis Antetokounmpo, Marvin Bagley III, Malcolm Brogdon, Jaylen Brown, Thomas Bryant, Wendell Carter Jr., Jordan Clarkson, Spencer Dinwiddie, Luka Dončić, Darius Garland, Draymond Green, Tyrese Haliburton, Jrue Holiday, Al Horford, Jaren Jackson Jr., LeBron James, Nikola Jokić, Zach LaVine, Caris LeVert, De'Anthony Melton, Donovan Mitchell, Malik Monk, Ja Morant, Jusuf Nurkić, Kristaps Porziņģis, Dwight Powell, Julius Randle, Naz Reid, Domantas Sabonis, Dario Šarić, Jayson Tatum, Karl-Anthony Towns, Myles Turner, Jonas Valančiūnas, Nikola Vučević, Moritz Wagner, P.J. Washington, Derrick White, Christian Wood, Trae Young
-
-
-Results of the clustering with normalization of the scores with weighting.
 
 \begin{figure}
-    \centering
-    \begin{subfigure}{0.49\textwidth}
-        \centering
-        \includegraphics[scale=0.2]{figures/kmedoids_weighted_1_eigenfunction_1.eps}
-        \includegraphics[scale=0.2]{figures/kmedoids_weighted_1_eigenfunction_2.eps}
-        \includegraphics[scale=0.2]{figures/kmedoids_weighted_1_eigenfunction_3.eps}
-        \includegraphics[scale=0.2]{figures/kmedoids_weighted_1_eigenfunction_4.eps}
-        \caption{Cluster 1.}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}{0.49\textwidth}
-        \centering
-        \includegraphics[scale=0.2]{figures/kmedoids_weighted_2_eigenfunction_1.eps}
-        \includegraphics[scale=0.2]{figures/kmedoids_weighted_2_eigenfunction_2.eps}
-        \includegraphics[scale=0.2]{figures/kmedoids_weighted_2_eigenfunction_3.eps}
-        \includegraphics[scale=0.2]{figures/kmedoids_weighted_2_eigenfunction_4.eps}
-        \caption{Cluster 2}
-    \end{subfigure}
-    \\
-    \begin{subfigure}{0.49\textwidth}
-        \centering
-        \includegraphics[scale=0.2]{figures/kmedoids_weighted_3_eigenfunction_1.eps}
-        \includegraphics[scale=0.2]{figures/kmedoids_weighted_3_eigenfunction_2.eps}
-        \includegraphics[scale=0.2]{figures/kmedoids_weighted_3_eigenfunction_3.eps}
-        \includegraphics[scale=0.2]{figures/kmedoids_weighted_3_eigenfunction_4.eps}
-        \caption{Cluster 3.}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}{0.49\textwidth}
-        \centering
-        \includegraphics[scale=0.2]{figures/kmedoids_weighted_4_eigenfunction_1.eps}
-        \includegraphics[scale=0.2]{figures/kmedoids_weighted_4_eigenfunction_2.eps}
-        \includegraphics[scale=0.2]{figures/kmedoids_weighted_4_eigenfunction_3.eps}
-        \includegraphics[scale=0.2]{figures/kmedoids_weighted_4_eigenfunction_4.eps}
-        \caption{Cluster 4}
-    \end{subfigure}
-    \\
-    \begin{subfigure}{0.49\textwidth}
-        \centering
-        \includegraphics[scale=0.2]{figures/kmedoids_weighted_5_eigenfunction_1.eps}
-        \includegraphics[scale=0.2]{figures/kmedoids_weighted_5_eigenfunction_2.eps}
-        \includegraphics[scale=0.2]{figures/kmedoids_weighted_5_eigenfunction_3.eps}
-        \includegraphics[scale=0.2]{figures/kmedoids_weighted_5_eigenfunction_4.eps}
-        \caption{Cluster 5}
-    \end{subfigure}
-    \caption{Decomposition with weighting.}
-    \label{fig:cluster_weight}
+	\centering
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\includegraphics[scale=0.2]{figures/kmedoids_weighted_1_eigenfunction_1.eps}
+		\includegraphics[scale=0.2]{figures/kmedoids_weighted_1_eigenfunction_2.eps}
+		\includegraphics[scale=0.2]{figures/kmedoids_weighted_1_eigenfunction_3.eps}
+		\includegraphics[scale=0.2]{figures/kmedoids_weighted_1_eigenfunction_4.eps}
+		\caption{Cluster 1.}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\includegraphics[scale=0.2]{figures/kmedoids_weighted_2_eigenfunction_1.eps}
+		\includegraphics[scale=0.2]{figures/kmedoids_weighted_2_eigenfunction_2.eps}
+		\includegraphics[scale=0.2]{figures/kmedoids_weighted_2_eigenfunction_3.eps}
+		\includegraphics[scale=0.2]{figures/kmedoids_weighted_2_eigenfunction_4.eps}
+		\caption{Cluster 2}
+	\end{subfigure}
+	\\
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\includegraphics[scale=0.2]{figures/kmedoids_weighted_3_eigenfunction_1.eps}
+		\includegraphics[scale=0.2]{figures/kmedoids_weighted_3_eigenfunction_2.eps}
+		\includegraphics[scale=0.2]{figures/kmedoids_weighted_3_eigenfunction_3.eps}
+		\includegraphics[scale=0.2]{figures/kmedoids_weighted_3_eigenfunction_4.eps}
+		\caption{Cluster 3.}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\includegraphics[scale=0.2]{figures/kmedoids_weighted_4_eigenfunction_1.eps}
+		\includegraphics[scale=0.2]{figures/kmedoids_weighted_4_eigenfunction_2.eps}
+		\includegraphics[scale=0.2]{figures/kmedoids_weighted_4_eigenfunction_3.eps}
+		\includegraphics[scale=0.2]{figures/kmedoids_weighted_4_eigenfunction_4.eps}
+		\caption{Cluster 4}
+	\end{subfigure}
+	\\
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\includegraphics[scale=0.2]{figures/kmedoids_weighted_5_eigenfunction_1.eps}
+		\includegraphics[scale=0.2]{figures/kmedoids_weighted_5_eigenfunction_2.eps}
+		\includegraphics[scale=0.2]{figures/kmedoids_weighted_5_eigenfunction_3.eps}
+		\includegraphics[scale=0.2]{figures/kmedoids_weighted_5_eigenfunction_4.eps}
+		\caption{Cluster 5}
+	\end{subfigure}
+	\caption{Decomposition with weighting.}
+	\label{fig:cluster_weight}
 \end{figure}
-
-\textbf{Cluster 1:} Kyle Anderson, OG Anunoby, RJ Barrett, Bradley Beal, Chris Boucher, Miles Bridges, Malcolm Brogdon, Bruce Brown, Jaylen Brown, Thomas Bryant, Wendell Carter Jr., John Collins, DeMar DeRozan, Joel Embiid, De'Aaron Fox, Shai Gilgeous-Alexander, Aaron Gordon, Jerami Grant, Draymond Green, Rui Hachimura, Tobias Harris, Jrue Holiday, Jaren Jackson Jr., LeBron James, Keldon Johnson, Zach LaVine, Caris LeVert, Terance Mann, Dejounte Murray, Larry Nance Jr., Kelly Oubre Jr., Bobby Portis, Julius Randle, Naz Reid, Derrick Rose, Dennis Schröder, Collin Sexton, Pascal Siakam, Karl-Anthony Towns, Nikola Vučević, Moritz Wagner, T.J. Warren, Christian Wood, Delon Wright.
-
-
-\textbf{Cluster 2:} Saddiq Bey, Alec Burks, Kentavious Caldwell-Pope, Jordan Clarkson, Mike Conley, Donte DiVincenzo, Luka Dončić, Kevin Durant, Dorian Finney-Smith, Paul George, Eric Gordon, Tyrese Haliburton, Joe Harris, Al Horford, Reggie Jackson, Tyus Jones, Brook Lopez, Lauri Markkanen, CJ McCollum, Doug McDermott, De'Anthony Melton, Khris Middleton, Malik Monk, Monté Morris, Jamal Murray, Kelly Olynyk, Cedi Osman, Jordan Poole, Taurean Prince, Josh Richardson, Fred VanVleet, Lonnie Walker IV, Coby White, Derrick White.
-
-
-\textbf{Cluster 3:} Bam Adebayo, Jarrett Allen, Giannis Antetokounmpo, Deandre Ayton, Marvin Bagley III, Jimmy Butler, Clint Capela, Brandon Clarke, Nic Claxton, Anthony Davis, Andre Drummond, Markelle Fultz, Daniel Gafford, Rudy Gobert, Richaun Holmes, Nikola Jokić, T.J. McConnell, JaVale McGee, Ja Morant, Jusuf Nurkić, Mason Plumlee, Jakob Pöltl, Dwight Powell, Mitchell Robinson, Domantas Sabonis, Ben Simmons, Jonas Valančiūnas, Russell Westbrook, Thaddeus Young, Ivica Zubac.
-
-
-\textbf{Cluster 4:} Grayson Allen, Malik Beasley, Bogdan Bogdanović, Reggie Bullock Jr., Pat Connaughton, Robert Covington, Jae Crowder, Seth Curry, Stephen Curry, Evan Fournier, Danilo Gallinari, Devonte' Graham, Tim Hardaway Jr., Tyler Herro, Buddy Hield, Justin Holiday, Kevin Huerter, Joe Ingles, Cameron Johnson, Luke Kennard, Kevin Love, Kyle Lowry, Patty Mills, Marcus Morris Sr., Georges Niang, Royce O'Neale, Chris Paul, Michael Porter Jr., Immanuel Quickley, Duncan Robinson, D'Angelo Russell, Landry Shamet, Anfernee Simons, Marcus Smart, Gary Trent Jr..
-
-
-\textbf{Cluster 5:}  Harrison Barnes, Bojan Bogdanović, Devin Booker, Mikal Bridges, Dillon Brooks, Jalen Brunson, Spencer Dinwiddie, Luguentz Dort, Darius Garland, Jeff Green, James Harden, Gary Harris, Josh Hart, Gordon Hayward, De'Andre Hunter, Brandon Ingram, Kyrie Irving, Kyle Kuzma, Kawhi Leonard, Damian Lillard, Donovan Mitchell, Kristaps Porziņģis, Norman Powell, Terry Rozier, Dario Šarić, Jayson Tatum, Myles Turner, P.J. Washington, Andrew Wiggins, Trae Young.
-
-
 
 % section clustering_results (end)
