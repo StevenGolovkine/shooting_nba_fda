@@ -8,7 +8,9 @@ We first used these principal component functions to describe the major modes of
 
 We then applied $k$-medoids clustering to the player-specific scores to construct a data-driven taxonomy of player shooting tendencies. The resulting clusters revealed diverse shooting profiles, which we interpreted through the typical functional principal component scores within each group.
 
-Interestingly, the estimated clusters showed only weak agreement with the conventional NBA-defined player positions. This may be because shooting behavior represents only one aspect of a player’s role; play-making, defensive responsibilities, and off-the-ball movement also influence positional classification. Nevertheless, our analysis provides a novel data-driven perspective on how players differ in their shooting behaviors.
+Interestingly, the estimated clusters showed only weak agreement with the conventional NBA-defined player positions. This may be because shooting behavior represents only one aspect of a player’s role; play-making, defensive responsibilities, and off-the-ball movement also influence positional classification. 
+Given the weak agreement, future work could estimate fewer or more than five clusters.
+Nevertheless, our analysis provides a novel data-driven perspective on how players differ in their shooting behaviors.
 
 We envision a number of potential uses of both our functional shot-chart representation and the subsequent clustering of shooting patterns.
 Firstly, the functional representation of a players shot-chart provides a comprehensive characterization of a player's shooting behavior, i.e., the shot chart is not reduced to one or more scalar summaries.
@@ -16,16 +18,9 @@ This representation could be used by coaches or front-office staff to monitor ch
 Because the charts can naturally be presented in a way that is interpretable to basketball fans who may not be familiar with the underlying mathematics and statistics, the representation can be used to tell stories to the general public about player tendencies, and enable historical comparisons between players, enriching the narrative around the sport.
 While we used shots made and shots missed, other metrics defined over the offensive half-court (e.g., shooting efficiency), could be represented in the same way for the aforementioned purposes.
 
-There are a number of possible methodological extensions to the modeling framework.
+There are also a number of possible methodological extensions to the modeling framework.
 One of the most exiting avenues is to combine the shot-chart representations with other high-throughput data sources that are now routinely collected within the NBA.
 For example, temporal biomechanical data are now being measured by motion-tracking systems such as Hawk-Eye, and the possibility of a multi-modal representation that reflects a players tactical and physical tendencies -- and the interaction between them -- could provide more detailed and specific analyses.
-Our modeling framework could also be applied to positional data in other sports, for example, to characterize a player's typical position in soccer, or the ``fighting style" of a boxer.
-
-	{\color{red}Add references}
-
-% {\color{red}In-season use -- is a player's pattern changing?}
-
-% As an extension, use the defensive shot chart from \cite{franksCharacterizingSpatialStructure2015}.
+Our modeling framework could also be applied to positional data in other sports, for example, to characterize a soccer player's ``natural position" or a boxer's ``fighting style".
 
 
-% section discussion (end)
