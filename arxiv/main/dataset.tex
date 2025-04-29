@@ -2,32 +2,32 @@
 \section{Dataset} % (fold)
 \label{sec:dataset}
 
-Our motivating dataset is derived from the NBA. To access comprehensive game data, we use the Python package \texttt{nba\_api}\footnote{\url{https://github.com/swar/nba_api/}}, which interfaces with the APIs provided by \url{nba.com}. The dataset includes both made and missed field goal attempt locations from the offensive half-court, covering all NBA games from the $2018-2019$ to the $2023-2024$. The offensive half-court is a $50$ ft (sideline to sideline) by $47$ ft (baseline to mid court line) rectangle. Filtering the dataset, we focus on players who attempted more than $1000$ field goals during this six-season period, resulting in a cohort of $173$ players out of the $573$ players who have stepped onto the court during these seven years. Collectively, these players attempted $717381$ shots, of which $340466$ ($47\%$) were successful. To ensure data quality, we exclude attempts classified as impossible (e.g., out-of-bounds), leaving a dataset of $716114$ shots, with $340430$ ($48\%$) successful attempts.
+Our motivating dataset is derived from the NBA. To access comprehensive game data, we use the Python package \texttt{nba\_api}\footnote{\url{https://github.com/swar/nba_api/}}, which interfaces with the APIs provided by \url{nba.com}. The dataset includes both made and missed field goal attempt locations from the offensive half-court, covering all NBA games from the $2018-2019$ to the $2023-2024$ regular seasons. The offensive half-court is a $50$ ft (sideline to sideline) by $47$ ft (baseline to mid court line) rectangle. Filtering the dataset, we focus on players who attempted more than $1000$ field goals during this six-season period, resulting in a cohort of $173$ players out of the $573$ players who have stepped onto the court during these seven years. Collectively, these players attempted $717381$ shots, of which $340466$ ($47\%$) were successful. To ensure data quality, we exclude attempts classified as impossible (e.g., out-of-bounds), leaving a dataset of $716114$ shots, with $340430$ ($48\%$) successful attempts.
 
 
-In the NBA, players are typically categorized by their roles on the court into three primary positions: `guard', `forward', and `center'. Guards are responsible for ball handling, playmaking, and perimeter shooting. Centers, often referred to as "big men", primarily operate near the basket to score in the paint. Forwards are versatile players who contribute in multiple areas of the court. Additionally, the NBA recognizes hybrid roles for players with overlapping skill sets: `guard-forward', `forward-guard', `center-forward', and `forward-center'. To ensure a sufficient number of players in each group, we aggregate the `guard-forward' and `forward-guard' roles into a single `forward-guard' category, and the `center-forward' and `forward-center' roles into a single `forward-center' category. This results in five distinct positional groups (`guard', `forward-guard', `forward', `forward-center' and `center'), corresponding to the number of players on the court. The number of players across these category is shown in Table~\ref{tab:player_position}.
+In the NBA, players are typically categorized by their roles on the court into three primary positions: `guard', `forward', and `center'. Guards are responsible for ball handling, playmaking, and perimeter shooting. Centers, often referred to as "big men", primarily operate near the basket to score in the paint. Forwards are versatile players who contribute in multiple areas of the court. Additionally, the NBA recognizes hybrid roles for players with overlapping skill sets: `guard-forward', `forward-guard', `center-forward', and `forward-center'. To ensure a sufficient number of players in each group, we aggregate the `guard-forward' and `forward-guard' roles into a single `forward-guard' category, and the `center-forward' and `forward-center' roles into a single `forward-center' category. This results in five distinct positional groups (`guard', `forward-guard', `forward', `forward-center' and `center'), corresponding to the number of players on the court. The number of players across these categories is shown in Table~\ref{tab:player_position}.
 \begin{table}
-\centering
-\caption{Number of players for each position according to the NBA.}
-\label{tab:player_position}
-\begin{tabular}{ c|ccccc } 
- Position     & Guard & Forward-Guard & Forward & Forward-Center & Center \\ 
- \hline
- \# of players & 68 & 24 & 43 & 25 & 13 \\ 
-\end{tabular}
+	\centering
+	\caption{Number of players for each position according to the NBA.}
+	\label{tab:player_position}
+	\begin{tabular}{ c|ccccc }
+		Position      & Guard & Forward-Guard & Forward & Forward-Center & Center \\
+		\hline
+		\# of players & 68    & 24            & 43      & 25             & 13     \\
+	\end{tabular}
 \end{table}
 
 
-We model both the locations of successful shots and unsuccessful shots for each player on the offensive half-court. Given that players can shoot from nearly any point within the well-defined boundaries of the half-court, the shot maps can be naturally represented as bivariate functional observations defined on two-dimensional rectangular grids. Figure~\ref{fig:examples_shooting_charts} displays raw shot charts for five players, each representing a different position: Stephen Curry (guard), Jayson Tatum (forward-guard), LeBron James (forward), Joel Embiid (forward-center) and Nikola Jokić (center). The code to reproduce this dataset and the analysis (including all steps in the preprocessing pipeline) is available on \textsf{GitHub}\footnote{\url{https://github.com/StevenGolovkine/shooting_nba_fda/}}. 
+We model both the locations of successful shots and unsuccessful shots for each player on the offensive half-court. Given that players can shoot from nearly any point within the well-defined boundaries of the half-court, the shot maps can be naturally represented as bivariate functional observations defined on two-dimensional rectangular grids. Figure~\ref{fig:examples_shooting_charts} displays raw shot charts for five players, each representing a different position: Stephen Curry (guard), Jayson Tatum (forward-guard), LeBron James (forward), Joel Embiid (forward-center) and Nikola Jokić (center). The code to reproduce this dataset and the analysis (including all the steps in the preprocessing pipeline) is available on \textsf{GitHub}\footnote{\url{https://github.com/StevenGolovkine/shooting_nba_fda/}}.
 \begin{figure}
-    \centering
-    \includegraphics[scale=0.5]{figures/curry_guard.eps}
-    \includegraphics[scale=0.5]{figures/tatum_forward_guard.eps}
-    \includegraphics[scale=0.5]{figures/james_forward.eps}
-    \includegraphics[scale=0.5]{figures/embiid_forward_center.eps}
-    \includegraphics[scale=0.5]{figures/jokic_center.eps}
-    \caption{Shots charts for five selected NBA players.}
-    \label{fig:examples_shooting_charts}
+	\centering
+	\includegraphics[scale=0.5]{figures/curry_guard.eps}
+	\includegraphics[scale=0.5]{figures/tatum_forward_guard.eps}
+	\includegraphics[scale=0.5]{figures/james_forward.eps}
+	\includegraphics[scale=0.5]{figures/embiid_forward_center.eps}
+	\includegraphics[scale=0.5]{figures/jokic_center.eps}
+	\caption{Shots charts for five selected NBA players.}
+	\label{fig:examples_shooting_charts}
 \end{figure}
 
 % section dataset (end)

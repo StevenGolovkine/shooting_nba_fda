@@ -2,9 +2,8 @@
 \section{Clustering results} % (fold)
 \label{sec:clustering_results}
 
-In this section, we present the complete clustering results.
+In this section, we present the complete clustering results. First, we present in which cluster each of the $173$ players belong to when we assign equal weights to all components. Figure \ref{fig:cluster_no_weight} presents the decomposition of each cluster when the clustering is performed when equal weights are given to the components. The clustering results can be interpreted based on shooting tendencies.
 
-First, we present in which cluster each of the $173$ players belong when we assign equal weights to all components. Figure \ref{fig:cluster_no_weight} presents the decomposition of each cluster when the clustering is performed when equal weights are given to the components. We remark that players in the Cluster 1 are the huge shooters, players in the Cluster 2 are the average shooters, players in the Cluster 3 are the short-range shooters, players in the Cluster 4 are the shooters that prefers to shoot from the aisles, and players in the Cluster 5 are the shooters that prefers to shoot in the axis of the basket.
 
 \begin{description}
 	\item[Cluster 1] Grayson Allen, Malik Beasley, Pat Connaughton, Robert Covington, Jae Crowder, Stephen Curry, Donte DiVincenzo, Evan Fournier, Danilo Gallinari, Eric Gordon, Devonte' Graham, Tim Hardaway Jr., James Harden, Joe Harris, Buddy Hield, Kevin Huerter, Joe Ingles, Damian Lillard, Brook Lopez, Kevin Love, Kyle Lowry, Lauri Markkanen, Doug McDermott, Patty Mills, Royce O'Neale, Jordan Poole, Michael Porter Jr., Duncan Robinson, Landry Shamet, Anfernee Simons, Marcus Smart, Fred VanVleet, Coby White.
@@ -62,12 +61,12 @@ First, we present in which cluster each of the $173$ players belong when we assi
 		\caption{Cluster 5}
 	\end{subfigure}
 	\caption{MFPCA decompositions from the clustering using equal weights for each component.
-    }
+	}
 	\label{fig:cluster_no_weight}
 \end{figure}
 
 
-Second, we present in which cluster each of the $173$ players belong when we assign a weight to each component given the proportion of variance they explain. Figure \ref{fig:cluster_weight} presents the decomposition of each cluster when the clustering is performed when weigths reflect the proportion of the variance they explained. We remark that the cluster are mostly defined by the first components, reflecting the willingness of the player to shoot. We remark that players in the Cluster 4 are the huge shooters, while players in the Cluster 3 are the little shooters (except very close to the basket).
+Second, we present in which cluster each of the $173$ players belong when we assign a weight to each component given the proportion of variance they explain. Figure \ref{fig:cluster_weight} presents the decomposition of each cluster when the clustering is performed when weigths reflect the proportion of the variance they explained. Since the first component accounts for approximately $70\%$ of the total variance, the clusters are primarily driven by the first score $c_1$, reflecting the overall shooting frequency of the players.
 
 
 \begin{description}
