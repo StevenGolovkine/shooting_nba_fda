@@ -15,7 +15,7 @@ We apply MFPCA to estimate the mean functions and eigenfunctions, providing a de
     \includegraphics[scale=0.35]{figures/eigenfunction_4.eps}
     \\
     \includegraphics[scale=0.35]{figures/colorbar2.eps}
-    \caption{Estimation of the mean surface and the eigenfunctions of the shots density charts. The eigenfunctions represent deviation from the mean surface and are defined up to a sign, making their values at specific points not directly interpretable. Note that the mean surface and eigenfunctions have been normalized between $-1$ and $1$ for presentation purpose.}
+    \caption{Estimates of the mean surface and the eigenfunctions of the shots density charts. The eigenfunctions represent deviations from the mean surface and are defined up to a sign, making their values at specific points not directly interpretable as densities. Note that the mean surface and eigenfunctions have been normalized to be between $-1$ and $1$ for presentation purposes.}
     \label{fig:mean_eigenfunctions}
 \end{figure}
 
@@ -30,7 +30,7 @@ As an example, Figure~\ref{fig:examples_players} illustrates the decomposition o
     \includegraphics[scale=0.295]{figures/curry_eigenfunction_4.eps}
     \\
     \includegraphics[scale=0.35]{figures/colorbar2.eps}
-    \caption{Example of the decomposition of Stephen Curry into the eigenfunctions basis.}
+    \caption{Decomposition of Stephen Curry's shot chart densities into the eigenfunctions basis.}
     \label{fig:examples_players}
 \end{figure}
 
@@ -42,7 +42,7 @@ Figure~\ref{fig:clusters} presents the estimated scores $c_k$ from~\eqref{eq:kl_
     \includegraphics[scale=0.95]{figures/scores_3.eps}
     \includegraphics[scale=0.95]{figures/scores_4.eps}
     \includegraphics[scale=0.95]{figures/legend.eps}
-    \caption{Scatter plots of the coefficients colored using the NBA defined typology of players. We highlighted one player per position. The scores have been jittered on the y-axis for visualisation purposes.}
+    \caption{Scatter plots of the player-specific basis coefficients (scores) colored using the NBA defined typology of players. We highlighted one player per position. The scores have been jittered on the y-axis for visualisation purposes.}
     \label{fig:clusters}
 \end{figure}
 
@@ -72,7 +72,7 @@ Figure~\ref{fig:average_cluster_weight} presents the cluster medoids for the res
     \includegraphics[scale=0.35]{figures/average_player_3_weighted.eps}
     \includegraphics[scale=0.35]{figures/average_player_4_weighted.eps}
     \includegraphics[scale=0.35]{figures/average_player_5_weighted.eps}
-    \caption{Most representative player of each cluster according to the $k$-medoids algorithm using an euclidean distance with weights defined using the percentage of variance explained by each components.}
+    \caption{Most representative player from each cluster according to the $k$-medoids algorithm using an euclidean distance with weights defined using the percentage of variance explained by each component.}
     \label{fig:average_cluster_weight}
 \end{figure}
 
@@ -85,7 +85,7 @@ Figure~\ref{fig:confusion_mat} presents the differences between the NBA-defined 
     \includegraphics[scale=0.55]{figures/confusion_mat_kmedoids_weights.eps}
     \hfill
     \includegraphics[scale=0.55]{figures/confusion_matk_medoids_w_no_w.eps}
-    \caption{Agreement between the two clustering taxonomies (using equal weights and variance weights) and the conventional NBA typology. NBA clusters are based on the usual typology ($0$: center, $1$: forward, $2$: forward-center, $3$: forward-guard, $4$: guard).}
+    \caption{Agreement between the two clustering taxonomies (using equal weights and variance weights) and the conventional NBA position typology. NBA clusters are based on the usual typology ($0$: center, $1$: forward, $2$: forward-center, $3$: forward-guard, $4$: guard).}
     \label{fig:confusion_mat}
 \end{figure}
 
