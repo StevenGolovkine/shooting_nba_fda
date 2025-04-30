@@ -12,13 +12,13 @@ where $\mu(s, t)$ is the mean (average) function, and $c_k$ are the player-speci
 To create a data-driven taxonomy of players based on MFPCA, we apply a $k$-medoids clustering algorithm \citep{kaufmanFindingGroupsData2009} to the normalized functional principal component scores $c_k$, using $k = 5$ clusters, as the number of players on the court. The $k$-medoids algorithm minimizes the dissimilarity between each player's scores and the medoid of its cluster. We use the weighted euclidean distance as the measure of dissimilarity. This method offers a practical advantage over the $k$-means clustering algorithm: the center of each cluster is an actual player from the dataset rather than an averaged representation of all players within the cluster, enhancing interpretability. In our analysis, we consider two weighting schemes to calculate the distance: one assigns equal weights to all components, and the other weights components given the proportion of variance they explain.
 \begin{figure}
 	\centering
-	\includegraphics[scale=0.35]{figures/curry_density.eps}
-	\includegraphics[scale=0.35]{figures/tatum_density.eps}
-	\includegraphics[scale=0.35]{figures/james_density.eps}
-	\includegraphics[scale=0.35]{figures/embiid_density.eps}
-	\includegraphics[scale=0.35]{figures/jokic_density.eps}
+	\includegraphics[scale=0.35]{figures/curry_density.pdf}
+	\includegraphics[scale=0.35]{figures/tatum_density.pdf}
+	\includegraphics[scale=0.35]{figures/james_density.pdf}
+	\includegraphics[scale=0.35]{figures/embiid_density.pdf}
+	\includegraphics[scale=0.35]{figures/jokic_density.pdf}
 	\\
-	\includegraphics[scale=0.35]{figures/colorbar.eps}
+	\includegraphics[scale=0.35]{figures/colorbar.pdf}
 	\caption{Smoothed shot chart densities for five selected NBA players. The densities have been individually normalized between $0$ and $1$.}
 	\label{fig:examples_shooting_density}
 \end{figure}
