@@ -6,8 +6,8 @@
 \usepackage[big,online]{dgruyter}	%values: small,big | online,print,work
 \usepackage{lmodern} 
 \usepackage{microtype}
-\usepackage[numbers,square,sort&compress]{natbib}
-
+\usepackage[authoryear,sort&compress]{natbib}
+\usepackage{subcaption}
 
 % New theorem-like environments will be introduced by using the commands \theoremstyle and \newtheorem.
 % Please note that the environments proof and definition are already defined within dgryuter.sty.
@@ -42,171 +42,386 @@
   \DOI{10.1515/sample-YYYY-XXXX}
 %%%--------------------------------------------%%%
 
-\title{Insert your title here}
-\runningtitle{Short title}
+\title{Is Stephen Curry really a guard? New perspective on players typology using functional data analysis}
+\runningtitle{New perspective on players typology using functional data analysis}
 %\subtitle{Insert subtitle if needed}
 
-\author*[1]{First Author}
+\author*[1]{Steven Golovkine}
 %\ use * to mark the author as the corresponding author
-\author[2]{Second Author}
-\author[2]{Third Author} 
-\runningauthor{F.~Author et al.}
+\author[2]{Edward Gunning}
+\runningauthor{S.~Golovkine and E.~Gunning}
 \affil[1]{\protect\raggedright 
-Institution, Department, City, Country of first author, e-mail: author\_one@xx.yz}
+Département de mathématiques et statistique, Université Laval, Québec, Canada, email: \href{mailto:steven.golovkine@mat.ulaval.ca}{steven.golovkine@mat.ulaval.ca}}
 \affil[2]{\protect\raggedright 
-Institution, Department, City, Country of second author and third author, e-mail: author\_two@xx.yz, author\_three@xx.yz}
+Department of Biostatistics and Epidemiology, University of Pennsylvania, Philadelphia, USA, email: \href{mailto:edward.gunning@pennmedicine.upenn.edu}{edward.gunning@pennmedicine.upenn.edu}}
 	
 %\communicated{...}
 %\dedication{...}
 	
-\abstract{Please insert your abstract here (approx. 200 words). Remember that online systems rely heavily on the content of titles and abstracts to identify articles in electronic bibliographic databases and search engines. Abstracts give a clear indication of the nature and the range of the results in the paper.}
+\abstract{We present a novel representation of NBA players' shooting patterns based on Functional Data Analysis (FDA). Each player's charts of made and missed shots are treated as smooth functional data defined over a two-dimensional domain corresponding to the offensive half-court. This continuous representation enables a parsimonious multivariate functional principal components analysis (MFPCA) decomposition, producing a set of common principal component functions that capture the primary modes of variability in shooting patterns, along with player-specific scores that quantify individual deviations from the average behavior. We first interpret the principal component functions to characterize the main sources of variation in shooting tendencies. We then apply $k$-medoids clustering to the principal component scores to construct a data-driven taxonomy of players. Comparing our empirical clusters to conventional NBA position labels reveals low agreement, suggesting that our shooting-pattern representation might capture aspects of playing style not fully reflected in official designations. The proposed methodology provides a flexible, interpretable, and continuous framework for analyzing player tendencies, with potential applications in coaching, scouting, and historical player or match comparisons.}
 
-\keywords{Please insert your keywords here, separated by commas.}
+\keywords{Basketball, Clustering, Shooting patterns, Sports Analytics}
 
 \maketitle
 	
 	
-\section{Introduction} 
+\section{Introduction} % (fold)
+\label{sec:introduction}
 
-Found a journal in which you would like to publish? Then we suggest going to the journal’s website and reading the information on the submission form. Please follow our specifications for guidance with creating and formatting your manuscript. In each journal’s supplementary pages, you will find the current impact factor and additional information about the journal.
 
-Many journals accept manuscript submissions through the online systems ScholarOne Manuscripts and Editorial Manager. This saves you time and speeds up the publication process. Journals without a submission system of this type can be contacted via the relevant product page.
+With the increasing availability of large, detailed, and complex sports performance datasets, sports analytics has become a rapidly expanding field of both research and application, drawing significant interest from the statistics and machine learning communities. In team sports, traditional approaches have often focused on predicting game outcomes based on team characteristics \citep{dixonModellingAssociationFootball1997,babootaPredictiveAnalysisModelling2019}; for recent reviews, see \cite{horvatUseMachineLearning2020,bunkerApplicationMachineLearning2022}.
+More recently, the availability of tracking data has enabled researchers to delve into more specific aspects of various sports, such as evaluating individual player performance in soccer \citep{pappalardoPlayeRankDatadrivenPerformance2019,decroosActionsSpeakLouder2019} or analyzing defensive performance in American football passing plays \citep{schmidSimulatingDefensiveTrajectories2021}. See \cite{kovalchikPlayerTrackingData2023} for a recent review on machine learning approaches to analyze tracking data. Basketball, in particular, presents opportunities for analysis, supported by extensive data provided by the National Basketball Association (NBA).
 
-More information can be found at https://www.degruyter.com/page/authors.
 
-\subsection{General information} 
-Manuscripts should be written in clear and concise English. Please have your text proofread by an English native speaker before you submit it for consideration. At the proof stage, only minor changes and corrections are allowed.
+Basketball is a team sport in which two teams of five players compete to score points by shooting a ball through the opponent's hoop while defending their own. The game has been extensively studied through various analytical perspectives. For example, researchers have examined shooting mechanics and movements \citep{millerRelationshipBasketballShooting1996,liuChangesBasketballShooting1999,okazakiReviewBasketballJump2015}, estimated pre-game and in-game winning probabilities \citep{maddoxBayesianEstimationIngame2022}, and modeled outcomes of possessions \citep{cervoneMultiresolutionStochasticProcess2016}. Statistical models have also been applied to analyze defensive strategies \citep{csataljayEffectsDefensivePressure2013} and spatial performance on the court \citep{zuccolottoSpatialPerformanceAnalysis2023}. For a comprehensive review of performance analysis in basketball, see \cite{ternerModelingPlayerTeam2021}.
 
-The \textbf{Introduction} to the manuscript should contain a clear definition of the problem being considered. Wherever possible theoretical results should be cited. The use of SI units is required.
 
-\section{Layout of manuscripts} 
-\subsection{Equations and theorem-like environments}	
-\textbf{Equations} should be well-aligned and should not be crowded \eqref{eq:1}. Only Latin and Greek alphabets are to be used. Complicated superscripts and subscripts should be avoided by introducing new symbols. Avoid repetition of a complicated expression by representing it with a symbol.
+In basketball, game outcomes are heavily influenced by shooting accuracy, as a player's effectiveness is often defined by its ability to consistently score from various court locations. Analyzing shooting patterns thus serves as a powerful tool, not only for assessing individual performance but also for refining team strategies. An important tool for examining shooting patterns is shooting charts, which are visual representations that display all the shots a player has attempted and made over a season or a single game. Shooting charts are extensively studied in basketball research, with much of the work focusing on modeling them as spatial point processes. This approach typically involves creating a count matrix of shots taken by each player on a discretized court, then estimating an intensity surface over this grid by fitting a log-Gaussian Cox process. A low-rank approximation of these intensity surfaces is achieved using non-negative matrix factorization, as described in \citet{millerFactorizedPointProcess2014,franksCharacterizingSpatialStructure2015}. Non-parametric estimation of the intensity surface is also considered in \cite{yinBayesianNonparametricLearning2022}. These low-rank intensity surfaces help characterize NBA players’ shooting tendencies and evaluate their scoring efficiency. Some models do not require the intensity surface fitting approach. For example, \cite{reichSpatialAnalysisBasketball2006} employed conditionally autoregressive models to capture spatial correlations, while \cite{huZeroinflatedPoissonModel2023} fitted a Bayesian zero-inflated Poisson model to represent shooting attempts for players with distinct shooting styles. Although these methods effectively summarize player data, they are less suitable for comparing different players.
 
-% unnumbered equation if not cited in the text
-\begin{equation*}
-k_{n+1} = n^2 + k_n^2 - k_{n-1}
-\end{equation*}
 
-% numbered equation if cited in the text
-\begin{equation}
-f(x)=(x+a)(x+b)
-\label{eq:1}
+To compare players' shooting behaviors, specialized methods have been developed. \citet{fuHoopInSightAnalyzingComparing2024} employ (interactive) data visualization techniques to analyze and contrast shooting performance. In a different approach, \citet{huBayesianGroupLearning2021} use a log-Gaussian Cox process to model the shooting intensity with a specific similarity measure for comparing players. \citet{jiaoBayesianMarkedSpatial2021} propose a Bayesian marked spatial point process model to capture shot intensity, investigating whether players’ success rates are higher in areas where they attempt more shots and clustering players based on this pattern. In another study, \citet{wong-toiJointAnalysisField2022} analyze shooting patterns across players by dividing the court into a grid and using a Bayesian nonparametric mixture model to identify latent clusters among players. Similarly, \citet{yinAnalysisProfessionalBasketball2023} apply a Bayesian nonparametric matrix clustering technique to estimated intensity maps, offering insights into shot selection characteristics. All these methods require a discretized representation of the court.
+
+
+To overcome the requirement of court discretization, we propose to estimate the shot density continuously across the offensive half-court and model these densities as functional data \citep{ramsayFunctionalDataAnalysis2005,kokoszkaIntroductionFunctionalData2017}. This idea first appeared in our paper \cite{golovkineUseGramMatrix2024}. Both missed and made shot charts are treated as multivariate functional data over a two-dimensional domain (i.e., the offensive half-court). Functional Data Analysis (FDA) addresses the analysis of realizations of a continuous stochastic process, observed at discrete sampling points and defined on compact domains. By treating shot density as a stochastic process defined over the offensive half-court, we can consider each player’s shot density as a realization of this process. FDA tools allow us to summarize and capture variability within this process. To achieve this, we perform a basis decomposition using multivariate functional principal components analysis (MFPCA), and then describe players’ shooting styles based on this decomposition. Finally, representing player data onto the basis decomposition allows us to use clustering techniques to identify players with similar shooting behaviors. This approach to analyzing shooting patterns provides nuanced insights that can be valuable for coaches, analysts, and players alike.
+
+
+The remainder of the article is organized as follows. In Section~\ref{sec:dataset}, we introduce the dataset covering the 2018-2019 through 2023-2024 regular NBA seasons. Section~\ref{sec:method} details our methodology, while Section~\ref{sec:results} presents the application of this methodology to NBA player data. Finally, we conclude with a discussion in Section~\ref{sec:discussion}.
+
+% section introduction (end)
+
+\section{Dataset} % (fold)
+\label{sec:dataset}
+
+Our motivating dataset is derived from the NBA. To access comprehensive game data, we use the Python package \texttt{nba\_api}\footnote{\url{https://github.com/swar/nba_api/}}, which interfaces with the APIs provided by \url{nba.com}. The dataset includes both made and missed field goal attempt locations from the offensive half-court, covering all NBA games from the $2018-2019$ to the $2023-2024$ regular seasons. The offensive half-court is a $50$ ft (sideline to sideline) by $47$ ft (baseline to mid court line) rectangle. Filtering the dataset, we focus on players who attempted more than $1000$ field goals during this six-season period, resulting in a cohort of $173$ players out of the $573$ players who have stepped onto the court during these seven years. Collectively, these players attempted $717381$ shots, of which $340466$ ($47\%$) were successful. To ensure data quality, we exclude attempts classified as impossible (e.g., out-of-bounds), leaving a dataset of $716114$ shots, with $340430$ ($48\%$) successful attempts.
+
+
+In the NBA, players are typically categorized by their roles on the court into three primary positions: `guard', `forward', and `center'. Guards are responsible for ball handling, playmaking, and perimeter shooting. Centers, often referred to as "big men", primarily operate near the basket to score in the paint. Forwards are versatile players who contribute in multiple areas of the court. Additionally, the NBA recognizes hybrid roles for players with overlapping skill sets: `guard-forward', `forward-guard', `center-forward', and `forward-center'. To ensure a sufficient number of players in each group, we aggregate the `guard-forward' and `forward-guard' roles into a single `forward-guard' category, and the `center-forward' and `forward-center' roles into a single `forward-center' category. This results in five distinct positional groups (`guard', `forward-guard', `forward', `forward-center' and `center'), corresponding to the number of players on the court. The number of players across these categories is shown in Table~\ref{tab:player_position}.
+\begin{table}
+	\centering
+	\caption{Number of players for each position according to the NBA.}
+	\label{tab:player_position}
+	\begin{tabular}{ c|ccccc }
+		Position      & Guard & Forward-Guard & Forward & Forward-Center & Center \\
+		\hline
+		\# of players & 68    & 24            & 43      & 25             & 13     \\
+	\end{tabular}
+\end{table}
+
+
+We model both the locations of successful shots and unsuccessful shots for each player on the offensive half-court. Given that players can shoot from nearly any point within the well-defined boundaries of the half-court, the shot maps can be naturally represented as bivariate functional observations defined on two-dimensional rectangular grids. Figure~\ref{fig:examples_shooting_charts} displays raw shot charts for five players, each representing a different position: Stephen Curry (guard), Jayson Tatum (forward-guard), LeBron James (forward), Joel Embiid (forward-center) and Nikola Jokić (center). The code to reproduce this dataset and the analysis (including all the steps in the pre-processing pipeline) is available on \textsf{GitHub}\footnote{\url{https://github.com/StevenGolovkine/shooting_nba_fda/}}.
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.5]{figures/curry_guard.eps}
+	\includegraphics[scale=0.5]{figures/tatum_forward_guard.eps}
+	\includegraphics[scale=0.5]{figures/james_forward.eps}
+	\includegraphics[scale=0.5]{figures/embiid_forward_center.eps}
+	\includegraphics[scale=0.5]{figures/jokic_center.eps}
+	\caption{Shots charts for five selected NBA players.}
+	\label{fig:examples_shooting_charts}
+\end{figure}
+
+% section dataset (end)
+
+\section{Methodology} % (fold)
+\label{sec:method}
+
+The first step in our approach is to convert the raw shots charts into smooth functions suitable for analysis. To achieve this, we use a two-dimensional kernel density estimator with a Gaussian kernel for both missed and made shots. After normalizing the court to the $[0, 1] \times [0, 1]$ range, bandwidth estimation is performed utilizing Silverman's rule \citep{silvermanDensityEstimationStatistics1986}. The density estimation is conducted on a regularly sampled grid of $201 \times 201$ points. We then represent the smoothed densities of missed and made shots for each player as the two features of a bivariate functional observation. Both features are defined on the same two-dimensional rectangular domain and observed over the $201 \times 201$ grid. Note that the choice of the grid resolution is arbitrary and can be adjusted as needed. Figure~\ref{fig:examples_shooting_density} shows the density estimates of the same five players whose shots charts are presented in Figure~\ref{fig:examples_shooting_charts}.
+
+We apply multivariate functional principal components analysis  \citep{happMultivariateFunctionalPrincipal2018} to decompose each estimated density into a common set of basis functions and player-specific coefficients. Let $X$ denote an observation of the densities of a player, represented as a vector of two functions: the first corresponding to the density of missed shots and the second to the density of the made shots. We aim to find basis functions $\{\phi_k\}_{1 \leq k \leq K}$ that provide the most parsimonious representation of $X$, for a given $K$, as
+\begin{equation}\label{eq:kl_decomp}
+	X(s, t) = \mu(s, t) + \sum_{k = 1}^K c_k\phi_k(s, t), \quad s, t \in [0, 1] \times [0, 1],
 \end{equation}
+where $\mu(s, t)$ is the mean (average) function, and $c_k$ are the player-specific basis coefficients, referred to as scores. Each eigenfunction in the decomposition~\eqref{eq:kl_decomp} characterize a variation away from the mean function, with the player-specific scores indicating the magnitude and direction of the deviation for each individual player. We estimate four components ($K = 4$), based on the approach of \cite{golovkineUseGramMatrix2024}, explaining approximately $90\%$ of the total variance in the data. The scores $c_k$ are estimated as the projection of the observations $X$ onto the eigenfunctions $\phi_k$. These scores provide a finite-dimensional representation of the functional data, capturing player-specific characteristics, and can be used as scalar variables in subsequent analyses.
+To create a data-driven taxonomy of players based on MFPCA, we apply a $k$-medoids clustering algorithm \citep{kaufmanFindingGroupsData2009} to the normalized functional principal component scores $c_k$, using $k = 5$ clusters, as the number of players on the court. The $k$-medoids algorithm minimizes the dissimilarity between each player's scores and the medoid of its cluster. We use the weighted euclidean distance as the measure of dissimilarity. This method offers a practical advantage over the $k$-means clustering algorithm: the center of each cluster is an actual player from the dataset rather than an averaged representation of all players within the cluster, enhancing interpretability. In our analysis, we consider two weighting schemes to calculate the distance: one assigns equal weights to all components, and the other weights components given the proportion of variance they explain.
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.35]{figures/curry_density.eps}
+	\includegraphics[scale=0.35]{figures/tatum_density.eps}
+	\includegraphics[scale=0.35]{figures/james_density.eps}
+	\includegraphics[scale=0.35]{figures/embiid_density.eps}
+	\includegraphics[scale=0.35]{figures/jokic_density.eps}
+	\\
+	\includegraphics[scale=0.35]{figures/colorbar.eps}
+	\caption{Smoothed shot chart densities for five selected NBA players. The densities have been individually normalized between $0$ and $1$.}
+	\label{fig:examples_shooting_density}
+\end{figure}
 
-New theorem-like environments will be introduced by using the commands \verb|\theoremstyle| and \verb|\newtheorem|.
-Please note that the environments proof and definition are already defined within dgryuter.sty.
+% section method (end)
 
-\begin{definition}
-This is a definition environment.
-\end{definition}
-	
-\begin{theorem}
-This is a theorem environment.
-\end{theorem}
-	
-\begin{proof}
-This is a proof environment.
-\end{proof}
+\section{Results} % (fold)
+\label{sec:results}
 
-\subsection{Figures and Tables}
-The number of \textbf{Figures} should be limited to the absolute minimum. Images must be of good contrast and sufficiently high resolution for reproduction (minimum 600 dpi). Lettering of all figures should be uniform in style. Authors are encouraged to submit illustrations in color if necessary for their scientific content. Publication of color figures is provided free of charge both in online and print editions.
+\subsection{MFPCA decomposition of the densities} % (fold)
+\label{sub:decomposition_of_the_densities}
 
-When drawing bar graphs, use patterning/color instead of grey scales (faint shading may be lost upon reproduction).
-Each figure should be uploaded separately as .jpg-, .eps-, .pdf- or .tiff-file. The legends for the figures must be concise and self-explanatory. The key to the symbols in the figures should be included in the figure where possible. Otherwise, they should be included in the legend.
+We apply MFPCA to estimate the mean functions and eigenfunctions, providing a description of players shooting behavior. Figure~\ref{fig:mean_eigenfunctions} presents the estimation of the mean functions alongside the estimated functional principal components, which capture deviations from the mean shooting density. Unlike the shooting densities, the functional principal components may take on negative values as they represent deviations from the mean rather than densities themselves. For presentation purposes, the functional principal components have been normalized between $-1$ and $1$. Blue areas correspond to negative values of the functional components, and thus contribute negatively to the density, while red area corresponds to positive values of the functional components, and thus contribute positively to the density. The mean chart represents the shooting behavior of the average player in the NBA. Shots are most frequently taken in the paint, then the most common position is behind the three-point line, in the wings and the corners. The elbows and the short-corners are less important as shooting spots. The estimated functional components can be explained as characterizing different shooting behaviors. We first note that, except for $\phi_3$, the functional components for missed and made shots are similar. This suggests  that players do not have specific shooting position where the percentage of missed shots significantly exceeds that of made shots. The first component, explained $67.9\%$ of the total variance, contrasts players based on their overall shooting frequency relative to the average NBA player. A player with a positive score $c_1$ for $\phi_1$ will shot more frequently, both successfully and unsuccessfully, than average. These effects are concentrated the high-density areas of the court such as the paint and beyond the arc (i.e., $\phi_1$ has a similar shape to the mean function). Conversely, a negative score corresponds to players who shoot less frequently than the average, with effects concentrated in these same regions. The second component (explaining $8.5\%$ of the total variance) highlights a contrast between shooting inside and outside the three-pointer line. Players with a positive score $c_2$ for $\phi_2$ prefer to shoot closer to the basket, while those with negative scores prefer long-range shots. The third component (explaining $6.1\%$ of the total variance) contrasts players that shoot in the paint and the others. Positive scores $c_3$ are associated with frequent attempts and successes in the paint, while negative scores would prefer to shoot farther out. Interestingly, players who perform well near the basket also tend to attempt and miss shots from the corners. The fourth component (explaining $4.0\%$ of the total variance) captures differences between shooting from the wings and shooting along the axis of the hoop. Players with positive (resp. negative) score will shot in the axis of the hoop (resp. from the wing).
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.35]{figures/mean.eps}
+	\includegraphics[scale=0.35]{figures/eigenfunction_1.eps}
+	\includegraphics[scale=0.35]{figures/eigenfunction_2.eps}
+	\includegraphics[scale=0.35]{figures/eigenfunction_3.eps}
+	\includegraphics[scale=0.35]{figures/eigenfunction_4.eps}
+	\\
+	\includegraphics[scale=0.35]{figures/colorbar2.eps}
+	\caption{Estimates of the mean surface and the eigenfunctions of the shots density charts. The eigenfunctions represent deviations from the mean surface and are defined up to a sign, making their values at specific points not directly interpretable as densities. Note that the mean surface and eigenfunctions have been normalized to be between $-1$ and $1$ for presentation purposes.}
+	\label{fig:mean_eigenfunctions}
+\end{figure}
 
-A concise, self-explanatory caption should appear below \textbf{Figures and Tables}. Each table should be placed on a separate manuscript page including its caption. All figures and tables should be numbered and referred to in your document as Table 1 or Figure 1 (e.g. “See Table \ref{tab:Table1}”, “As Figure 2 indicates” etc.).
+As an example, Figure~\ref{fig:examples_players} illustrates the decomposition of Stephen Curry's density shot chart. Curry shoots more frequently than the average player, as indicated by his positive coefficient $c_1$, reflecting a higher number of both missed and made shots compared to the average player. His second coefficient $c_2$ is negative and close to zero, suggesting only a slight preference for shooting beyond the three-point line. The small negative value of his third coefficient $c_3$ indicates shooting behavior close to the average for this component. However, Curry prefers to shoots in the axis of the basket (fourth coefficient $c_4$ is positive) compared to the other players.
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.295]{figures/curry_reconstruction.eps}
+	\includegraphics[scale=0.295]{figures/mean.eps}
+	\includegraphics[scale=0.295]{figures/curry_eigenfunction_1.eps}
+	\includegraphics[scale=0.295]{figures/curry_eigenfunction_2.eps}
+	\includegraphics[scale=0.295]{figures/curry_eigenfunction_3.eps}
+	\includegraphics[scale=0.295]{figures/curry_eigenfunction_4.eps}
+	\\
+	\includegraphics[scale=0.35]{figures/colorbar2.eps}
+	\caption{Decomposition of Stephen Curry's shot chart densities into the eigenfunctions basis.}
+	\label{fig:examples_players}
+\end{figure}
 
-\begin{table} [!ht]
-\caption{Sample table with header.}
-\begin{tabular}{rrl}
-Table head 1 	& Table head 2 	& Table head 3 	\\ \midrule
-10 						& 40 						& text A 				\\
-20						& 50						& text B 				\\
-30						& 60 						& text C 				\\
-\end{tabular}
-\label{tab:Table1}
-\end{table}
+Figure~\ref{fig:clusters} presents the estimated scores $c_k$ from~\eqref{eq:kl_decomp} colored by the NBA-defined playing positions. One representative player from each position is highlighted (same as Figures~\ref{fig:examples_shooting_charts} and~\ref{fig:examples_players}). Notably, the scores do not separate players by position. From Figure~\ref{fig:clusters}, it can be seen that some players exhibit scores (coefficients) that substantially differ from the general distribution. For example, for the second eigenfunction, Chris Paul (with a large coefficient) and Duncan Robinson (with a large negative coefficient) may be designed as outliers. Similarly, for the third eigenfunction, Chris Paul has a large negative coefficient. Although a positive $c_2$ typically indicates a preference for shooting near the basket and a negative $c_3$ suggests a preference for shooting beyond the three-point line, Chris Paul's scoring pattern appears contradictory. This inconsistency arises because Chris Paul's most common shooting position is the high post, located between the three-point line and the painted area. In this case, the eigenfunctions compensate for one another to capture his shooting style, which is relatively rare in the modern NBA. Finally, for the fourth eigenfunction, Reggie Bullock Jr. has a large negative coefficient, indicating a strong preference for shooting from the wings and corners.
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.95]{figures/scores_1.eps}
+	\includegraphics[scale=0.95]{figures/scores_2.eps}
+	\includegraphics[scale=0.95]{figures/scores_3.eps}
+	\includegraphics[scale=0.95]{figures/scores_4.eps}
+	\includegraphics[scale=0.95]{figures/legend.eps}
+	\caption{Scatter plots of the player-specific basis coefficients (scores) colored using the NBA defined typology of players. We highlighted one player per position. The scores have been jittered on the y-axis for visualization purposes.}
+	\label{fig:clusters}
+\end{figure}
 
-\begin{table} [!ht]
-\caption{Sample table without header.}
-\begin{tabular}{rrrr}
-\starttabularbody %Table starts with the body
-First column 	& Second column 	& Third column 	& Fourth column	\\
-1 						& 2 							& 3 						& 4							\\
-4 						& 5 							& 6 						& 7 						\\
-8 						& 9 							& 11 						& 12 						\\
-\end{tabular}
-\label{tab:Table2}
-\end{table}
+% subsection decomposition_of_the_densities (end)
 
-\subsection{References}
-Please refer to the journal's website for more information on the reference style. 
-Sample references can be found here: \cite{carbonaro:2008} and \cite{farley:2010,antonyan,chen:2013,hofmann:2013,yong:2001}. All references should be collected at the end of the paper. 
+\subsection{Clustering} % (fold)
+\label{sub:clustering}
 
-\section{Manuscript processing} 
-
-The \textbf{evaluation process} varies from journal to journal.
-
-\begin{itemize}
-    \item Single-blind review: the reviewers remain anonymous to the authors.
-    \item Double-blind review: the reviewers do not know who the authors are, nor do the authors know who has evaluated their manuscript.
-\end{itemize}
-Typically, at least two independent experts are invited to review a manuscript’s content. The manuscript is then either accepted, rejected, or returned for revision based on their evaluation.
-
-With many journals, you can propose reviewers who come from outside of your closest areas of academia. It is at the editors’ discretion whether to accept these proposals.
+The $k$-medoids algorithm was applied to the coefficients plotted in Figure~\ref{fig:clusters}, grouping players into five clusters using an euclidean distance and different weighting schemes for the components. The choice of five clusters aligns with the number of players on the court for each team. Detailed clustering results, including player names and decomposition in eigenfunctions basis, are provided in Appendix~\ref{sec:clustering_results}. Figure~\ref{fig:average_cluster_no_weight} presents the medoids for each cluster when the components are weighted equally. The medoid, as the central observation in a cluster, represents the most representative player within that cluster. The decompositions of these representative players are given in Figure~\ref{fig:cluster_no_weight} in the Appendix. The clustering results can be interpreted based on shooting tendencies. Cluster $1$ groups high-volume shooters. Cluster $3$ includes players who primarily shoot from the center axis of the basket, while players in Cluster $4$ predominantly score from the corners. Clusters $2$ and $5$ are similar, comprising players who primarily score in the paint but also attempt shots from beyond the three-point line, albeit with limited success.
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.35]{figures/average_player_1.eps}
+	\includegraphics[scale=0.35]{figures/average_player_2.eps}
+	\includegraphics[scale=0.35]{figures/average_player_3.eps}
+	\includegraphics[scale=0.35]{figures/average_player_4.eps}
+	\includegraphics[scale=0.35]{figures/average_player_5.eps}
+	\caption{Most representative player of each cluster according to the $k$-medoids algorithm using an euclidean distance with equal weights for each components.}
+	\label{fig:average_cluster_no_weight}
+\end{figure}
 
 
-\textbf{Galley proofs}: Before your contribution is published, you will receive a proof of the article to proofread. At this point in the publication process, there must be no more changes made to the content: only minor corrections in form and phrasing are possible.	
-		
+Figure~\ref{fig:average_cluster_weight} presents the cluster medoids for the results obtained with components weighted using the percentage of variance they explain. Since the first component accounts for approximately $70\%$ of the total variance, the clusters are primarily driven by the first score $c_1$, reflecting the overall shooting frequency of the players. The clusters span a spectrum of shooting behaviors, from players who predominantly score in the paint (Cluster $3$) to those who are prolific three-point shooters (Cluster $4$). This effect is also evident in the decomposition shown in Figure~\ref{fig:cluster_weight} in the Appendix. The clusters can be ranked relative to the average player’s shooting tendencies. Compared to the average player, Cluster $3$ players shoot more frequently in the paint and attempt fewer three-pointers. Players in Cluster $1$ shoot slightly less than the average player, while those in Cluster $5$ align  with the average. Cluster $2$ comprises players who shoot slightly more than average, and Cluster $4$ players favor three-pointers significantly more.
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.35]{figures/average_player_1_weighted.eps}
+	\includegraphics[scale=0.35]{figures/average_player_2_weighted.eps}
+	\includegraphics[scale=0.35]{figures/average_player_3_weighted.eps}
+	\includegraphics[scale=0.35]{figures/average_player_4_weighted.eps}
+	\includegraphics[scale=0.35]{figures/average_player_5_weighted.eps}
+	\caption{Most representative player from each cluster according to the $k$-medoids algorithm using an euclidean distance with weights defined using the percentage of variance explained by each component.}
+	\label{fig:average_cluster_weight}
+\end{figure}
 
+
+Figure~\ref{fig:confusion_mat} presents the differences between the NBA-defined typology and the two clustering approaches we present. The NBA clusters are based on the usual player classification ($0$: center, $1$: forward, $2$: forward-center, $3$: forward-guard, $4$: guard). Overall, there is minimal agreement between the NBA clusters and the $k$-medoids clusters, whether weights are equal or based on the percentage of variance explained. The only  exception is the NBA-defined `center' category, which aligns with the cluster $2$ in the $k$-medoids results when weighted by the variance explained. Furthermore, there is little agreement between the two $k$-medoids clustering methods themselves.
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.55]{figures/confusion_mat_kmedoids_no_weights.eps}
+	\hfill
+	\includegraphics[scale=0.55]{figures/confusion_mat_kmedoids_weights.eps}
+	\hfill
+	\includegraphics[scale=0.55]{figures/confusion_matk_medoids_w_no_w.eps}
+	\caption{Agreement between the two clustering taxonomies (using equal weights and variance weights) and the conventional NBA position typology. NBA clusters are based on the usual typology ($0$: center, $1$: forward, $2$: forward-center, $3$: forward-guard, $4$: guard).}
+	\label{fig:confusion_mat}
+\end{figure}
+
+
+% subsection clustering (end)
+
+% section results (end)
+
+\section{Discussion} % (fold)
+\label{sec:discussion}
+
+In this work, we presented a novel representation of NBA players’ shot density charts based on Functional Data Analysis (FDA). We defined the smoothed densities of each player’s made and missed shots as bivariate functional data over the entire offensive half-court. This functional representation enabled a principal component decomposition, in which a player’s variation from the mean shot chart is parsimoniously described by a common set of principal component functions, weighted by player-specific scores.
+
+We first used these principal component functions to describe the major modes of variation in shooting behavior. The first component, which explained almost $70\%$ of the total variance, primarily captured shooting frequency, distinguishing between players who shoot with high and low volumes. The remaining components, which explain successively less variation, captured increasingly subtle but interpretable features of shot selection.
+
+We then applied $k$-medoids clustering to the player-specific scores to construct a data-driven taxonomy of player shooting tendencies. The resulting clusters revealed diverse shooting profiles, which we interpreted through the typical functional principal component scores within each group.
+
+Interestingly, the estimated clusters showed only weak agreement with the conventional NBA-defined player positions. This may be because shooting behavior represents only one aspect of a player’s role; play-making, defensive responsibilities, and off-the-ball movement also influence positional classification.
+Given the weak agreement, future work could estimate fewer or more than five clusters.
+Nevertheless, our analysis provides a novel data-driven perspective on how players differ in their shooting behaviors.
+
+We envision a number of potential uses of both our functional shot-chart representation and the subsequent clustering of shooting patterns.
+Firstly, the functional representation of a players shot-chart provides a comprehensive characterization of a player's shooting behavior, i.e., the shot chart is not reduced to one or more scalar summaries.
+This representation could be used by coaches or front-office staff to monitor changes in a player's shooting patterns between or within seasons, to identify player-specific tendencies which inform specific training regimes, and also to identify players whose characteristics match the needs of the team during scouting and recruitment.
+Because the charts can naturally be presented in a way that is interpretable to basketball fans who may not be familiar with the underlying mathematics and statistics, the representation can be used to tell stories to the general public about player tendencies, and enable historical comparisons between players, enriching the narrative around the sport.
+While we used shots made and shots missed, other metrics defined over the offensive half-court (e.g., shooting efficiency or defensive shot charts, \cite{franksCharacterizingSpatialStructure2015}), could be represented in the same way for the aforementioned purposes.
+
+There are also a number of possible methodological extensions to the modeling framework.
+One of the most exiting avenues is to combine the shot-chart representations with other high-throughput data sources that are now routinely collected within the NBA.
+For example, temporal biomechanical data are now being measured by motion-tracking systems such as Hawk-Eye, and the possibility of a multi-modal representation that reflects a players tactical and physical tendencies -- and the interaction between them -- could provide more detailed and specific analyses.
+Our modeling framework could also be applied to positional data in other sports, for example, to characterize a soccer player's ``natural position'' or a boxer's ``fighting style''.
+
+
+% section discussion (end)
+
+
+% Appendices
+\setcounter{equation}{0}
+\renewcommand{\theequation}{A.\arabic{equation}}
+\begin{appendix}
+
+\section{Clustering results} % (fold)
+\label{sec:clustering_results}
+
+In this section, we present the complete clustering results. First, we present in which cluster each of the $173$ players belong to when we assign equal weights to all components. Figure \ref{fig:cluster_no_weight} presents the decomposition of each cluster when the clustering is performed when equal weights are given to the components. The clustering results can be interpreted based on shooting tendencies.
+
+
+\begin{description}
+	\item[Cluster 1] Grayson Allen, Malik Beasley, Pat Connaughton, Robert Covington, Jae Crowder, Stephen Curry, Donte DiVincenzo, Evan Fournier, Danilo Gallinari, Eric Gordon, Devonte' Graham, Tim Hardaway Jr., James Harden, Joe Harris, Buddy Hield, Kevin Huerter, Joe Ingles, Damian Lillard, Brook Lopez, Kevin Love, Kyle Lowry, Lauri Markkanen, Doug McDermott, Patty Mills, Royce O'Neale, Jordan Poole, Michael Porter Jr., Duncan Robinson, Landry Shamet, Anfernee Simons, Marcus Smart, Fred VanVleet, Coby White.
+	\item[Cluster 2]  Harrison Barnes, RJ Barrett, Chris Boucher, Miles Bridges, Bruce Brown, John Collins, Luguentz Dort, Aaron Gordon, Jerami Grant, Josh Hart, Keldon Johnson, Kyle Kuzma, Larry Nance Jr., Kelly Olynyk, Cedi Osman, Kelly Oubre Jr., Norman Powell, Delon Wright, Thaddeus Young.
+	\item[Cluster 3]  Bam Adebayo, Jarrett Allen, Deandre Ayton, Bradley Beal, Bogdan Bogdanović, Devin Booker, Dillon Brooks, Jalen Brunson, Alec Burks, Clint Capela, Brandon Clarke, Nic Claxton, Mike Conley, Seth Curry, Anthony Davis, DeMar DeRozan, Andre Drummond, Kevin Durant, Joel Embiid, De'Aaron Fox, Markelle Fultz, Daniel Gafford, Paul George, Shai Gilgeous-Alexander, Rudy Gobert, Tobias Harris, Gordon Hayward, Tyler Herro, Richaun Holmes, Brandon Ingram, Kyrie Irving, Reggie Jackson, Tyus Jones, Luke Kennard, Kawhi Leonard, CJ McCollum, T.J. McConnell, JaVale McGee, Khris Middleton, Dejounte Murray, Jamal Murray, Chris Paul, Mason Plumlee, Jakob Pöltl, Immanuel Quickley, Josh Richardson, Mitchell Robinson, Derrick Rose, D'Angelo Russell, Dennis Schröder, Collin Sexton, Pascal Siakam, Ben Simmons, Gary Trent Jr., Russell Westbrook, Andrew Wiggins, Ivica Zubac.
+	\item[Cluster 4] Kyle Anderson, OG Anunoby, Saddiq Bey, Bojan Bogdanović, Mikal Bridges, Reggie Bullock Jr., Jimmy Butler, Kentavious Caldwell-Pope, Dorian Finney-Smith, Jeff Green, Rui Hachimura, Gary Harris, Justin Holiday, De'Andre Hunter, Cameron Johnson, Terance Mann, Monté Morris, Marcus Morris Sr., Georges Niang, Bobby Portis, Taurean Prince, Terry Rozier, Lonnie Walker IV, T.J. Warren.
+	\item[Cluster 5]  Giannis Antetokounmpo, Marvin Bagley III, Malcolm Brogdon, Jaylen Brown, Thomas Bryant, Wendell Carter Jr., Jordan Clarkson, Spencer Dinwiddie, Luka Dončić, Darius Garland, Draymond Green, Tyrese Haliburton, Jrue Holiday, Al Horford, Jaren Jackson Jr., LeBron James, Nikola Jokić, Zach LaVine, Caris LeVert, De'Anthony Melton, Donovan Mitchell, Malik Monk, Ja Morant, Jusuf Nurkić, Kristaps Porziņģis, Dwight Powell, Julius Randle, Naz Reid, Domantas Sabonis, Dario Šarić, Jayson Tatum, Karl-Anthony Towns, Myles Turner, Jonas Valančiūnas, Nikola Vučević, Moritz Wagner, P.J. Washington, Derrick White, Christian Wood, Trae Young.
+\end{description}
+
+
+\begin{figure}
+	\centering
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\includegraphics[scale=0.2]{figures/kmedoids_1_eigenfunction_1.eps}
+		\includegraphics[scale=0.2]{figures/kmedoids_1_eigenfunction_2.eps}
+		\includegraphics[scale=0.2]{figures/kmedoids_1_eigenfunction_3.eps}
+		\includegraphics[scale=0.2]{figures/kmedoids_1_eigenfunction_4.eps}
+		\caption{Cluster 1.}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\includegraphics[scale=0.2]{figures/kmedoids_2_eigenfunction_1.eps}
+		\includegraphics[scale=0.2]{figures/kmedoids_2_eigenfunction_2.eps}
+		\includegraphics[scale=0.2]{figures/kmedoids_2_eigenfunction_3.eps}
+		\includegraphics[scale=0.2]{figures/kmedoids_2_eigenfunction_4.eps}
+		\caption{Cluster 2}
+	\end{subfigure}
+	\\
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\includegraphics[scale=0.2]{figures/kmedoids_3_eigenfunction_1.eps}
+		\includegraphics[scale=0.2]{figures/kmedoids_3_eigenfunction_2.eps}
+		\includegraphics[scale=0.2]{figures/kmedoids_3_eigenfunction_3.eps}
+		\includegraphics[scale=0.2]{figures/kmedoids_3_eigenfunction_4.eps}
+		\caption{Cluster 3.}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\includegraphics[scale=0.2]{figures/kmedoids_4_eigenfunction_1.eps}
+		\includegraphics[scale=0.2]{figures/kmedoids_4_eigenfunction_2.eps}
+		\includegraphics[scale=0.2]{figures/kmedoids_4_eigenfunction_3.eps}
+		\includegraphics[scale=0.2]{figures/kmedoids_4_eigenfunction_4.eps}
+		\caption{Cluster 4}
+	\end{subfigure}
+	\\
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\includegraphics[scale=0.2]{figures/kmedoids_5_eigenfunction_1.eps}
+		\includegraphics[scale=0.2]{figures/kmedoids_5_eigenfunction_2.eps}
+		\includegraphics[scale=0.2]{figures/kmedoids_5_eigenfunction_3.eps}
+		\includegraphics[scale=0.2]{figures/kmedoids_5_eigenfunction_4.eps}
+		\caption{Cluster 5}
+	\end{subfigure}
+	\caption{MFPCA decompositions from the clustering using equal weights for each component.
+	}
+	\label{fig:cluster_no_weight}
+\end{figure}
+
+
+Second, we present in which cluster each of the $173$ players belong when we assign a weight to each component given the proportion of variance they explain. Figure \ref{fig:cluster_weight} presents the decomposition of each cluster when the clustering is performed when weights reflect the proportion of the variance they explained. Since the first component accounts for approximately $70\%$ of the total variance, the clusters are primarily driven by the first score $c_1$, reflecting the overall shooting frequency of the players.
+
+
+\begin{description}
+	\item[Cluster 1] Kyle Anderson, OG Anunoby, RJ Barrett, Bradley Beal, Chris Boucher, Miles Bridges, Malcolm Brogdon, Bruce Brown, Jaylen Brown, Thomas Bryant, Wendell Carter Jr., John Collins, DeMar DeRozan, Joel Embiid, De'Aaron Fox, Shai Gilgeous-Alexander, Aaron Gordon, Jerami Grant, Draymond Green, Rui Hachimura, Tobias Harris, Jrue Holiday, Jaren Jackson Jr., LeBron James, Keldon Johnson, Zach LaVine, Caris LeVert, Terance Mann, Dejounte Murray, Larry Nance Jr., Kelly Oubre Jr., Bobby Portis, Julius Randle, Naz Reid, Derrick Rose, Dennis Schröder, Collin Sexton, Pascal Siakam, Karl-Anthony Towns, Nikola Vučević, Moritz Wagner, T.J. Warren, Christian Wood, Delon Wright.
+	\item[Cluster 2] Saddiq Bey, Alec Burks, Kentavious Caldwell-Pope, Jordan Clarkson, Mike Conley, Donte DiVincenzo, Luka Dončić, Kevin Durant, Dorian Finney-Smith, Paul George, Eric Gordon, Tyrese Haliburton, Joe Harris, Al Horford, Reggie Jackson, Tyus Jones, Brook Lopez, Lauri Markkanen, CJ McCollum, Doug McDermott, De'Anthony Melton, Khris Middleton, Malik Monk, Monté Morris, Jamal Murray, Kelly Olynyk, Cedi Osman, Jordan Poole, Taurean Prince, Josh Richardson, Fred VanVleet, Lonnie Walker IV, Coby White, Derrick White.
+	\item[Cluster 3] Bam Adebayo, Jarrett Allen, Giannis Antetokounmpo, Deandre Ayton, Marvin Bagley III, Jimmy Butler, Clint Capela, Brandon Clarke, Nic Claxton, Anthony Davis, Andre Drummond, Markelle Fultz, Daniel Gafford, Rudy Gobert, Richaun Holmes, Nikola Jokić, T.J. McConnell, JaVale McGee, Ja Morant, Jusuf Nurkić, Mason Plumlee, Jakob Pöltl, Dwight Powell, Mitchell Robinson, Domantas Sabonis, Ben Simmons, Jonas Valančiūnas, Russell Westbrook, Thaddeus Young, Ivica Zubac.
+	\item[Cluster 4] Grayson Allen, Malik Beasley, Bogdan Bogdanović, Reggie Bullock Jr., Pat Connaughton, Robert Covington, Jae Crowder, Seth Curry, Stephen Curry, Evan Fournier, Danilo Gallinari, Devonte' Graham, Tim Hardaway Jr., Tyler Herro, Buddy Hield, Justin Holiday, Kevin Huerter, Joe Ingles, Cameron Johnson, Luke Kennard, Kevin Love, Kyle Lowry, Patty Mills, Marcus Morris Sr., Georges Niang, Royce O'Neale, Chris Paul, Michael Porter Jr., Immanuel Quickley, Duncan Robinson, D'Angelo Russell, Landry Shamet, Anfernee Simons, Marcus Smart, Gary Trent Jr..
+	\item[Cluster 5] Harrison Barnes, Bojan Bogdanović, Devin Booker, Mikal Bridges, Dillon Brooks, Jalen Brunson, Spencer Dinwiddie, Luguentz Dort, Darius Garland, Jeff Green, James Harden, Gary Harris, Josh Hart, Gordon Hayward, De'Andre Hunter, Brandon Ingram, Kyrie Irving, Kyle Kuzma, Kawhi Leonard, Damian Lillard, Donovan Mitchell, Kristaps Porziņģis, Norman Powell, Terry Rozier, Dario Šarić, Jayson Tatum, Myles Turner, P.J. Washington, Andrew Wiggins, Trae Young.
+\end{description}
+
+
+\begin{figure}
+	\centering
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\includegraphics[scale=0.2]{figures/kmedoids_weighted_1_eigenfunction_1.eps}
+		\includegraphics[scale=0.2]{figures/kmedoids_weighted_1_eigenfunction_2.eps}
+		\includegraphics[scale=0.2]{figures/kmedoids_weighted_1_eigenfunction_3.eps}
+		\includegraphics[scale=0.2]{figures/kmedoids_weighted_1_eigenfunction_4.eps}
+		\caption{Cluster 1.}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\includegraphics[scale=0.2]{figures/kmedoids_weighted_2_eigenfunction_1.eps}
+		\includegraphics[scale=0.2]{figures/kmedoids_weighted_2_eigenfunction_2.eps}
+		\includegraphics[scale=0.2]{figures/kmedoids_weighted_2_eigenfunction_3.eps}
+		\includegraphics[scale=0.2]{figures/kmedoids_weighted_2_eigenfunction_4.eps}
+		\caption{Cluster 2}
+	\end{subfigure}
+	\\
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\includegraphics[scale=0.2]{figures/kmedoids_weighted_3_eigenfunction_1.eps}
+		\includegraphics[scale=0.2]{figures/kmedoids_weighted_3_eigenfunction_2.eps}
+		\includegraphics[scale=0.2]{figures/kmedoids_weighted_3_eigenfunction_3.eps}
+		\includegraphics[scale=0.2]{figures/kmedoids_weighted_3_eigenfunction_4.eps}
+		\caption{Cluster 3.}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\includegraphics[scale=0.2]{figures/kmedoids_weighted_4_eigenfunction_1.eps}
+		\includegraphics[scale=0.2]{figures/kmedoids_weighted_4_eigenfunction_2.eps}
+		\includegraphics[scale=0.2]{figures/kmedoids_weighted_4_eigenfunction_3.eps}
+		\includegraphics[scale=0.2]{figures/kmedoids_weighted_4_eigenfunction_4.eps}
+		\caption{Cluster 4}
+	\end{subfigure}
+	\\
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\includegraphics[scale=0.2]{figures/kmedoids_weighted_5_eigenfunction_1.eps}
+		\includegraphics[scale=0.2]{figures/kmedoids_weighted_5_eigenfunction_2.eps}
+		\includegraphics[scale=0.2]{figures/kmedoids_weighted_5_eigenfunction_3.eps}
+		\includegraphics[scale=0.2]{figures/kmedoids_weighted_5_eigenfunction_4.eps}
+		\caption{Cluster 5}
+	\end{subfigure}
+	\caption{MFPCA decompositions from the clustering using variance weights for each component.}
+	\label{fig:cluster_weight}
+\end{figure}
+
+% section clustering_results (end)
+
+\end{appendix}
+
+% end Appendices
 
 \begin{acknowledgement}
   Please insert acknowledgments of the assistance of colleagues or similar notes of appreciation here.
 \end{acknowledgement}
 
 \begin{funding}
-  Please insert information concerning research grant support here (institution and grant number). Please provide for each funder the funder’s DOI according to https://doi.crossref.org/funderNames?mode=list.
+  S. Golovkine did this work while he was at the University of Limerick and was partially supported by Science Foundation Ireland under Grant No. 19/FFP/7002 and co-funded under the European Regional Development Fund.
 \end{funding}
 %\bibliographystyle{...}
 %\bibliography{...}
 
+\bibliographystyle{chicago}
+\bibliography{biblio}
 
-
-\begin{thebibliography}{9}
-%Please refer to the journal's website for the corresponding reference style.
-
-% -- Articles in journals    -- %
-\bibitem{carbonaro:2008}
-A. Carbonaro, G. Metafune and C. Spina, Parabolic Schrödinger operators, \emph{J. Math. Anal. Appl.} \textbf{343} (2008), 965–974.
-
-% -- Articles ahead of print -- %
-\bibitem{farley:2010}
-D. Farley and L. Sabalka, Presentations of graph braid groups, \emph{Forum Math.} (2010), DOI: 10.1515/form.2011.086.
-
-% -- Accepted articles       -- %
-\bibitem{antonyan}
-S. A. Antonyan and T. Dobrowolski, Locally contractible coset spaces, \emph{Forum Math.}, to appear.
-
-% -- Preprints               -- %
-\bibitem{chen:2013}
-Z.-Q. Chen and L. Wang, Uniqueness of stable processes with drift, preprint (2013), http://arxiv.org/pdf/1309.6414v1.
-
-% -- Books and Monographs    -- %
-\bibitem{hofmann:2013}
-K. H. Hofmann and S. A. Morris, \emph{The Structure of Compact Groups}, 3rd ed., De Gruyter Stud. Math. 25, De Gruyter, Berlin, 2013.
-
-% -- Contributions           -- %
-\bibitem{yong:2001}
-W.-A. Yong, Basic aspects of hyperbolic relaxation systems, in: \emph{Advances in the Theory of Shock Waves, Progr. Nonlinear Differential Equations Appl. 47}, Birkhäuser, Boston (2001), 259–305.
-
-% -- Thesis           			-- %
-\bibitem{king:1995}
-J. D. King, \emph{Thesis title}, Ph.D. thesis, University of Cambridge, 1995.
-
-% -- Proceedings       			-- %
-\bibitem{hay:2016}
-B. Hay, Drone tourism: a study of the current and potential use of drones in hospitality and tourism, in: \emph{CAUTHE 2016: the changing landscape of tourism and hospitality: the impact of emerging markets and emerging destinations}, Blue Mountains, Sydney, 8-11 February, 2016, pp. 49-68. 
-
-\end{thebibliography}
 \end{document}
