@@ -1,0 +1,59 @@
+\section{}
+
+\comment{
+The paper demonstrates the use of functional data analysis methods applied to shot chart densities in basketball for investigating common patterns among players. The shot chart is an important object of quantitative analysis in basketball, particularly when investigating spatial features in offensive strategies and performance. While the referees are in agreement that the paper targets a problem of interest, their reports contains several suggestions for revision. Below are some key issues with the paper, some of which overlap with comments from the two referees, that should be carefully and fully addressed in a revision, in addition to other points raised by the referees.
+}
+
+\reply{
+
+}
+
+\comment{
+In the introduction, several methods for analyzing shot charts are summarized, including several based on intensity surfaces. The authors cite the requirement of a discretized grid for these methods as the reason for pursuing a density-based analysis, but this is not convincing. All functional data analyses must, in the end, be performed on a discrete grid, and it is not obvious that the estimated (log) intensity surfaces could not also be used as functional data objects. Another key difference between bivariate densities and intensity surfaces is that the latter contain information about shot volume, an aspect completely absent in the density representation. Please provide a more thorough justification for using densities as data objects as opposed to existing approaches.
+}
+
+\reply{
+
+}
+
+\comment{
+While it is true that early work in functional data analysis did include applications of FPCA (or other standard FDA methods) directly to densities \parencite{kneipInferenceDensityFamilies2001,neriniClassifyingDensitiesUsing2007, ramsayFunctionalDataAnalysis2005}, these methods have been superseded in the last decade by non-linear dimension reduction methods due to the fact that density properties are not retained by linear decompositions \parencite{bigotGeodesicPCAWasserstein2017, delicadoDimensionalityReductionWhen2011, petersenFunctionalDataAnalysis2016}. Many if not all of these newer methods can only be applied to univariate densities; however, the authors should include a discussion about the potential pitfalls of FPCA when applied to functional data that, by nature, satisfy nonlinear constraints (positivity and integration to 1). If possible, some attempt to mitigate these issues for the bivariate shot chart densities should be made.
+}
+
+\reply{
+}
+
+\comment{
+The choice of k-medioid clustering is also not discussed in detail. As suggested by the reviewers, please investigate the robustness or variability of your findings to more clustering methods, or provide a justification for this particular approach.
+}
+
+\reply{
+}
+
+\comment{
+A key drawback of the analysis is its lack of assessment of sampling variability. This is critical both for the reliability of the interpretation of the functional principal components (particularly those with smaller eigenvalues) as well as the clustering results. Without some inferential instrument (e.g., confidence bands), it is impossible to judge the importance of the findings.
+}
+
+\reply{
+}
+
+\comment{
+Although the analytical steps are clearly laid out, it is not obvious what the clustering should reflect relative to player positions. Based on the title and some of the conclusions stated by the authors, the underlying assumption seems to be that there is something unexpected or interesting about the lack of agreement between the clustering and designated player positions. However, there seems no obvious reason why these should coincide given different coaching styles and combination of player strengths. Please provide more concrete guidance about how the proposed analytical pipeline can be useful.
+}
+
+\reply{
+}
+
+\comment{
+Please carefully check the interpretation of each of the functional principal components. For instance, I do not believe it is the case that the first component reflects players who shoot more or less than average. This is because the functions being analyzed contain no information about overall shot volume, but only the distribution of shots. I also do not believe it is possible that the entire first component is positive, since it is known – at least in the univariate case \parencite{kneipInferenceDensityFamilies2001} – that principal components for densities must integrate to zero.
+}
+
+\reply{
+}
+
+\comment{
+In addition to potentially comparing with additional clustering methods, further comparisons should be made between the proposed density-based approach and existing intensity-based approaches (functional or non-functional) in order to highlight advantages, if any, of the proposed pipeline.
+}
+
+\reply{
+}
