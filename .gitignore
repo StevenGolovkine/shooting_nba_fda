@@ -23,8 +23,8 @@
 ./ipynb_checkpoints/*
 notebooks/*
 __pycache__/*
-./code/.ipynb_checkpoints/*
-./code/__pycache__/*.pyc
+code/.ipynb_checkpoints/*
+code/__pycache__/*.pyc
 
 # Private folder
 ./comments/*
