@@ -3,31 +3,37 @@
 \comment{The current research is characterizing NBA player shooting behavior using functional data analysis. The authors treat made and missed shot locations as bivariate functional data on the offensive half-court and perform a multivariate functional principal component analysis to extract dominant shooting patterns. Then, using k-medoids clustering on the resulting player-specific scores, they generate a data-driven typology of player shooting styles, questioning the validity of traditional NBA positional labels. Several conceptual and technical issues limit both the novelty and the inferential credibility of the results. I therefore recommend a revision before the paper can be considered for publication.}
 
 \reply{
+Leave until end.
 }
 
 \comment{While the paper is intended for a quantitative audience, some statistical steps, especially the MFPCA, are described at a relatively informal level. There is no discussion of convergence or uncertainty in the functional principal components.}
 
 \reply{
+Same as point re samplinhvariability, but lets just Ref to Happ and Greven for convergence.
 }
 
 \comment{The authors do not evaluate the stability of their clustering. Furthermore, they do not provide external validation (e.g., prediction, test–train splits, comparison with existing clustering approaches). Please consider using metrics such as Adjusted Rand Index or Silhouette scores to assess cluster quality. Alternatively, compare results with simpler clustering methods (e.g., k-means on shooting frequency by location bins) to demonstrate added value.}
 
 \reply{
+Steven.
 }
 
 \comment{While contrasting the clusters with NBA-defined positions is informative, the resulting disagreement is not deeply analyzed. Are there specific cases where agreement is worse?}
 
 \reply{
+Ed
 }
 
 \comment{The paper uses a 2D KDE with Gaussian kernel and Silverman’s rule but does not specify whether the bandwidth is optimized globally, per player, or per component.}
 
 \reply{
+Steven.
 }
 
 \comment{The model jointly treats made and missed shots, but no attention is given to efficiency metrics (i.e., shooting percentage), which are arguably central to evaluating shot quality.}
 
 \reply{
+Implicit in combining shots made and shot missed?
 }
 
 
