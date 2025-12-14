@@ -44,7 +44,7 @@ Figure~\ref{fig:clusters} presents the estimated scores $c_k$ from~\eqref{eq:kl_
 	\includegraphics[scale=0.95]{figures/scores_3.pdf}
 	\includegraphics[scale=0.95]{figures/scores_4.pdf}
 	\includegraphics[scale=0.95]{figures/legend.pdf}
-	\caption{Scatter plots of the player-specific basis coefficients (scores) colored using the NBA defined typology of players. We highlighted one player per position. The scores have been jittered on the y-axis for visualization purposes.}
+	\caption{Scatter plots of the player-specific basis coefficients (scores) colored using the NBA defined typology of players. We highlighted one player per position. The scores have been standardized and jittered on the y-axis for visualization purposes. \textcolor{blue}{Add the interpretation of each scores after we agree on the interpretation.}}
 	\label{fig:clusters}
 \end{figure}
 
@@ -53,7 +53,7 @@ Figure~\ref{fig:clusters} presents the estimated scores $c_k$ from~\eqref{eq:kl_
 \subsection{Clustering} % (fold)
 \label{sub:clustering}
 
-The $k$-medoids algorithm was applied to the coefficients plotted in Figure~\ref{fig:clusters}, grouping players into five clusters using an euclidean distance and different weighting schemes for the components. The choice of five clusters aligns with the number of players on the court for each team. Detailed clustering results, including player names and decomposition in eigenfunctions basis, are provided in Appendix~\ref{sec:clustering_results}. Figure~\ref{fig:average_cluster_no_weight} presents the medoids for each cluster when the components are weighted equally. The medoid, as the central observation in a cluster, represents the most representative player within that cluster. The decompositions of these representative players are given in Figure~\ref{fig:cluster_no_weight} in the Appendix. The clustering results can be interpreted based on shooting tendencies. Cluster $1$ groups high-volume shooters. Cluster $3$ includes players who primarily shoot from the center axis of the basket, while players in Cluster $4$ predominantly score from the corners. Clusters $2$ and $5$ are similar, comprising players who primarily score in the paint but also attempt shots from beyond the three-point line, albeit with limited success.
+The $k$-medoids algorithm was applied to the coefficients plotted in Figure~\ref{fig:clusters}, grouping players into five clusters using an euclidean distance and different weighting schemes for the components. The choice of five clusters aligns with the number of players on the court for each team. Detailed clustering results, including player names and decomposition in eigenfunctions basis, are provided in Appendix~\ref{sec:clustering_results}. Figure~\ref{fig:average_cluster_no_weight} presents the medoids for each cluster when the components are weighted equally. The medoid, as the central observation in a cluster, represents the most representative player within that cluster. The decompositions of these representative players are given in Figure~\ref{fig:cluster_no_weight} in the Appendix. The clustering results can be interpreted based on shooting tendencies. Cluster $1$ groups high-volume shooters. Cluster $2$ includes players who primarily shoot from the center axis of the basket, while players in Cluster $3$ predominantly score from the corners. Clusters $4$ and $5$ are similar, comprising players who primarily score in the paint but also attempt shots from beyond the three-point line, albeit with limited success.
 \begin{figure}
 	\centering
 	\includegraphics[scale=0.35]{figures/average_player_1.pdf}
@@ -66,7 +66,7 @@ The $k$-medoids algorithm was applied to the coefficients plotted in Figure~\ref
 \end{figure}
 
 
-Figure~\ref{fig:average_cluster_weight} presents the cluster medoids for the results obtained with components weighted using the percentage of variance they explain. Since the first component accounts for approximately $70\%$ of the total variance, the clusters are primarily driven by the first score $c_1$, reflecting the overall shooting frequency of the players. The clusters span a spectrum of shooting behaviors, from players who predominantly score in the paint (Cluster $3$) to those who are prolific three-point shooters (Cluster $4$). This effect is also evident in the decomposition shown in Figure~\ref{fig:cluster_weight} in the Appendix. The clusters can be ranked relative to the average player’s shooting tendencies. Compared to the average player, Cluster $3$ players shoot more frequently in the paint and attempt fewer three-pointers. Players in Cluster $1$ shoot slightly less than the average player, while those in Cluster $5$ align  with the average. Cluster $2$ comprises players who shoot slightly more than average, and Cluster $4$ players favor three-pointers significantly more.
+Figure~\ref{fig:average_cluster_weight} presents the cluster medoids for the results obtained with components weighted using the percentage of variance they explain. Since the first component accounts for approximately $70\%$ of the total variance, the clusters are primarily driven by the first score $c_1$, reflecting the overall shooting frequency of the players. The clusters span a spectrum of shooting behaviors, from players who predominantly score in the paint (Cluster $3$) to those who are prolific three-point shooters (Cluster $4$). This effect is also evident in the decomposition shown in Figure~\ref{fig:cluster_weight} in the Appendix. The clusters can be ranked relative to the average player’s shooting tendencies. Compared to the average player, Cluster $1$ players shoot more frequently in the paint and attempt fewer three-pointers. Players in Cluster $2$ shoot slightly less than the average player, while those in Cluster $3$ align  with the average. Cluster $4$ comprises players who shoot slightly more than average, and Cluster $5$ players favor three-pointers significantly more.
 \begin{figure}
 	\centering
 	\includegraphics[scale=0.35]{figures/average_player_1_weighted.pdf}
@@ -79,15 +79,15 @@ Figure~\ref{fig:average_cluster_weight} presents the cluster medoids for the res
 \end{figure}
 
 
-Figure~\ref{fig:confusion_mat} presents the differences between the NBA-defined typology and the two clustering approaches we present. The NBA clusters are based on the usual player classification ($0$: center, $1$: forward, $2$: forward-center, $3$: forward-guard, $4$: guard). Overall, there is minimal agreement between the NBA clusters and the $k$-medoids clusters, whether weights are equal or based on the percentage of variance explained. The only  exception is the NBA-defined `center' category, which aligns with the cluster $2$ in the $k$-medoids results when weighted by the variance explained. Furthermore, there is little agreement between the two $k$-medoids clustering methods themselves.
+Figure~\ref{fig:confusion_mat} presents the differences between the NBA-defined typology and the two clustering approaches we present. \textcolor{blue}{TO BE CHANGED: The NBA clusters are based on the usual player classification ($0$: center, $1$: forward, $2$: forward-center, $3$: forward-guard, $4$: guard). Overall, there is minimal agreement between the NBA clusters and the $k$-medoids clusters, whether weights are equal or based on the percentage of variance explained. The only  exception is the NBA-defined `center' category, which aligns with the cluster $2$ in the $k$-medoids results when weighted by the variance explained. Furthermore, there is little agreement between the two $k$-medoids clustering methods themselves.}
 \begin{figure}
 	\centering
-	\includegraphics[scale=0.55]{figures/confusion_mat_kmedoids_no_weights.pdf}
+	\includegraphics[scale=0.475]{figures/confusion_mat_kmedoids_no_weights.pdf}
 	\hfill
-	\includegraphics[scale=0.55]{figures/confusion_mat_kmedoids_weights.pdf}
+	\includegraphics[scale=0.475]{figures/confusion_mat_kmedoids_weights.pdf}
 	\hfill
-	\includegraphics[scale=0.55]{figures/confusion_matk_medoids_w_no_w.pdf}
-	\caption{Agreement between the two clustering taxonomies (using equal weights and variance weights) and the conventional NBA position typology. NBA clusters are based on the usual typology ($0$: center, $1$: forward, $2$: forward-center, $3$: forward-guard, $4$: guard).}
+	\includegraphics[scale=0.475]{figures/confusion_mat_kmedoids_w_no_w.pdf}
+	\caption{Agreement between the two clustering taxonomies (using equal weights and variance weights) and the conventional NBA position typology.}
 	\label{fig:confusion_mat}
 \end{figure}
 
