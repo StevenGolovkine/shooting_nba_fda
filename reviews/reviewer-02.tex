@@ -70,25 +70,27 @@ P10: give a link / reference to Hawk-Eye; “player’s”
 }
 
 \comment{
-At the very least, you should report the  of guards, forwards, and centers in each cluster. (Many readers may not be able to distinguish who is a guard or who is a forward, etc, just by reading players’ names.)  It would also be nice if you used a quantitative metric to measure the agreement between the clusters you find and the NBA positions. If you try other functional clustering methods (as I suggest below), these comparisons would be even more interesting.
+At the very least, you should report the number of guards, forwards, and centers in each cluster. (Many readers may not be able to distinguish who is a guard or who is a forward, etc, just by reading players’ names.)  It would also be nice if you used a quantitative metric to measure the agreement between the clusters you find and the NBA positions. If you try other functional clustering methods (as I suggest below), these comparisons would be even more interesting.
 }
 
 \reply{
-	Steven
+	We added the number of guards, forwards and centers in each cluster in the appendix. We also changed the confusion matrix to show the NBA position directly. See Comment 1.4 for a discussion on metrics to assess the clustering quality.
 }
 
 \comment{
 Did you consider other functional clustering approaches? It would be interesting to see if you get similar clusters (and similar levels of agreement) using a different approach.
 }
 
-\reply{Steven}
+\reply{See Comment 1.4 for a discussion on other functional clustering approaches.}
 
 \comment{
 Why not cluster the surfaces themselves and not the MFPCA scores using functional clustering algorithms? That would be fun to see.
 }
 
 \reply{
-	Ed can take this initially.
+	Ed can take this initially. \textcolor{red}{We can actually try to cluster the surface directly using k-medoids with a specific distance between multivariate surfaces, like
+		$$d(X, Y) = \sum_{i = 1}^{2} \int_{\mathcal{T}_1} \int_{\mathcal{T}_2} \{X^{(i)}(s, t) - Y^{(i)}(s, t)\}^2 ds dt.$$
+		It should be feasible to implement quickly. I think we just need to write the distance function to compute the dissimilarity matrix and use the \textsf{kmedoids} Python package.}
 }
 
 \comment{

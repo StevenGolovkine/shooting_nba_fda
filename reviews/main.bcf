@@ -3065,7 +3065,9 @@
     <bcf:citekey order="2" intorder="1">bigotGeodesicPCAWasserstein2017</bcf:citekey>
     <bcf:citekey order="2" intorder="2">delicadoDimensionalityReductionWhen2011</bcf:citekey>
     <bcf:citekey order="2" intorder="3">petersenFunctionalDataAnalysis2016</bcf:citekey>
-    <bcf:citekey order="3" intorder="1">kneipInferenceDensityFamilies2001</bcf:citekey>
+    <bcf:citekey order="3" intorder="1">jacquesFunctionalDataClustering2014</bcf:citekey>
+    <bcf:citekey order="4" intorder="1">zhangReviewClusteringMethods2023</bcf:citekey>
+    <bcf:citekey order="5" intorder="1">kneipInferenceDensityFamilies2001</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="apa">
