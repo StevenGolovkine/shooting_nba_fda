@@ -13,7 +13,7 @@ import numpy as np
 import pandas as pd
 
 from FDApy.representation.functional_data import DenseFunctionalData, BasisFunctionalData
-from FDApy.preprocessing import MFPCA
+from FDApy.preprocessing import MFPCA, UFPCA
 
 class MidpointNormalize(mpl.colors.Normalize):
     def __init__(self, vmin=None, vmax=None, vcenter=None, clip=False):
@@ -292,7 +292,10 @@ class ShotCharts:
         idx_c: int,
         title: str
     ) -> mpl.axes:
-        mean = mfpca.mean.data[idx_c][0].values.squeeze()
+        if isinstance(mfpca, MFPCA):
+            mean = mfpca.mean.data[idx_c][0].values.squeeze()
+        else:
+            mean = mfpca.mean[0].values.squeeze()
 
         X_MIN, X_MAX = (-250, 250) 
         Y_MIN, Y_MAX = (0, 470)
@@ -322,10 +325,13 @@ class ShotCharts:
         idx_c: int,
         title: str
     ) -> mpl.axes:
-        if isinstance(mfpca.eigenfunctions.data[idx_c], BasisFunctionalData):
-            eigenfunctions = mfpca.eigenfunctions.data[idx_c].to_grid()
+        if isinstance(mfpca, MFPCA):
+            if isinstance(mfpca.eigenfunctions.data[idx_c], BasisFunctionalData):
+                eigenfunctions = mfpca.eigenfunctions.data[idx_c].to_grid()
+            else:
+                eigenfunctions = mfpca.eigenfunctions.data[idx_c]
         else:
-            eigenfunctions = mfpca.eigenfunctions.data[idx_c]
+            eigenfunctions = mfpca.eigenfunctions
         eigenfunctions = eigenfunctions[idx].values.squeeze()
         pct = 100 * mfpca.eigenvalues / np.sum(mfpca.eigenvalues)
 
@@ -361,10 +367,13 @@ class ShotCharts:
         title: str,
         maximum: float
     ) -> plt.figure:
-        if isinstance(mfpca.eigenfunctions.data[idx_c], BasisFunctionalData):
-            eigenfunctions = mfpca.eigenfunctions.data[idx_c].to_grid()
+        if isinstance(mfpca, MFPCA):
+            if isinstance(mfpca.eigenfunctions.data[idx_c], BasisFunctionalData):
+                eigenfunctions = mfpca.eigenfunctions.data[idx_c].to_grid()
+            else:
+                eigenfunctions = mfpca.eigenfunctions.data[idx_c]
         else:
-            eigenfunctions = mfpca.eigenfunctions.data[idx_c]
+            eigenfunctions = mfpca.eigenfunctions
         eigenfunctions = eigenfunctions[idx].values.squeeze()
         pct = 100 * mfpca.eigenvalues / np.sum(mfpca.eigenvalues)
         score = scores.loc[scores.PLAYER_NAME == name, idx].values
