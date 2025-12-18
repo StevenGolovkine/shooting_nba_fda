@@ -407,10 +407,13 @@ class ShotCharts:
         title: str,
         maximum: float
     ) -> plt.figure:
-        if isinstance(mfpca.eigenfunctions.data[idx_c], BasisFunctionalData):
-            eigenfunctions = mfpca.eigenfunctions.data[idx_c].to_grid()
+        if isinstance(mfpca, MFPCA):
+            if isinstance(mfpca.eigenfunctions.data[idx_c], BasisFunctionalData):
+                eigenfunctions = mfpca.eigenfunctions.data[idx_c].to_grid()
+            else:
+                eigenfunctions = mfpca.eigenfunctions.data[idx_c]
         else:
-            eigenfunctions = mfpca.eigenfunctions.data[idx_c]
+            eigenfunctions = mfpca.eigenfunctions
         eigenfunctions = eigenfunctions[idx].values.squeeze()
         pct = 100 * mfpca.eigenvalues / np.sum(mfpca.eigenvalues)
         fpc = score * eigenfunctions
