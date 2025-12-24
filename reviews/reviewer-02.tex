@@ -17,7 +17,7 @@ Break up the first paragraph in 4.1 into multiple smaller ones.
 }
 
 \reply{
-	We thank the reviewer for their comments. We corrected the grammatical errors. Regarding the ``short corners'', the ``short corners'' refers to specific location on the court. We added a graphic that explain the different names of the court location.
+	We thank the reviewer for their comments. We corrected the grammatical errors. Regarding the ``short corners'', the ``short corners'' refers to specific location on the court. We added a graphic that explain the different names of the court location in the Appendix.
 }
 
 \comment{
@@ -26,7 +26,7 @@ Can you explain how this is shown by the 3rd PC?
 }
 
 \reply{
-	Ed
+	The explanation of the third principal components has been rewritten.
 }
 
 \comment{
@@ -34,7 +34,7 @@ Last sentence (P5, L55-56) does not make sense. What is â€œthe axis of the hoopâ
 }
 
 \reply{
-	ED TO EDIT IF NEEDED. It refers to shooting in front of the basket as oppose to shooting in the wings/corners.
+	The explanation of the fourth principal component has also been rewritten.
 }
 
 \comment{
@@ -88,9 +88,7 @@ Why not cluster the surfaces themselves and not the MFPCA scores using functiona
 }
 
 \reply{
-	Ed can take this initially. \textcolor{red}{We can actually try to cluster the surface directly using k-medoids with a specific distance between multivariate surfaces, like
-		$$d(X, Y) = \sum_{i = 1}^{2} \int_{\mathcal{T}_1} \int_{\mathcal{T}_2} \{X^{(i)}(s, t) - Y^{(i)}(s, t)\}^2 ds dt.$$
-		It should be feasible to implement quickly. I think we just need to write the distance function to compute the dissimilarity matrix and use the \textsf{kmedoids} Python package.}
+	See Comment 1.4 for a discussion on other functional clustering approaches.
 }
 
 \comment{
