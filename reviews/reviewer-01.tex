@@ -15,7 +15,7 @@
 \comment{The authors do not evaluate the stability of their clustering. Furthermore, they do not provide external validation (e.g., prediction, test–train splits, comparison with existing clustering approaches). Please consider using metrics such as Adjusted Rand Index or Silhouette scores to assess cluster quality. Alternatively, compare results with simpler clustering methods (e.g., k-means on shooting frequency by location bins) to demonstrate added value.}
 
 \reply{
-	Adjusted Rand Index and Silhouette scores have been computed. ARI are close to $0$ but this is expected as we are looking for another typology than usual NBA players. The Silhouete scores are not too bad.
+	Adjusted Rand Index (ARI) and Silhouette coefficients have been computed. ARI between the NBA clusters and the proposed clustrers are close to $0$ but this is expected as we are looking for another typology than usual NBA players. The Silhouete coefficient for the $k$-medoids with equal weights is equal to $0.04$, while the Silhouette coefficient for the $k$-medoids with variance weights is equal to $0.4$. We also computed the Silhouette coefficient of the NBA clustering using the distance matrix used for the $k$-medoids with equal weights ($-0.05$) and using the distance matrix used for the $k$-medoids with variance weights ($-0.1$).
 	\textcolor{red}{Ed, do you consider that doing $k$-means on shooting frequency by  locations bins is simpler than what we have done? Another point how do you choose location bins? Maybe show that we get different clustering results based on the number of location bins, a problem that we do not have because we do not discretize the court.}
 }
 
