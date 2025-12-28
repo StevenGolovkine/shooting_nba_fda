@@ -57,7 +57,15 @@ The choice of k-medoid clustering is also not discussed in detail. As suggested 
 }
 
 \reply{
-	We will address all comments regarding the clustering method here. According to \cite{jacquesFunctionalDataClustering2014} and \cite{zhangReviewClusteringMethods2023}, there are maily four possibilities to cluster functional data: raw-data clustering, $2$-step methods, non-parametric clustering and model-based clustering.
+	We will address all comments regarding the clustering method here. According to \cite{jacquesFunctionalDataClustering2014}, there are mainly four possibilities to cluster functional data: raw-data clustering, $2$-step methods, non-parametric clustering and model-based clustering.
+	\begin{itemize}
+		\item Raw-data clustering consists in directly clustering the discretization of the surfaces at some points. Because we discretized the density on a grid of $201 \times 201$ points (that would be flatten to vectors of $40401$ points), this is not ideal to cluster the data.
+		\item $2$-step methods consist of, first, reducing the dimension of the data, usually by expanding the data into a basis, and second, to perform the clustering on the basis coefficients.
+		\item non-parametric clustering consists in using specific distances between surfaces combined with classic clustering algorithms.
+		\item model-based clustering assumes probability distributions on the underlying data. As the notion of probability density function is not well defined for functional data, the probability distributions are usually assumed on the coefficients that describe the data.
+	\end{itemize}
+
+	According to \cite{zhangReviewClusteringMethods2023}, clustering methods are split into $2$ categories: vector space and function space. (Not sur that we should use this paper.)
 }
 
 \comment{
