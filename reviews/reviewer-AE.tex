@@ -13,42 +13,56 @@ In the introduction, several methods for analyzing shot charts are summarized, i
 }
 
 \reply{
-	{\color{purple}TO DO = ADD ABOUT BINS AS DISCUSSED IN MEETING, INTEGRATE INT DO RESULTS AND DISCUSSION.}
+	We acknowledge thia point, so here we expand on why we chose density surfaces over intensity surfaces:
 	\begin{itemize}
 		\item \textbf{Intensity surfaces}: mean number of shots expected per unit area. These are \emph{not} normalized. Players who play more games, or just shoot more in general can have different intensities despite having same underlying patterns.
 		\item \textbf{Density surfaces}: These are normalized (densities integrate to $1$), hence more suitable for comparing shot profiles, especially across longer time periods. The only drawback is that they can lack information shot volumes.
 	\end{itemize}
-
-	So our justification:
-	\begin{itemize}
-		\item We use densities because they are normalized so to make fair comparisons of \emph{patterns/ densities} that are not affecte by, e.g., number of games or minutes played.
-		\item To DO: Present a histogram of total number of shots per player to show that these can inflate/ mislead an intensity based approach.
-		\item Acknowledge that an overall shot volume metric, normalized where appropriate, e.g., total shots per game, could lead to an improved characterization in future work.
-	\end{itemize}
-
-	CHECK REFERENCES to Double check what they model....
-
-	\cite{millerFactorizedPointProcess2014} and \cite{franksCharacterizingSpatialStructure2015} use one-square-foot tiles for ``computational tractability of LGCP [(log Gaussian Cox process)] inference'' and they ``expect this tile size to capture all interesting spatial variation''. \cite{yinBayesianNonparametricLearning2022} also use one-square foot tiles (``This rectangle waas divided into $50 \times 35 = 1750$ equally-sized grid boxes of $1ft \times 1ft$''). \cite{reichSpatialAnalysisBasketball2006} divided the court into an $11 \times 11$ grid based on distance and angle. \cite{huZeroinflatedPoissonModel2023} partionned the court into $1ft \times 2ft$ blocks. \cite{fuHoopInSightAnalyzingComparing2024} divided the court ``into a series of contiguous smaller regions for aggregation and convenience''. \cite{huBayesianGroupLearning2021} partitioned the court to disjoint triangles and used this mesh of discrete sampling locations to estimate a continuous surface in space via interpolation. \cite{jiaoBayesianMarkedSpatial2021} partitioned into $50 x 35$ grid boxes of $1$ft by $1$ft. \cite{wong-toiJointAnalysisField2022} divided the front court into twelve zones. \cite{yinAnalysisProfessionalBasketball2023} discretized to generate a $25 \times 18$ matrix as the main variable of interest.
+	Therefore, purely from a behaviour characterization standpoint, we prefer densities because they are normalized and hence allow to make fair comparisons of shooting  \emph{patterns} that are not affected by, e.g., number of games or minutes played. However, we acknowledge that an overall shot volume metric, normalized where appropriate, e.g., total shots per game, could lead to an improved characterization in future work.
+	We have added the following sentence to the introduction to reflect this:
+	\begin{quote}
+		\emph{{\color{blue}``Densities are computed separately for each shot type (made and missed) and each player and are therefore normalized for each individuals total number of each shots.
+					We prefer this over an un-normalized representation that contains information about overall shot volume, so that we can make make fair comparisons of shooting
+					patterns that are not affected by, e.g., number of games or minutes played."}}
+	\end{quote}
+	We have also added the following sentence to the discussion:
+	\begin{quote}
+		\emph{{``\color{blue}Firstly, some overall measure of overall shot volume or shooting frequency could be added to improve the characterization of players' behaviours."}}
+	\end{quote}
+	Additionally, the point on FDA methods often requiring discretizations (on a fine grid) is sometimes  correct. However, when a basis representation is used, the calculation is performed using the basis coefficients rather than the discretized objects (see, e.g., \cite{ramsayFunctionalDataAnalysis2005}).
+	We argue, however, that there is not a clear consensus from the cited works on how to discretize a (half) basketball court:
+	\begin{enumerate}
+		\item \cite{millerFactorizedPointProcess2014} and \cite{franksCharacterizingSpatialStructure2015} use one-square-foot tiles for ``computational tractability of LGCP [(log Gaussian Cox process)] inference'' and they ``expect this tile size to capture all interesting spatial variation''.
+		\item \cite{yinBayesianNonparametricLearning2022} also use one-square foot tiles (``This rectangle waas divided into $50 \times 35 = 1750$ equally-sized grid boxes of $1ft \times 1ft$'').
+		\item \cite{reichSpatialAnalysisBasketball2006} divided the court into an $11 \times 11$ grid based on distance and angle.
+		\item \cite{huZeroinflatedPoissonModel2023} partionned the court into $1ft \times 2ft$ blocks.
+		      \cite{fuHoopInSightAnalyzingComparing2024} divided the court ``into a series of contiguous smaller regions for aggregation and convenience''.
+		\item \cite{huBayesianGroupLearning2021} partitioned the court to disjoint triangles and used this mesh of discrete sampling locations to estimate a continuous surface in space via interpolation.
+		\item \cite{jiaoBayesianMarkedSpatial2021} partitioned into $50 x 35$ grid boxes of $1$ft by $1$ft.
+		\item \cite{wong-toiJointAnalysisField2022} divided the front court into twelve zones.
+		\item \cite{yinAnalysisProfessionalBasketball2023} discretized to generate a $25 \times 18$ matrix as the main variable of interest.
+	\end{enumerate}
+	While discretization is necessary for these approaches and the justification for each type can be understood individually, we argue that the continuous FDA approach removes the subjectivity that may arise.
 }
 
 \comment{
 While it is true that early work in functional data analysis did include applications of FPCA (or other standard FDA methods) directly to densities \parencite{kneipInferenceDensityFamilies2001,neriniClassifyingDensitiesUsing2007, ramsayFunctionalDataAnalysis2005}, these methods have been superseded in the last decade by non-linear dimension reduction methods due to the fact that density properties are not retained by linear decompositions \parencite{bigotGeodesicPCAWasserstein2017, delicadoDimensionalityReductionWhen2011, petersenFunctionalDataAnalysis2016}. Many if not all of these newer methods can only be applied to univariate densities; however, the authors should include a discussion about the potential pitfalls of FPCA when applied to functional data that, by nature, satisfy nonlinear constraints (positivity and integration to 1). If possible, some attempt to mitigate these issues for the bivariate shot chart densities should be made.
 }
 
-\reply{
-	{\color{purple}To add to paper, in discussion as a limittation:}
+\reply{We acknowledge this point -- we have applied FPCA, a conventional linear dimension reduction technique for standard functional data, i.e., curves assumed to belong to the space of $\mathcal{L}_2$ of square-integrable functions. However, densities belong to a constrained space -- they are non-negative and integrate to $1$.
+	Therefore, reconstructions given by standard FPCA are not guaranteed to satisfy density constraints.
+	As such, alternative non-linear approaches have been proposed for modeling univariate densities, e.g., transformations that map the densities to an unconstrained space before doing FPCA \parencite{petersenFunctionalDataAnalysis2016}.
+	However, we have chosen to apply standard FPCA, acknowledging its limitations, because:
+	\begin{enumerate}
+		\item Conventional FPCA is tractable, it is straightforward to describe to a general data-science audience. We can interpret the individual FPCs as a shift of the mean density \parencite{kneipInferenceDensityFamilies2001}. Furthermore, standard computational FPCA methods can be employed to deal with the high-dimensionality of the two-dimensional surfaces.
+		\item Although specialized geometrically-aware density approaches can be can give better performance, standard FPCA has been shown to provide a reasonable approximation in many cases \parencite{petersenFunctionalDataAnalysis2016} \textbf{\color{purple}Steven: Add ref to Dai and Mueller -- https://projecteuclid.org/journals/annals-of-statistics/volume-46/issue-6B/Principal-component-analysis-for-functional-data-on-Riemannian-manifolds-and/10.1214/17-AOS1660.full}.
+		\item If FPCA approximations of individual densities take negative values, they can be projected back into the density space, by retaining only the positive part and re-normalizing \parencite{petersenFunctionalDataAnalysis2016}.
+	\end{enumerate}
+	Therefore, we decided to use the standard FPCA approximation rather than develop a new method by extending existing univariate density approaches to the bivariate case.
+	We do, however, now acknowledge this as a limitation in our discussion:
 	\begin{quote}
-		\emph{We have applied FPCA, a conventional linear dimension reduction technique for standard functional data, i.e., curves assumed to belong to the space of $\mathcal{L}_2$ of square-integrable functions. However, densities belong to a constrained space -- they are non-negative and integrate to $1$.
-			As a result, reconstructions given by standard FPCA, are not guaranteed to satisfy density constraints.
-			As such, alternative non-linear approaches have been proposed for modeling univariate densities, e.g., transformations that map the densities to an unconstrained space before doing FPCA \parencite{petersenFunctionalDataAnalysis2016}.
-			However, we have chosen to apply standard FPCA, acknowledging its limitations, because:
-			\begin{enumerate}
-				\item Conventional FPCA is tractable, it is straightforward to describe to a general data-science audience. We can interpret the individual FPCs as a shift of the mean density \parencite{kneipInferenceDensityFamilies2001}. Furthermore, standard computational FPCA methods can be employed to deal with the high-dimensionality of the two-dimensional surfaces.
-				\item Although specialized geometrically-aware density approaches can be can give better performance, standard FPCA has been shown to provide a reasonable approximation in many cases \parencite{petersenFunctionalDataAnalysis2016} \textbf{(CITE DAI and Muller)}.
-				\item If FPCA approximations of individual densities take negative values, they can be projected back into the density space, by retaining only the positive part and re-normalizing. \parencite{petersenFunctionalDataAnalysis2016} \textbf{(CITE HALL)}
-			\end{enumerate}
-		}
-		Therefore, we decided to use the standard FPCA approximation rather than develop a new method by extending existing univariate density approaches to the bivariate case.
+		\emph{\color{blue}``We employed standard FPCA which assumes that observations are realisations from an unconstrained space of functions.
+			However, densities are constrained because they must be non-negative and integrate to $1$. Reconstructions from standard FPCA do not necessarily satisfy the non-negativity constraint so specialized methods have been developed \citep{petersenFunctionalDataAnalysis2016}. However, these are for the univariate case. Rather than develop or extend these methodological approaches to the bivariate case, we apply the more tractable, standard FPCA approach while acknowledging its limitations. If required, reconstructions that lie outside the space of densities can be projected back into the density space."}
 	\end{quote}
 }
 
@@ -73,9 +87,13 @@ A key drawback of the analysis is its lack of assessment of sampling variability
 }
 
 \reply{
+	{\color{purple}\textbf{Steven}: I have added a small comment here, but to satisfy reviewer I think it might be easy to do something simple like compute $5$ bootstrap samples, and show the first 3 PCs from each run and how they don't change much compared to the original.}
 
-	But we are working with a WHOLE POPULATION.
-	CHARACTERIZE VARIABILITY IN POPULATION.(maybe... Bootstrap sensitivity analysis for FPCs.)
+	We acknowledge this as a limitation, though it is slightly less relevant than in typical scientific analyses.
+	We computed these components based on the whole population of NBA players over a specific period, rather than a sample.
+	Therefore, we are not necessarily trying to make inferences about the modes of variability in a larger population.
+	That being said, we acknowledge that a population does not have to exist phsyically -- e.g., the hypothetical notion of a new NBA player not observed or from another time period.
+	Therefore, as a simple sensitivity check, we have performed the following {\color{red}\dots \textbf{ADD bootstrap if we do it.}}
 }
 
 \comment{
@@ -83,7 +101,10 @@ Although the analytical steps are clearly laid out, it is not obvious what the c
 }
 
 \reply{
-	Ed: Move up sentence from dicusssion up front to methods/
+	To address this, we have added the following description and caution to the methods section:
+	\begin{quote}
+		\emph{{``\color{blue}Moreover, we will compare the estimated clusters to the $k=5$ nominal positions provided by the NBA. We do not expect perfect agreement -- defence, play-making and movement all play a role in addition to shooting. However, because shooting behaviour is a key component of a player's overall game, the positions comparison can help inform the labels we provide to our clusters."}}
+	\end{quote}
 }
 
 \comment{
@@ -93,10 +114,9 @@ Please carefully check the interpretation of each of the functional principal co
 \reply{
 	Thank you for this comment.
 	Indeed, this interpretation was initially phrased incorrectly. We have now replaced this explanation with a correct interpretation, in terms of relative numbers of shots missed and shots made, rather than overall shooting volume.
+	Regarding the strict positivity, this comment is also correct. We failed to interpret/ describe the small blue dot directly underneath the basket for the missed shots. An interpretation has been suitably added.
 
-	\textcolor{red}{I think our interpretation was wrong. As there is a (very small) blue area just under the basket. So the first eigenfunction will discriminated between players that just shoot under the basket (mostly lay-ups) or players that shoot further from the basket.}
-
-	\textbf{\color{red}Correct re integrate to 0, but in the sense of the multivariate inner product. We might be missing this with recaling.}
+	\textbf{\color{red}Steven: We need to check this integrates to $0$ thing.}
 }
 
 \comment{
