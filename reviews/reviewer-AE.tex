@@ -49,21 +49,21 @@ While discretization is necessary for these approaches and the justification for
 While it is true that early work in functional data analysis did include applications of FPCA (or other standard FDA methods) directly to densities \parencite{kneipInferenceDensityFamilies2001,neriniClassifyingDensitiesUsing2007, ramsayFunctionalDataAnalysis2005}, these methods have been superseded in the last decade by non-linear dimension reduction methods due to the fact that density properties are not retained by linear decompositions \parencite{bigotGeodesicPCAWasserstein2017, delicadoDimensionalityReductionWhen2011, petersenFunctionalDataAnalysis2016}. Many if not all of these newer methods can only be applied to univariate densities; however, the authors should include a discussion about the potential pitfalls of FPCA when applied to functional data that, by nature, satisfy nonlinear constraints (positivity and integration to 1). If possible, some attempt to mitigate these issues for the bivariate shot chart densities should be made.
 }
 
-\reply{
-	{\color{purple}To add to paper, in discussion as a limittation:}
-	\begin{quote}
-		\emph{We have applied FPCA, a conventional linear dimension reduction technique for standard functional data, i.e., curves assumed to belong to the space of $\mathcal{L}_2$ of square-integrable functions. However, densities belong to a constrained space -- they are non-negative and integrate to $1$.
-			As a result, reconstructions given by standard FPCA, are not guaranteed to satisfy density constraints.
-			As such, alternative non-linear approaches have been proposed for modeling univariate densities, e.g., transformations that map the densities to an unconstrained space before doing FPCA \parencite{petersenFunctionalDataAnalysis2016}.
-			However, we have chosen to apply standard FPCA, acknowledging its limitations, because:
-			\begin{enumerate}
-				\item Conventional FPCA is tractable, it is straightforward to describe to a general data-science audience. We can interpret the individual FPCs as a shift of the mean density \parencite{kneipInferenceDensityFamilies2001}. Furthermore, standard computational FPCA methods can be employed to deal with the high-dimensionality of the two-dimensional surfaces.
-				\item Although specialized geometrically-aware density approaches can be can give better performance, standard FPCA has been shown to provide a reasonable approximation in many cases \parencite{petersenFunctionalDataAnalysis2016} \textbf{(CITE DAI and Muller)}.
-				\item If FPCA approximations of individual densities take negative values, they can be projected back into the density space, by retaining only the positive part and re-normalizing. \parencite{petersenFunctionalDataAnalysis2016} \textbf{(CITE HALL)}
-			\end{enumerate}
-		}
-		Therefore, we decided to use the standard FPCA approximation rather than develop a new method by extending existing univariate density approaches to the bivariate case.
-	\end{quote}
+\reply{We acknowledge this point -- we have applied FPCA, a conventional linear dimension reduction technique for standard functional data, i.e., curves assumed to belong to the space of $\mathcal{L}_2$ of square-integrable functions. However, densities belong to a constrained space -- they are non-negative and integrate to $1$.
+Therefore, reconstructions given by standard FPCA are not guaranteed to satisfy density constraints.
+As such, alternative non-linear approaches have been proposed for modeling univariate densities, e.g., transformations that map the densities to an unconstrained space before doing FPCA \parencite{petersenFunctionalDataAnalysis2016}.
+    However, we have chosen to apply standard FPCA, acknowledging its limitations, because:
+    \begin{enumerate}
+        \item Conventional FPCA is tractable, it is straightforward to describe to a general data-science audience. We can interpret the individual FPCs as a shift of the mean density \parencite{kneipInferenceDensityFamilies2001}. Furthermore, standard computational FPCA methods can be employed to deal with the high-dimensionality of the two-dimensional surfaces.
+        \item Although specialized geometrically-aware density approaches can be can give better performance, standard FPCA has been shown to provide a reasonable approximation in many cases \parencite{petersenFunctionalDataAnalysis2016} \textbf{\color{purple}Steven: Add ref to Dai and Mueller -- https://projecteuclid.org/journals/annals-of-statistics/volume-46/issue-6B/Principal-component-analysis-for-functional-data-on-Riemannian-manifolds-and/10.1214/17-AOS1660.full}.
+        \item If FPCA approximations of individual densities take negative values, they can be projected back into the density space, by retaining only the positive part and re-normalizing \parencite{petersenFunctionalDataAnalysis2016}.
+    \end{enumerate}
+Therefore, we decided to use the standard FPCA approximation rather than develop a new method by extending existing univariate density approaches to the bivariate case.
+We do, however, now acknowledge this as a limitation in our discussion:
+\begin{quote}
+    \emph{\color{blue}``We employed standard FPCA which assumes that observations are realisations from an unconstrained space of functions.
+    However, densities are constrained because they must be non-negative and integrate to $1$. Reconstructions from standard FPCA do not necessarily satisfy the non-negativity constraint so specialized methods have been developed \citep{petersenFunctionalDataAnalysis2016}. However, these are for the univariate case. Rather than develop or extend these methodological approaches to the bivariate case, we apply the more tractable, standard FPCA approach while acknowledging its limitations. If required, reconstructions that lie outside the space of densities can be projected back into the density space."}
+\end{quote}
 }
 
 \comment{
@@ -79,7 +79,7 @@ The choice of k-medoid clustering is also not discussed in detail. As suggested 
 		\item model-based clustering assumes probability distributions on the underlying data. As the notion of probability density function is not well defined for functional data, the probability distributions are usually assumed on the coefficients that describe the data.
 	\end{itemize}
 
-	According to \cite{zhangReviewClusteringMethods2023}, clustering methods are split into $2$ categories: vector space and function space. (Not sur that we should use this paper.)
+	According to \cite{zhangReviewClusteringMethods2023}, clustering methods are split into $2$ categories: vector space and function space. {\color{purple}(Not sure that we should use this paper.)}
 }
 
 \comment{

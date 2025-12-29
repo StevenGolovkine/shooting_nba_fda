@@ -24,4 +24,8 @@ One of the most exciting avenues is to combine shot-chart representations with o
 For example, temporal biomechanical data are now being measured by motion-tracking systems such as Hawk-Eye, and the possibility of a multi-modal representation that reflects a players tactical and physical tendencies -- and the interaction between them -- could provide more detailed and specific analyses.
 Our modeling framework could also be applied to positional data in other sports, for example, to characterize a soccer player's ``natural position'' or a boxer's ``fighting style''.
 
+Finally, some limitations of the proposed modelling framework are as follows.
+{\color{blue}``We employed standard FPCA which assumes that observations are realisations from an unconstrained space of functions.
+However, densities are constrained because they must be non-negative and integrate to $1$. Reconstructions from standard FPCA do not necessarily satisfy the non-negativity constraint so specialized methods have been developed \citep{petersenFunctionalDataAnalysis2016}. However, these are for the univariate case. Rather than develop or extend these methodological approaches to the bivariate case, we apply the more tractable, standard FPCA approach while acknowledging its limitations. If required, reconstructions that lie outside the space of densities can be projected back into the density space."}
+
 
