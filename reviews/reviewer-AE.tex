@@ -13,22 +13,36 @@ In the introduction, several methods for analyzing shot charts are summarized, i
 }
 
 \reply{
-	{\color{purple}TO DO = ADD ABOUT BINS AS DISCUSSED IN MEETING, INTEGRATE INT DO RESULTS AND DISCUSSION.}
+We acknowledge thia point, so here we expand on why we chose density surfaces over intensity surfaces:
 	\begin{itemize}
 		\item \textbf{Intensity surfaces}: mean number of shots expected per unit area. These are \emph{not} normalized. Players who play more games, or just shoot more in general can have different intensities despite having same underlying patterns.
 		\item \textbf{Density surfaces}: These are normalized (densities integrate to $1$), hence more suitable for comparing shot profiles, especially across longer time periods. The only drawback is that they can lack information shot volumes.
 	\end{itemize}
-
-	So our justification:
-	\begin{itemize}
-		\item We use densities because they are normalized so to make fair comparisons of \emph{patterns/ densities} that are not affecte by, e.g., number of games or minutes played.
-		\item To DO: Present a histogram of total number of shots per player to show that these can inflate/ mislead an intensity based approach.
-		\item Acknowledge that an overall shot volume metric, normalized where appropriate, e.g., total shots per game, could lead to an improved characterization in future work.
-	\end{itemize}
-
-	CHECK REFERENCES to Double check what they model....
-
-	\cite{millerFactorizedPointProcess2014} and \cite{franksCharacterizingSpatialStructure2015} use one-square-foot tiles for ``computational tractability of LGCP [(log Gaussian Cox process)] inference'' and they ``expect this tile size to capture all interesting spatial variation''. \cite{yinBayesianNonparametricLearning2022} also use one-square foot tiles (``This rectangle waas divided into $50 \times 35 = 1750$ equally-sized grid boxes of $1ft \times 1ft$''). \cite{reichSpatialAnalysisBasketball2006} divided the court into an $11 \times 11$ grid based on distance and angle. \cite{huZeroinflatedPoissonModel2023} partionned the court into $1ft \times 2ft$ blocks. \cite{fuHoopInSightAnalyzingComparing2024} divided the court ``into a series of contiguous smaller regions for aggregation and convenience''. \cite{huBayesianGroupLearning2021} partitioned the court to disjoint triangles and used this mesh of discrete sampling locations to estimate a continuous surface in space via interpolation. \cite{jiaoBayesianMarkedSpatial2021} partitioned into $50 x 35$ grid boxes of $1$ft by $1$ft. \cite{wong-toiJointAnalysisField2022} divided the front court into twelve zones. \cite{yinAnalysisProfessionalBasketball2023} discretized to generate a $25 \times 18$ matrix as the main variable of interest.
+Therefore, purely from a behaviour characterization standpoint, we prefer densities because they are normalized and hence allow to make fair comparisons of shooting  \emph{patterns} that are not affected by, e.g., number of games or minutes played. However, we acknowledge that an overall shot volume metric, normalized where appropriate, e.g., total shots per game, could lead to an improved characterization in future work.
+We have added the following sentence to the introduction to reflect this:
+\begin{quote}
+    \emph{{\color{blue}``Densities are computed separately for each shot type (made and missed) and each player and are therefore normalized for each individuals total number of each shots.
+We prefer this over an un-normalized representation that contains information about overall shot volume, so that we can make make fair comparisons of shooting
+patterns that are not affected by, e.g., number of games or minutes played."}}
+\end{quote}
+We have also added the following sentence to the discussion:
+\begin{quote}
+    \emph{{``\color{blue}Firstly, some overall measure of overall shot volume or shooting frequency could be added to improve the characterization of players' behaviours."}}
+\end{quote}
+Additionally, the point on FDA methods often requiring discretizations (on a fine grid) is sometimes  correct. However, when a basis representation is used, the calculation is performed using the basis coefficients rather than the discretized objects (see, e.g., \cite{ramsayFunctionalDataAnalysis2005}).
+We argue, however, that there is not a clear consensus from the cited works on how to discretize a (half) basketball court:
+\begin{enumerate}
+    \item \cite{millerFactorizedPointProcess2014} and \cite{franksCharacterizingSpatialStructure2015} use one-square-foot tiles for ``computational tractability of LGCP [(log Gaussian Cox process)] inference'' and they ``expect this tile size to capture all interesting spatial variation''.
+    \item \cite{yinBayesianNonparametricLearning2022} also use one-square foot tiles (``This rectangle waas divided into $50 \times 35 = 1750$ equally-sized grid boxes of $1ft \times 1ft$''). 
+    \item \cite{reichSpatialAnalysisBasketball2006} divided the court into an $11 \times 11$ grid based on distance and angle.
+    \item \cite{huZeroinflatedPoissonModel2023} partionned the court into $1ft \times 2ft$ blocks. 
+    \cite{fuHoopInSightAnalyzingComparing2024} divided the court ``into a series of contiguous smaller regions for aggregation and convenience''. 
+    \item \cite{huBayesianGroupLearning2021} partitioned the court to disjoint triangles and used this mesh of discrete sampling locations to estimate a continuous surface in space via interpolation. 
+    \item \cite{jiaoBayesianMarkedSpatial2021} partitioned into $50 x 35$ grid boxes of $1$ft by $1$ft.
+    \item \cite{wong-toiJointAnalysisField2022} divided the front court into twelve zones. 
+    \item \cite{yinAnalysisProfessionalBasketball2023} discretized to generate a $25 \times 18$ matrix as the main variable of interest.
+\end{enumerate}
+While discretization is necessary for these approaches and the justification for each type can be understood individually, we argue that the continuous FDA approach removes the subjectivity that may arise.
 }
 
 \comment{
