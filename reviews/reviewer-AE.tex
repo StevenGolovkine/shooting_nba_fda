@@ -87,9 +87,13 @@ A key drawback of the analysis is its lack of assessment of sampling variability
 }
 
 \reply{
+{\color{purple}\textbf{Steven}: I have added a small comment here, but to satisfy reviewer I think it might be easy to do something simple like compute $5$ bootstrap samples, and show the first 3 PCs from each run and how they don't change much compared to the original.}
 
-	But we are working with a WHOLE POPULATION.
-	CHARACTERIZE VARIABILITY IN POPULATION.(maybe... Bootstrap sensitivity analysis for FPCs.)
+We acknowledge this as a limitation, though it is slightly less relevant than in typical scientific analyses.
+We computed these components based on the whole population of NBA players over a specific period, rather than a sample.
+Therefore, we are not necessarily trying to make inferences about the modes of variability in a larger population.
+That being said, we acknowledge that a population does not have to exist phsyically -- e.g., the hypothetical notion of a new NBA player not observed or from another time period.
+Therefore, as a simple sensitivity check, we have performed the following {\color{red}\dots \textbf{ADD bootstrap if we do it.}}
 }
 
 \comment{
@@ -97,7 +101,10 @@ Although the analytical steps are clearly laid out, it is not obvious what the c
 }
 
 \reply{
-	Ed: Move up sentence from dicusssion up front to methods/
+To address this, we have added the following description and caution to the methods section:
+\begin{quote}
+    \emph{{``\color{blue}Moreover, we will compare the estimated clusters to the $k=5$ nominal positions provided by the NBA. We do not expect perfect agreement -- defence, play-making and movement all play a role in addition to shooting. However, because shooting behaviour is a key component of a player's overall game, the positions comparison can help inform the labels we provide to our clusters."}}
+\end{quote}
 }
 
 \comment{
@@ -107,10 +114,9 @@ Please carefully check the interpretation of each of the functional principal co
 \reply{
 	Thank you for this comment.
 	Indeed, this interpretation was initially phrased incorrectly. We have now replaced this explanation with a correct interpretation, in terms of relative numbers of shots missed and shots made, rather than overall shooting volume.
+    Regarding the strict positivity, this comment is also correct. We failed to interpret/ describe the small blue dot directly underneath the basket for the missed shots. An interpretation has been suitably added.
 
-	\textcolor{red}{I think our interpretation was wrong. As there is a (very small) blue area just under the basket. So the first eigenfunction will discriminated between players that just shoot under the basket (mostly lay-ups) or players that shoot further from the basket.}
-
-	\textbf{\color{red}Correct re integrate to 0, but in the sense of the multivariate inner product. We might be missing this with recaling.}
+    \textbf{\color{red}Steven: We need to check this integrates to $0$ thing.}
 }
 
 \comment{

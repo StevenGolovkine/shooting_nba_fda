@@ -2,7 +2,7 @@
 \section{Results} % (fold)
 \label{sec:results}
 
-\subsection{MFPCA decomposition of the densities} % (fold)
+\subsection{MFPCA decomposition of the densities} 
 \label{sub:decomposition_of_the_densities}
 
 We apply MFPCA to estimate the mean functions and eigenfunctions, providing a description of players' shooting behavior.
@@ -26,7 +26,8 @@ The estimated functional components can be explained as characterizing different
 	{\color{purple}\textbf{I think this is incorrect because these densities are normalized: The first component, explained $67.9\%$ of the total variance, contrasts players based on their overall shooting frequency relative to the average NBA player.} A player with a positive score $c_1$ for $\phi_1$ will {\color{blue} shoot} more frequently, both successfully and unsuccessfully, than average. These effects are concentrated the high-density areas of the court such as the paint and beyond the arc (i.e., $\phi_1$ has a similar shape to the mean function). Conversely, a negative score corresponds to players who shoot less frequently than the average, with effects concentrated in these same regions.}
 	{\color{blue}The first component explains $67.9\%$ of the total variance and is similar in shape to the mean densities because it assigns higher positive density values to the areas under the paint and around the outside of the perimeter arc.
 		Although the average player tends to have a large proportion of their made and missed shots from this area, players with a positive score $c_1$ tend to make and miss even more of their shots than average from these regions.
-		\textbf{\emph{{\color{purple}Add about small little blue dot under paint for missed.}}}
+		In addition, for the missed shots, there is a small, compact blue area, appearing as a small dot, in the location directly under the basket.
+        This means that players with a positive score $c_1$ have fewer of their missed shots from this location.
 		In contrast, players with a negative score $c_1$ have a smaller-than-average proportion of their made and missed shots taken from these ``typical" shooting regions.}
 The second component, explaining $8.5\%$ of the total variance, highlights a contrast between shooting inside and outside the three-point line.
 Players with a positive score $c_2$ for $\phi_2$ prefer to shoot closer to the basket, while those with negative scores prefer long-range shots.
