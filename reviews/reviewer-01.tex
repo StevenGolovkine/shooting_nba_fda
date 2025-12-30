@@ -10,14 +10,13 @@
 
 \reply{
 	Given the applied nature of the paper, we have not presented convergence results for MFPCA. However, a full theoretical treatment of the method can be found in \cite{happMultivariateFunctionalPrincipal2018}.
-    While we are primarily concerned with describing the variation in an entire population of NBA players, rather than making inferences using a sample, uncertainty quantification for the MFPCs is not of primary concern either. However, to assess stability/ sensitivity of our approach, we have{\color{purple}\dots ADD BOOTSTRAP RESULTS IF WE DO IT}.
+	While we are primarily concerned with describing the variation in an entire population of NBA players, rather than making inferences using a sample, uncertainty quantification for the MFPCs is not of primary concern either. However, to assess stability/ sensitivity of our approach, we have{\color{purple}\dots ADD BOOTSTRAP RESULTS IF WE DO IT}.
 }
 
 \comment{The authors do not evaluate the stability of their clustering. Furthermore, they do not provide external validation (e.g., prediction, test–train splits, comparison with existing clustering approaches). Please consider using metrics such as Adjusted Rand Index or Silhouette scores to assess cluster quality. Alternatively, compare results with simpler clustering methods (e.g., k-means on shooting frequency by location bins) to demonstrate added value.}
 
 \reply{
 	Adjusted Rand Index (ARI) and Silhouette coefficients have been computed. ARI between the NBA clusters and the proposed clustrers are close to $0$ but this is expected as we are looking for another typology than usual NBA players. The Silhouete coefficient for the $k$-medoids with equal weights is equal to $0.04$, while the Silhouette coefficient for the $k$-medoids with variance weights is equal to $0.4$. We also computed the Silhouette coefficient of the NBA clustering using the distance matrix used for the $k$-medoids with equal weights ($-0.05$) and using the distance matrix used for the $k$-medoids with variance weights ($-0.1$).
-	\textcolor{red}{Ed, do you consider that doing $k$-means on shooting frequency by  locations bins is simpler than what we have done? Another point how do you choose location bins? Maybe show that we get different clustering results based on the number of location bins, a problem that we do not have because we do not discretize the court.}
 }
 
 \comment{While contrasting the clusters with NBA-defined positions is informative, the resulting disagreement is not deeply analyzed. Are there specific cases where agreement is worse?}
@@ -35,10 +34,10 @@
 \comment{The model jointly treats made and missed shots, but no attention is given to efficiency metrics (i.e., shooting percentage), which are arguably central to evaluating shot quality.}
 
 \reply{
-We have now added the following to the discussion to acknowledge this point:
-\begin{quote}
-    \emph{\color{blue}``Secondly, this work focused on charaxterising the spatial patterns of made or missed shots. The normalization in the density estimation step, performed separately for the made and missed shots, inherently removes information about total shot volume or shooting efficiency (e.g., percentage chance of success). Future work could include an overall measure of shot volume or shooting efficiency to improve the characterization of players' behaviours."}
-\end{quote}
+	We have now added the following to the discussion to acknowledge this point:
+	\begin{quote}
+		\emph{\color{blue}``Secondly, this work focused on characterising the spatial patterns of made or missed shots. The normalization in the density estimation step, performed separately for the made and missed shots, inherently removes information about total shot volume or shooting efficiency (e.g., percentage chance of success). Future work could include an overall measure of shot volume or shooting efficiency to improve the characterization of players' behaviours."}
+	\end{quote}
 }
 
 
