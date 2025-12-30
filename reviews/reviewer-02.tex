@@ -66,25 +66,15 @@ P10: give a link / reference to Hawk-Eye; “player’s”
 }
 
 \reply{
-The typo (players $\rigtharrow$ player's) has been fixed. The Hawkeye reference has been added.
-\color{purple}\textbf{Steven}: I have provided the Bib entry for the companies web page below. Can you please cite in the appropriate place please?
+	The typo (players $\rightarrow$ player's) has been fixed. The Hawkeye reference has been added.
 }
-\begin{verbatim}
-    @misc{HawkeyeInnovation2025,
-  title        = {Hawkeye Innovation, LLC},
-  howpublished = {\url{https://www.hawkeyeinnovation.com/}},
-  year         = {2025},
-  organization = {Hawkeye Innovation, LLC},
-  address      = {Agawam, Massachusetts, United States},
-}
-\end{verbatim}
 
 \comment{
 At the very least, you should report the number of guards, forwards, and centers in each cluster. (Many readers may not be able to distinguish who is a guard or who is a forward, etc, just by reading players’ names.)  It would also be nice if you used a quantitative metric to measure the agreement between the clusters you find and the NBA positions. If you try other functional clustering methods (as I suggest below), these comparisons would be even more interesting.
 }
 
 \reply{
-	We added the number of guards, forwards and centers in each cluster in the appendix. We also changed the confusion matrix to show the NBA position directly. See Comment 0.4 for a discussion on metrics to assess the clustering quality.
+	We added the number of guards, forwards and centers in each cluster in the Appendix. We also changed the confusion matrix to show the NBA position directly. See Comment 0.4 for a discussion on metrics to assess the clustering quality.
 }
 
 \comment{
@@ -107,10 +97,10 @@ What about just FPCA of all shot locations (as opposed to made and missed shots?
 
 \reply{
 	This is an interesting suggestion. Our rationale is that a players typical shooting ``pattern" or ``behaviour" is defined not only by where they shoot, but more specifically by where they score and miss from. In a simple example, we might consider two players who attempt a lot of shots from both the three-point line \emph{and} under the paint.
-    Player $A$ is an expert three-point shooter but weaker at closer-range shots, and vice-versa for player $B$. 
-    With a standard FPCA of overall shot volumes as suggested, we would characterize these player similarly. 
-    However, the MFPCA of made and missed shots would would be able to decipher between the two patterns.
+	Player $A$ is an expert three-point shooter but weaker at closer-range shots, and vice-versa for player $B$.
+	With a standard FPCA of overall shot volumes as suggested, we would characterize these player similarly.
+	However, the MFPCA of made and missed shots would would be able to decipher between the two patterns.
 
 
-    As noted in Comment $0.2$, however, we do agree that future work could use additional information (e.g., overall shots volume, normalized or un-normalized) to provide improved characterisations.
+	As noted in Comment $0.2$, however, we do agree that future work could use additional information (e.g., overall shots volume, normalized or un-normalized) to provide improved characterisations.
 }

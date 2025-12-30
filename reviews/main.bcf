@@ -3086,6 +3086,7 @@
     <bcf:citekey order="20" intorder="1">jacquesFunctionalDataClustering2014</bcf:citekey>
     <bcf:citekey order="21" intorder="1">zhangReviewClusteringMethods2023</bcf:citekey>
     <bcf:citekey order="22" intorder="1">kneipInferenceDensityFamilies2001</bcf:citekey>
+    <bcf:citekey order="23" intorder="1">happMultivariateFunctionalPrincipal2018</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="apa">
