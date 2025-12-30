@@ -14,7 +14,7 @@ where $\mu(s, t)$ is the mean (average) function, and $c_k$ are the player-speci
 To create a data-driven taxonomy of players based on MFPCA, we apply a $k$-medoids clustering algorithm \citep{kaufmanFindingGroupsData2009} to the normalized functional principal component scores $c_k$, using $k = 5$ clusters, as the number of players on the court.
 {\color{blue}Moreover, we will compare the estimated clusters to the $k=5$ nominal positions provided by the NBA.
 We do not expect perfect agreement -- defence, play-making and movement all play a role in addition to shooting.
-However, because shooting behaviour is a key component of a player's overall game, the positions comparison can help inform the labels we provide to our clusters.
+However, because shooting behavior is a key component of a player's overall game, the positions comparison can help inform the labels we provide to our clusters.
 }
 The $k$-medoids algorithm minimizes the dissimilarity between each player's scores and the medoid of its cluster. We use the weighted {\color{blue} Euclidean} distance as the measure of dissimilarity. This method offers a practical advantage over the $k$-means clustering algorithm: the center of each cluster is an actual player from the dataset rather than an averaged representation of all players within the cluster, enhancing interpretability. In our analysis, we consider two weighting schemes to calculate the distance: one assigns equal weights to all components, and the other weights components given the proportion of variance they explain.
 \begin{figure}
