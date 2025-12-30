@@ -87,13 +87,22 @@ A key drawback of the analysis is its lack of assessment of sampling variability
 }
 
 \reply{
-	{\color{purple}\textbf{Steven}: I have added a small comment here, but to satisfy reviewer I think it might be easy to do something simple like compute $5$ bootstrap samples, and show the first 3 PCs from each run and how they don't change much compared to the original.}
 
 	We acknowledge this as a limitation, though it is slightly less relevant than in typical scientific analyses.
 	We computed these components based on the whole population of NBA players over a specific period, rather than a sample.
 	Therefore, we are not necessarily trying to make inferences about the modes of variability in a larger population.
 	That being said, we acknowledge that a population does not have to exist physically -- e.g., the hypothetical notion of a new NBA player not observed or from another time period.
-	Therefore, as a simple sensitivity check, we have performed the following {\color{red}\dots \textbf{ADD bootstrap if we do it.}}
+    
+	Therefore, as a simple sensitivity check, we have performed the following exercise and added it to the appendix:
+    \begin{itemize}
+        \item Construct $5$ bootstrap samples.
+        \item For each bootstrap sample, compute the MFPCA.
+        \item Display the mean and the first $4$ MFPCs from each bootstrap sample.
+    \end{itemize}
+    The shapes of the mean function and the first two principal components are very consistent.
+    There is slight sample-to-sample variability for the third component.
+    This result is intuitive -- the mean and leading components, explaining the most variability, represent the most common modes of variation in the data and hence are more stable from sample to sample. Overall, this simple sensitivity check indicates that the prominent modes of variation are stable.
+    }
 }
 
 \comment{

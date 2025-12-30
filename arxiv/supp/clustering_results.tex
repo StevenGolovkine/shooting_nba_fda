@@ -17,6 +17,15 @@
 \section{Bootstrap results} % (fold)
 \label{sec:bootstrap_results}
 
+As a sensitivity check, we performed the following exercise:
+    \begin{itemize}
+        \item Construct $5$ bootstrap samples.
+        \item For each bootstrap sample, compute the MFPCA.
+        \item Display the mean and the first $4$ MFPCs from each bootstrap sample.
+    \end{itemize}
+    The shapes of the resulting mean functions and the first two principal components are very consistent.
+    There is slight sample-to-sample variability for the third component.
+    This result is intuitive -- the mean and leading components, explaining the most variability, represent the most common modes of variation in the data and hence are more stable from sample to sample. Overall, this simple sensitivity check indicates that the prominent modes of variation are stable.
 
 \begin{figure}
 	\centering
