@@ -2,7 +2,7 @@
 \section{Results} % (fold)
 \label{sec:results}
 
-\subsection{MFPCA decomposition of the densities} 
+\subsection{MFPCA decomposition of the densities}
 \label{sub:decomposition_of_the_densities}
 
 We apply MFPCA to estimate the mean functions and eigenfunctions, providing a description of players' shooting behavior.
@@ -22,21 +22,20 @@ Unlike the shooting densities, the functional principal components may take on n
 
 The estimated functional components can be understood as characterizing different shooting behaviors. We first note that, except for $\phi_3$, the functional components for missed and made shots are similar.
 	{\color{blue}This suggests that the dominant patterns of player-to-player variation are driven by shot location, regardless of whether the shots are made or missed.}
-	{\color{purple}To be rewritten: This suggests that players do not have specific shooting position where the percentage of missed shots significantly exceeds that of made shots.}
-	{\color{purple}\textbf{I think this is incorrect because these densities are normalized: The first component, explains $67.9\%$ of the total variance, contrasts players based on their overall shooting frequency relative to the average NBA player.} A player with a positive score $c_1$ for $\phi_1$ will {\color{blue} shoot} more frequently, both successfully and unsuccessfully, than average. These effects are concentrated in the high-density areas of the court such as the paint and beyond the arc (i.e., $\phi_1$ has a similar shape to the mean function). Conversely, a negative score corresponds to players who shoot less frequently than the average, with effects concentrated in these same regions.}
+	%{\color{purple}To be rewritten: This suggests that players do not have specific shooting position where the percentage of missed shots significantly exceeds that of made shots.}
+	%{\color{purple}\textbf{I think this is incorrect because these densities are normalized: The first component, explains $67.9\%$ of the total variance, contrasts players based on their overall shooting frequency relative to the average NBA player.} A player with a positive score $c_1$ for $\phi_1$ will {\color{blue} shoot} more frequently, both successfully and unsuccessfully, than average. These effects are concentrated in the high-density areas of the court such as the paint and beyond the arc (i.e., $\phi_1$ has a similar shape to the mean function). Conversely, a negative score corresponds to players who shoot less frequently than the average, with effects concentrated in these same regions.}
 	{\color{blue}The first component explains $67.9\%$ of the total variance and is similar in shape to the mean densities because it assigns higher positive density values to the areas under the paint and around the outside of the perimeter arc.
 		Although the average player tends to have a large proportion of their made and missed shots from this area, players with a positive score $c_1$ tend to make and miss even more of their shots than average from these regions.
 		In addition, for the missed shots, there is a small, compact blue area, appearing as a small dot, in the location directly under the basket.
-        This means that players with a positive score $c_1$ have fewer of their missed shots from this location.
+		This means that players with a positive score $c_1$ have fewer of their missed shots from this location.
 		In contrast, players with a negative score $c_1$ have a smaller-than-average proportion of their made and missed shots taken from these ``typical" shooting regions.}
 The second component, explaining $8.5\%$ of the total variance, highlights a contrast between shooting inside and outside the three-point line.
 Players with a positive score $c_2$ for $\phi_2$ prefer to shoot closer to the basket, while those with negative scores prefer long-range shots.
 	{\color{blue}The third component (explaining $6.1\%$ of the total variance) contrasts players that shoot in the paint and the others, while also capturing some variation in missed shots from the corners.
 		For made shots, positive scores $c_3$ are associated with frequent attempts and successes in the paint and fewer made shots from further out.
 		For missed shots, positive scores $c_3$ also indicate frequent attempts and misses from around the paint, but interestingly also capture high proportions of missed shots from the corners, indicated by the two red regions on either side.
-		This pattern indicates that these players who tend to take a large number of their shots (both made and missed) from inside the paint also tend to take shots from the corners but are generally unsuccessful (i.e., we see the high densities in the corners for the missed shots but not the made shots).
-	}
-	{\color{purple}The fourth component (explaining $4.0\%$ of the total variance) captures differences between shooting from the wings and shooting along the axis of the hoop. Players with positive (resp. negative) score will shot in the axis of the hoop (resp. from the wing).}
+		This pattern indicates that these players who tend to take a large number of their shots (both made and missed) from inside the paint also tend to take shots from the corners but are generally unsuccessful (i.e., we see the high densities in the corners for the missed shots but not the made shots).}
+	%{\color{purple}The fourth component (explaining $4.0\%$ of the total variance) captures differences between shooting from the wings and shooting along the axis of the hoop. Players with positive (resp. negative) score will shot in the axis of the hoop (resp. from the wing).}
 	{\color{blue}Finally, the fourth component accounts for $4.0\%$ of the total variance and characterizes differences in shooting centrally (in the paint and along the central portion of the three-point arc) and shooting from the wings.
 		Players with a positive (negative) score $c_4$ tend to make and miss more of their shots from central regions of the court, and fewer of their shots from the wings.
 	}
@@ -76,17 +75,12 @@ Figure~\ref{fig:clusters} presents the estimated scores $c_k$ from~\eqref{eq:kl_
 	\includegraphics[scale=0.95]{figures/scores_3.pdf}
 	\includegraphics[scale=0.95]{figures/scores_4.pdf}
 	\includegraphics[scale=0.95]{figures/legend.pdf}
-	\caption{Scatter plots of the player-specific basis coefficients (scores) colored using the NBA defined typology of players. We highlighted one player per position. The scores have been standardized and jittered on the y-axis for visualization purposes. \textcolor{blue}{Add the interpretation of each scores after we agree on the interpretation.}}
+	\caption{Scatter plots of the player-specific basis coefficients (scores) colored using the NBA defined typology of players. We highlighted one player per position. The scores have been standardized and jittered on the y-axis for visualization purposes. \textcolor{blue}{The first component discriminates players by their overall shooting volume, with positive scores indicating a higher-than-average number of shots. The second component contrasts between two-pointers and three-pointers, with positive scores associated with shots near the basket. The third component differentiates players that shots in the paint, combined with frequent missed shots from the corners and associated to positive scores, and the others. The fourth component contrasts between centrally located shooting and wing-area shooting, with positive scores indicating more central shooting.}}
 	\label{fig:clusters}
 \end{figure}
 
 % subsection decomposition_of_the_densities (end)
 
-\subsection{Chris Paul} % (fold)
-
-Chris Paul has a particular shooting pattern. So, we present it here.
-
-Add decomposition of Chris Paul.
 
 
 % subsection chris_paul (end)
@@ -94,7 +88,7 @@ Add decomposition of Chris Paul.
 \subsection{Clustering} % (fold)
 \label{sub:clustering}
 
-The $k$-medoids algorithm was applied to the coefficients plotted in Figure~\ref{fig:clusters}, grouping players into five clusters using a Euclidean distance and different weighting schemes for the components. The choice of five clusters aligns with the number of players on the court for each team. Detailed clustering results, including player names and decomposition in eigenfunctions basis, are provided in Appendix~\ref{sec:clustering_results}. Figure~\ref{fig:average_cluster_no_weight} presents the medoids for each cluster when the components are weighted equally. The medoid, as the central observation in a cluster, represents the most representative player within that cluster. The decompositions of these representative players are given in Figure~\ref{fig:cluster_no_weight} in the Appendix. The clustering results can be interpreted based on shooting tendencies. Cluster $1$ groups high-volume shooters. Cluster $2$ includes players who primarily shoot from the center axis of the basket, while players in Cluster $3$ predominantly score from the corners. Clusters $4$ and $5$ are similar, comprising players who primarily score in the paint but also attempt shots from beyond the three-point line, albeit with limited success.
+The $k$-medoids algorithm was applied to the coefficients plotted in Figure~\ref{fig:clusters}, grouping players into five clusters using a Euclidean distance and different weighting schemes for the components. The choice of five clusters aligns with the number of players on the court for each team. Detailed clustering results, including player names and decomposition in eigenfunctions basis, are provided in Appendix~\ref{sec:clustering_results}. Figure~\ref{fig:average_cluster_no_weight} presents the medoids for each cluster when the components are weighted equally. The medoid, as the central observation in a cluster, represents the most representative player within that cluster. The decompositions of these representative players are given in Figure~\ref{fig:cluster_no_weight} in the Appendix. The clustering results can be interpreted based on shooting tendencies. Cluster $1$ groups high-volume perimeter shooters. Cluster $2$ includes players who primarily shoot from the center axis of the basket (represented by ), while players in Cluster $3$ predominantly score from the corners. Clusters $4$ and $5$ are similar, comprising players who primarily score in the paint but also attempt shots from beyond the three-point line, albeit with limited success.
 \begin{figure}
 	\centering
 	\includegraphics[scale=0.35]{figures/average_player_1.pdf}
