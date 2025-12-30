@@ -15,7 +15,7 @@ In the introduction, several methods for analyzing shot charts are summarized, i
 \reply{
 	We acknowledge this point, so here we expand on why we chose density surfaces over intensity surfaces:
 	\begin{itemize}
-		\item \textbf{Intensity surfaces}: mean number of shots expected per unit area. These are \emph{not} normalized. Players who play more games, or just shoot more in general can have different intensities despite having same underlying patterns. \textcolor{red}{I think there are some normalisation, see \cite{millerFactorizedPointProcess2014}, point $3$ of the procedure, but this is not clear how it is done.}
+		\item \textbf{Intensity surfaces}: mean number of shots expected per unit area. These are \emph{not} normalized. Players who play more games, or just shoot more in general can have different intensities despite having same underlying patterns\footnote{Though, some approaches employ a post-hoc normalization step, see step $3$ of \cite{millerFactorizedPointProcess2014}.}. 
 		\item \textbf{Density surfaces}: These are normalized (densities integrate to $1$), hence more suitable for comparing shot profiles, especially across longer time periods. The only drawback is that they can lack information shot volumes.
 	\end{itemize}
 	Therefore, purely from a behaviour characterization standpoint, we prefer densities because they are normalized and hence allow to make fair comparisons of shooting  \emph{patterns} that are not affected by, e.g., number of games or minutes played. However, we acknowledge that an overall shot volume metric, normalized where appropriate, e.g., total shots per game, could lead to an improved characterization in future work.
