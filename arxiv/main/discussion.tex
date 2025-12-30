@@ -13,19 +13,19 @@ Given the weak agreement, future work could estimate fewer or more than five clu
 Nevertheless, our analysis provides a novel data-driven perspective on how players differ in their shooting behaviors.
 
 We envision a number of potential uses of both our functional shot-chart representation and the subsequent clustering of shooting patterns.
-Firstly, the functional representation of a players shot-chart provides a comprehensive characterization of a player's shooting behavior, i.e., the shot chart is not reduced to one or more scalar summaries.
+Firstly, the functional representation of a player's shot chart provides a comprehensive characterization of a player's shooting behavior, i.e., the shot chart is not reduced to one or more scalar summaries.
 This representation could be used by coaches or front-office staff to monitor changes in a player's shooting patterns between or within seasons, to identify player-specific tendencies which inform specific training regimes, and also to identify players whose characteristics match the needs of the team during scouting and recruitment.
 Because the charts can naturally be presented in a way that is interpretable to basketball fans who may not be familiar with the underlying mathematics and statistics, the representation can be used to tell stories to the general public about player tendencies, and enable historical comparisons between players, enriching the narrative around the sport.
 While we used shots made and shots missed, other metrics defined over the offensive half-court (e.g., shooting efficiency or defensive shot charts, \cite{franksCharacterizingSpatialStructure2015}), could be represented in the same way for the aforementioned purposes.
 
 There are also a number of possible methodological extensions to the modeling framework.
-	{\color{blue}Firstly, some overall measure of overall shot volume or shooting frequency could be added to improve the characterization of players' behaviours.}
 One of the most exciting avenues is to combine shot-chart representations with other high-throughput data sources that are now routinely collected within the NBA.
-For example, temporal biomechanical data are now being measured by motion-tracking systems such as Hawk-Eye, and the possibility of a multi-modal representation that reflects a players tactical and physical tendencies -- and the interaction between them -- could provide more detailed and specific analyses.
+For example, temporal biomechanical data are now being measured by motion-tracking systems such as Hawk-Eye, and the possibility of a multi-modal representation that reflects a player's tactical and physical tendencies -- and the interaction between them -- could provide more detailed and specific analyses.
 Our modeling framework could also be applied to positional data in other sports, for example, to characterize a soccer player's ``natural position'' or a boxer's ``fighting style''.
 
 Finally, some limitations of the proposed modelling framework are as follows.
-	{\color{blue}We employed standard FPCA which assumes that observations are realisations from an unconstrained space of functions.
-		However, densities are constrained because they must be non-negative and integrate to $1$. Reconstructions from standard FPCA do not necessarily satisfy the non-negativity constraint so specialized methods have been developed \citep{petersenFunctionalDataAnalysis2016}. However, these are for the univariate case. Rather than develop or extend these methodological approaches to the bivariate case, we apply the more tractable, standard FPCA approach while acknowledging its limitations. If required, reconstructions that lie outside the space of densities can be projected back into the density space.}
+{\color{blue}We employed standard FPCA which assumes that observations are realisations from an unconstrained space of functions.
+However, densities are constrained because they must be non-negative and integrate to $1$. Reconstructions from standard FPCA do not necessarily satisfy the non-negativity constraint so specialized methods have been developed \citep{petersenFunctionalDataAnalysis2016}. However, these are for the univariate case. Rather than develop or extend these methodological approaches to the bivariate case, we apply the more tractable, standard FPCA approach while acknowledging its limitations. If required, reconstructions that lie outside the space of densities can be projected back into the density space.}
+{\color{blue}Secondly, this work focused on characterising the spatial patterns of made or missed shots. The normalization in the density estimation step, performed separately for the made and missed shots, inherently removes information about total shot volume or shooting efficiency (e.g., percentage chance of success). Future work could include an overall measure of shot volume or shooting efficiency to improve the characterization of players' behaviours.}
 
 
