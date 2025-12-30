@@ -1,4 +1,4 @@
-\section{}
+\section*{Associate Editor}
 
 \comment{
 The paper demonstrates the use of functional data analysis methods applied to shot chart densities in basketball for investigating common patterns among players. The shot chart is an important object of quantitative analysis in basketball, particularly when investigating spatial features in offensive strategies and performance. While the referees are in agreement that the paper targets a problem of interest, their reports contains several suggestions for revision. Below are some key issues with the paper, some of which overlap with comments from the two referees, that should be carefully and fully addressed in a revision, in addition to other points raised by the referees.
@@ -25,9 +25,9 @@ In the introduction, several methods for analyzing shot charts are summarized, i
 					We prefer this over an un-normalized representation that contains information about overall shot volume, so that we can make make fair comparisons of shooting
 					patterns that are not affected by, e.g., number of games or minutes played."}}
 	\end{quote}
-	We have also added the following sentence to the discussion:
+	We have also added the following sentences to the discussion:
 	\begin{quote}
-		\emph{{``\color{blue}Firstly, some overall measure of overall shot volume or shooting frequency could be added to improve the characterization of players' behaviours."}}
+		\emph{{``\color{blue}Secondly, this work focused on characterising the spatial patterns of made or missed shots. The normalization in the density estimation step, performed separately for the made and missed shots, inherently removes information about total shot volume or shooting efficiency (e.g., percentage chance of success). Future work could include an overall measure of shot volume or shooting efficiency to improve the characterization of players' behaviours."}}
 	\end{quote}
 	Additionally, the point on FDA methods often requiring discretizations (on a fine grid) is sometimes  correct. However, when a basis representation is used, the calculation is performed using the basis coefficients rather than the discretized objects (see, e.g., \cite{ramsayFunctionalDataAnalysis2005}).
 	We argue, however, that there is not a clear consensus from the cited works on how to discretize a (half) basketball court:

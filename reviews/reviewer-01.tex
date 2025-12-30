@@ -29,13 +29,16 @@
 \comment{The paper uses a 2D KDE with Gaussian kernel and Silverman’s rule but does not specify whether the bandwidth is optimized globally, per player, or per component.}
 
 \reply{
-	A different bandwidth is considered for each component (missed and made shots chart) of each player. We added a sentence to the main text.
+	A different bandwidth is considered for each component (missed and made shots chart) of each player. We have added a sentence to the main text to clarify this.
 }
 
 \comment{The model jointly treats made and missed shots, but no attention is given to efficiency metrics (i.e., shooting percentage), which are arguably central to evaluating shot quality.}
 
 \reply{
-ED TO DO -- \textcolor{red}{Another point is that we are not concerning by the evaluation of shot quality.}
+We have now added the following to the discussion to acknowledge this point:
+\begin{quote}
+    \emph{\color{blue}``Secondly, this work focused on charaxterising the spatial patterns of made or missed shots. The normalization in the density estimation step, performed separately for the made and missed shots, inherently removes information about total shot volume or shooting efficiency (e.g., percentage chance of success). Future work could include an overall measure of shot volume or shooting efficiency to improve the characterization of players' behaviours."}
+\end{quote}
 }
 
 
