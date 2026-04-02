@@ -4,7 +4,7 @@
 \section{Court description} % (fold)
 \label{sec:description}
 
-\textcolor{blue}{Here, we present a description of the spatial regions of the basketball court referenced throughout the main text. These regions correspond to functionally important areas of play. Figure~\ref{fig:court_desc} presents the important locations on the offensive half-court. The basket is located at the center of the baseline, with the low-post regions surrounding it on both the left and right sides. Above these areas, the high-post zones are located near the free-throw line. The three-point line is the line that separates the two-point area from the three-point area, i.e, any shot made beyond this line counts as three point. The zone located between the free-throw line and the three-point line is commonly referred to as the top of the key. The corners of the court are divided into short-corner zones, that are closer to the basket, and corner three-point zones along the baseline. Finally, the wing areas are located on the side of the court between the sidelines and the extension of the free-throw line.}
+Here, we present a description of the spatial regions of the basketball court referenced throughout the main text. These regions correspond to functionally important areas of play. Figure~\ref{fig:court_desc} presents the important locations on the offensive half-court. The basket is located at the center of the baseline, with the low-post regions surrounding it on both the left and right sides. Above these areas, the high-post zones are located near the free-throw line. The three-point line is the line that separates the two-point area from the three-point area, i.e, any shot made beyond this line counts as three point. The zone located between the free-throw line and the three-point line is commonly referred to as the top of the key. The corners of the court are divided into short-corner zones, that are closer to the basket, and corner three-point zones along the baseline. Finally, the wing areas are located on the side of the court between the sidelines and the extension of the free-throw line.
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.75\textwidth]{figures/court_description.pdf}
@@ -17,7 +17,7 @@
 \section{Bootstrap results} % (fold)
 \label{sec:bootstrap_results}
 
-\textcolor{blue}{As a sensitivity check, we performed the following exercise:
+As a sensitivity check, we performed the following exercise:
 	\begin{itemize}
 		\item Construct $5$ bootstrap samples.
 		\item For each bootstrap sample, compute the MFPCA.
@@ -25,7 +25,7 @@
 	\end{itemize}
 	The shapes of the resulting mean functions and the first two principal components are very consistent.
 	There is slight sample-to-sample variability for the third component.
-	This result is intuitive. The mean and leading components, explaining the most variability, represent the most common modes of variation in the data and hence are more stable from sample to sample. Overall, this simple sensitivity check indicates that the prominent modes of variation are stable.}
+	This result is intuitive. The mean and leading components, explaining the most variability, represent the most common modes of variation in the data and hence are more stable from sample to sample. Overall, this simple sensitivity check indicates that the prominent modes of variation are stable.
 
 \begin{figure}
 	\centering
@@ -167,8 +167,7 @@ In this section, we present the complete clustering results. First, we present i
 		\includegraphics[scale=0.2]{figures/kmedoids_5_eigenfunction_4.pdf}
 		\caption{Cluster 5.}
 	\end{subfigure}
-	\caption{\textcolor{blue}{MFPCA decompositions from the clustering using equal weights for each component.}
-	}
+	\caption{MFPCA decompositions from the clustering using equal weights for each component.}
 	\label{fig:cluster_no_weight}
 \end{figure}
 
@@ -246,7 +245,7 @@ Second, we present in which cluster each of the $173$ players belong when we ass
 		\includegraphics[scale=0.2]{figures/kmedoids_weighted_5_eigenfunction_4.pdf}
 		\caption{Cluster 5}
 	\end{subfigure}
-	\caption{\textcolor{blue}{MFPCA decompositions from the clustering using variance weights for each component.}}
+	\caption{MFPCA decompositions from the clustering using variance weights for each component.}
 	\label{fig:cluster_weight}
 \end{figure}
 

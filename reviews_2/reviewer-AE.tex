@@ -1,0 +1,70 @@
+\section*{Associate Editor}
+
+\comment{
+The author has eﬀectively addressed some of the comments from the initial submission.
+Two new referees have reviewed the paper and give several suggestions for further revision.
+In addition, the authors should consider the following points.
+}
+
+\reply{
+	We thank the associate editor for the careful consideration of our manuscript. We have addressed their points and those of the two reviewers and greatly improved the manuscript as a result. Our responses are presented in a point-by-point fashion below.
+}
+
+\comment{
+The MFPCA approach was described more clearly in the revision, which leads to an
+important point about visualization. In equation $(2)$, the eigenfunctions $\phi_k(s,t) \in \mathbb{R}^2$
+are bivariate, with one component corresponding to made and the other to missed
+shots. Doing MFPCA instead of marginal FPCA is nice since variability in made and
+missed shot locations are taken together, yielding a single set of scores for each player
+to cluster. However, there is no indication in the figures regarding how much each
+eigenfunction loads onto made and missed shots. In other words, it is possible that
+$\phi_1(s,t)$ loads mostly onto made shots and almost none onto missed shots, or vice versa,
+but there is no way to tell this from the current analysis because the normalization (a
+linear transformation, I assume) is applied separately to every panel in each figure. It
+would be more informative to apply this transformation to the combined data across
+made and missed shots - that is, normalization is applied to each column. Also, it
+would be helpful to report how much each component contributes to the variability
+explained in made/missed shots separately, in addition to the joint figures currently
+reported.
+}
+
+\reply{
+
+}
+
+\comment{
+Although the author has argued that lack of consensus in a suitable spatial grid leads
+to subjectivity in previous analyses, there is no apparent justification for the choice of
+a $201 \times 201$, equally spaced grid for the MFPCA. In addition, the density estimation
+induces further subjectivity by choice of a bandwidth. Is there a way to assess sensitivity of the results and interpretations to these choices? It seems the choice is no less
+arbitrary for density representations compared to previous methods.
+}
+
+\reply{
+
+}
+
+\comment{
+Related to the previous point, it is clear that densities are able to examine patterns
+without the influence of volume. However, how would removing volume information
+prove valuable in making performance-related decisions in terms of coaching, scouting,
+or training, for example? Are there other solutions that could be more eﬀective, such
+as stratifying by volume rather than removing it altogether? Please address this more
+completely in the discussion.
+}
+
+\reply{
+
+}
+
+\comment{
+The choice of $k= 5$ is clearly not data-driven. What would a true data-driven clustering
+look like? Certainly there are more than 5 shot pattern styles, so what information can
+we really gather from the clustering beyond observing that they clusters with $k= 5$ are
+poorly aligned with player position? Also, although several metrics on the clustering
+are reported (ARI, Silhouette score), the relevance of the values is not discussed or
+their bearing on the reliability and impact of the clustering results.}
+
+\reply{
+
+}

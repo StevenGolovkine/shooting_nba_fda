@@ -1,0 +1,96 @@
+\section{}
+
+\comment{Abstract
+\begin{itemize}
+\item Overclaims novelty; FDA-based spatial modeling exists and differentiation from prior intensity-surface approaches is insufficiently clarified.
+\item No explicit statement of key methodological limitations (e.g., normalization removing volume/efficiency information).
+\item Practical contribution vs methodological novelty not clearly separated.
+\end{itemize}
+}
+
+\reply{
+
+}
+
+\comment{Introduction and Background
+\begin{itemize}
+	\item Motivation for density representation vs intensity-based models is weakly justified; discretization critique is not convincing since FDA also requires discretization.
+	\item Limited positioning within modern representation learning or embedding-based player typologies.
+	\item Missing discussion of role-dependent contextual factors (pace, lineup context, possessions, play types).
+	\item Additional reference that could be added to the manuscript is: https://www.mdpi.com/2504-4990/6/3/102 and https://www.mdpi.com/2078-2489/16/8/699
+\end{itemize}
+}
+
+\reply{
+}
+
+\comment{
+Methodology
+\begin{itemize}
+	\item Kernel density estimation choices (Gaussian kernel, Silverman bandwidth) insufficiently validated or sensitivity-tested.
+	\item Grid resolution arbitrary without robustness analysis.
+	\item Normalization removes shot volume and efficiency, limiting interpretability of components.
+	\item MFPCA assumptions may violate density constraints (non-negativity, unit integral) — acknowledged but not resolved.
+	\item Choice of $k=5$ clusters driven by court positions rather than data-driven criteria.
+	\item Limited justification for $k$-medoids vs alternative clustering or manifold methods.
+\end{itemize}
+}
+
+\reply{
+}
+
+\comment{
+Results
+\begin{itemize}
+	\item Interpretation largely descriptive; lacks statistical validation or hypothesis testing.
+	\item Low cluster agreement (ARI = 0.04–0.05) not deeply analyzed — could indicate model inadequacy rather than novel insight.
+	\item Silhouette scores suggest weak cluster structure but implications are under-discussed.
+	\item No external validation (e.g., predictive performance, downstream task).
+\end{itemize}
+}
+
+\reply{
+
+}
+
+\comment{
+Discussion
+\begin{itemize}
+	\item Claims of interpretability and practical relevance not empirically demonstrated (e.g., coaching decisions, scouting outcomes).
+	\item Limited comparison against baseline models or alternative representations.
+	\item Absence of multimodal or contextual variables despite acknowledging importance.
+\end{itemize}
+}
+
+\reply{
+
+}
+
+\comment{
+Conclusion and future work
+\begin{itemize}
+	\item Future work suggestions are broad but not technically grounded (e.g., multimodal integration lacks methodological direction).
+	\item Does not address scalability, computational complexity, or real-time applicability.
+	\item Key methodological limitation (density normalization) insufficiently emphasized.
+\end{itemize}
+}
+
+\reply{
+
+}
+
+\comment{
+Technical Writing
+\begin{itemize}
+	\item Some redundancy in explaining FPCA concepts.
+	\item Overly descriptive narrative in results; could benefit from more concise statistical framing.
+	\item Terminology occasionally inconsistent between “shooting frequency,” “density,” and “intensity.”
+	\item Figures interpretation sometimes qualitative rather than quantitative.
+	\item Keywords are not precise and should be in alphabetical order.
+\end{itemize}
+}
+
+\reply{
+}
+
+
