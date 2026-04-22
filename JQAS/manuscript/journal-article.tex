@@ -80,14 +80,14 @@ In basketball, game outcomes are heavily influenced by shooting accuracy, as a p
 Analyzing shooting patterns thus serves as a powerful tool, not only for assessing individual performance but also for refining team strategies. An important tool for examining shooting patterns is shooting charts, which are visual representations that display all the shots a player has attempted and made over a season or a single game. Shooting charts are extensively studied in basketball research, with much of the work focusing on modeling them as spatial point processes. This approach typically involves creating a count matrix of shots taken by each player on a discretized court, then estimating an intensity surface over this grid by fitting a log-Gaussian Cox process. A low-rank approximation of these intensity surfaces is achieved using non-negative matrix factorization, as described in \citet{millerFactorizedPointProcess2014,franksCharacterizingSpatialStructure2015}. Non-parametric estimation of the intensity surface is also considered in \cite{yinBayesianNonparametricLearning2022}. These low-rank intensity surfaces help characterize NBA players’ shooting tendencies and evaluate their scoring efficiency. Some models do not require the intensity surface fitting approach. For example, \cite{reichSpatialAnalysisBasketball2006} employed conditionally autoregressive models to capture spatial correlations, while \cite{huZeroinflatedPoissonModel2023} fitted a Bayesian zero-inflated Poisson model to represent shooting attempts for players with distinct shooting styles. Although these methods effectively summarize player data, they are less suitable for comparing different players.
 
 
-To compare players' shooting behaviors, specialized methods have been developed. \citet{fuHoopInSightAnalyzingComparing2024} employ (interactive) data visualization techniques to analyze and contrast shooting performance. In a different approach, \citet{huBayesianGroupLearning2021} use a log-Gaussian Cox process to model the shooting intensity with a specific similarity measure for comparing players. \citet{jiaoBayesianMarkedSpatial2021} propose a Bayesian marked spatial point process model to capture shot intensity, investigating whether players’ success rates are higher in areas where they attempt more shots and clustering players based on this pattern. In another study, \citet{wong-toiJointAnalysisField2022} analyze shooting patterns across players by dividing the court into a grid and using a Bayesian nonparametric mixture model to identify latent clusters among players. Similarly, \citet{yinAnalysisProfessionalBasketball2023} apply a Bayesian nonparametric matrix clustering technique to {\color{blue} estimate} intensity maps, offering insights into shot selection characteristics. All these methods require a discretized representation of the court.
+To compare players' shooting behaviors, specialized methods have been developed. \citet{fuHoopInSightAnalyzingComparing2024} employ (interactive) data visualization techniques to analyze and contrast shooting performance. In a different approach, \citet{huBayesianGroupLearning2021} use a log-Gaussian Cox process to model the shooting intensity with a specific similarity measure for comparing players. \citet{jiaoBayesianMarkedSpatial2021} propose a Bayesian marked spatial point process model to capture shot intensity, investigating whether players’ success rates are higher in areas where they attempt more shots and clustering players based on this pattern. In another study, \citet{wong-toiJointAnalysisField2022} analyze shooting patterns across players by dividing the court into a grid and using a Bayesian nonparametric mixture model to identify latent clusters among players. Similarly, \citet{yinAnalysisProfessionalBasketball2023} apply a Bayesian nonparametric matrix clustering technique to blue estimate intensity maps, offering insights into shot selection characteristics. All these methods require a discretized representation of the court.
 
 
 To overcome the requirement of court discretization, we propose to estimate the shot density continuously across the offensive half-court and model these densities as functional data \citep{ramsayFunctionalDataAnalysis2005,kokoszkaIntroductionFunctionalData2017}.
 This idea first appeared in our paper \cite{golovkineUseGramMatrix2024}. Both missed and made shot charts are treated as multivariate functional data over a two-dimensional domain (i.e., the offensive half-court). Functional Data Analysis (FDA) addresses the analysis of realizations of a continuous stochastic process, observed at discrete sampling points and defined on compact domains. 
-{\color{blue}Densities are computed separately for each shot type (made and missed) and each player and are therefore normalized for each individuals total number of each shots.
+Densities are computed separately for each shot type (made and missed) and each player and are therefore normalized for each individuals total number of each shots.
 We prefer this over an un-normalized representation that contains information about overall shot volume, so that we can make make fair comparisons of shooting
-patterns that are not affected by, e.g., number of games or minutes played.}
+patterns that are not affected by, e.g., number of games or minutes played.
 By treating shot density as a stochastic process defined over the offensive half-court, we can consider each player’s shot density as a realization of this process. FDA tools allow us to summarize and capture variability within this process. To achieve this, we perform a basis decomposition using multivariate functional principal components analysis (MFPCA), and then describe players’ shooting styles based on this decomposition. Finally, representing player data onto the basis decomposition allows us to use clustering techniques to identify players with similar shooting behaviors. This approach to analyzing shooting patterns provides nuanced insights that can be valuable for coaches, analysts, and players alike.
 
 
@@ -134,9 +134,9 @@ We model both the locations of successful shots and unsuccessful shots for each 
 
 
 
-The first step in our approach is to convert the raw shot charts into smooth functions suitable for analysis. To achieve this, we use a two-dimensional kernel density estimator with a Gaussian kernel for both missed and made shots. After normalizing the court to the $[0, 1] \times [0, 1]$ range, bandwidth estimation is performed utilizing Silverman's rule \citep{silvermanDensityEstimationStatistics1986} \textcolor{blue}{for each component of each player}. The density estimation is conducted on a regularly sampled grid of $201 \times 201$ points. We then represent the smoothed densities of missed and made shots for each player as the two features of a bivariate functional observation. Both features are defined on the same two-dimensional rectangular domain and observed over the $201 \times 201$ grid. Note that the choice of the grid resolution is arbitrary and can be adjusted as needed. Figure~\ref{fig:examples_shooting_density} shows the density estimates of the same five players whose shot charts are presented in Figure~\ref{fig:examples_shooting_charts}.
+The first step in our approach is to convert the raw shot charts into smooth functions suitable for analysis. To achieve this, we use a two-dimensional kernel density estimator with a Gaussian kernel for both missed and made shots. After normalizing the court to the $[0, 1] \times [0, 1]$ range, bandwidth estimation is performed utilizing Silverman's rule \citep{silvermanDensityEstimationStatistics1986} for each component of each player. The density estimation is conducted on a regularly sampled grid of $201 \times 201$ points. We then represent the smoothed densities of missed and made shots for each player as the two features of a bivariate functional observation. Both features are defined on the same two-dimensional rectangular domain and observed over the $201 \times 201$ grid. Note that the choice of the grid resolution is arbitrary and can be adjusted as needed. Figure~\ref{fig:examples_shooting_density} shows the density estimates of the same five players whose shot charts are presented in Figure~\ref{fig:examples_shooting_charts}.
 
-\textcolor{blue}{After the density estimation, our data consist of independent trajectories of a vector-valued stochastic process $X = (X^{(1)}, X^{(2)})^{\top}$. Let $\mathcal{T} = [0, 1] \times [0, 1]$. The first coordinate $X^{(1)}$ corresponds to the density of missed shots and the second coordinate $X^{(2)}$ corresponds to the density of made shots. Both of them are assumed to belong to $\mathcal{L}^2(\mathcal{T})$, the Hilbert space of square-integrable real-valued functions defined on $\mathcal{T}$ having the usual inner product. Thus, $X$ is a stochastic process indexed by $\mathbf{t} = (t_1, t_2)$ belonging to the $2$-fold Cartesian product $\mathcal{T} \times \mathcal{T}$ and taking values in the $2$-fold Cartesian product space $\mathcal{H} = \mathcal{L}^2(\mathcal{T}) \times \mathcal{L}^2(\mathcal{T})$. In this space, we define the inner product as the sum of the inner products in $\mathcal{L}^2(\mathcal{T})$. Let $\mu: \mathcal{T} \times \mathcal{T} \rightarrow \mathcal{H}$ denote the mean function of the process $X$ and let $C$ denote the matrix-valued covariance function of the process $X$. We can then define the covariance operator of $X$, $\Gamma: \mathcal{H} \rightarrow \mathcal{H}$, as an integral operator with kernel $C$.
+After the density estimation, our data consist of independent trajectories of a vector-valued stochastic process $X = (X^{(1)}, X^{(2)})^{\top}$. Let $\mathcal{T} = [0, 1] \times [0, 1]$. The first coordinate $X^{(1)}$ corresponds to the density of missed shots and the second coordinate $X^{(2)}$ corresponds to the density of made shots. Both of them are assumed to belong to $\mathcal{L}^2(\mathcal{T})$, the Hilbert space of square-integrable real-valued functions defined on $\mathcal{T}$ having the usual inner product. Thus, $X$ is a stochastic process indexed by $\mathbf{t} = (t_1, t_2)$ belonging to the $2$-fold Cartesian product $\mathcal{T} \times \mathcal{T}$ and taking values in the $2$-fold Cartesian product space $\mathcal{H} = \mathcal{L}^2(\mathcal{T}) \times \mathcal{L}^2(\mathcal{T})$. In this space, we define the inner product as the sum of the inner products in $\mathcal{L}^2(\mathcal{T})$. Let $\mu: \mathcal{T} \times \mathcal{T} \rightarrow \mathcal{H}$ denote the mean function of the process $X$ and let $C$ denote the matrix-valued covariance function of the process $X$. We can then define the covariance operator of $X$, $\Gamma: \mathcal{H} \rightarrow \mathcal{H}$, as an integral operator with kernel $C$.
 Assuming that the covariance operator $\Gamma$ is a compact positive operator on $\mathcal{H}$ and using the results in \cite{happMultivariateFunctionalPrincipal2018}, there exists a complete orthonormal basis, the eigenfunctions, $\{\phi_k\}_{k \geq 1} \subset \mathcal{H}$ associated to a set of real numbers, the eigenvalues, $\{\lambda_k\}_{k \geq 1}$ that satisfy
 $$\Gamma \phi_k = \lambda_k \phi_k, \quad\text{and}\quad \lambda_k \rightarrow 0 \quad\text{as}\quad k \rightarrow \infty.$$
 Using the multivariate Karhunen-Loève theorem \citep{happMultivariateFunctionalPrincipal2018}, we obtain the decomposition
@@ -144,32 +144,43 @@ Using the multivariate Karhunen-Loève theorem \citep{happMultivariateFunctional
 	X(s, t) = \mu(s, t) + \sum_{k = 1}^{\infty} c_k\phi_k(s, t), \quad s, t \in [0, 1] \times [0, 1],
 \end{equation}
 where $c_k$ are the projections of the centered curves onto the eigenfunctions.
-}
+
 
 We apply multivariate functional principal components analysis  \citep{happMultivariateFunctionalPrincipal2018} to decompose each estimated density into a common set of basis functions and player-specific coefficients using~\eqref{eq:kl_decomp_inf}.
 We aim to find basis functions $\{\phi_k\}_{1 \leq k \leq K}$ that provide the most parsimonious representation of $X$, for a given $K$, as
 \begin{equation}\label{eq:kl_decomp}
 	X(s, t) = \mu(s, t) + \sum_{k = 1}^K c_k\phi_k(s, t), \quad s, t \in [0, 1] \times [0, 1],
 \end{equation}
-where $\mu(s, t)$ is the mean (average) function, and $c_k$ are the player-specific basis coefficients, referred to as scores. Each eigenfunction in the decomposition~\eqref{eq:kl_decomp} {\color{blue} characterizes} a variation away from the mean function, with the player-specific scores indicating the magnitude and direction of the deviation for each individual player. We estimate four components ($K = 4$), based on the approach of \cite{golovkineUseGramMatrix2024}, explaining approximately $90\%$ of the total variance in the data. The scores $c_k$ are estimated as the projection of the observations $X$ onto the eigenfunctions $\phi_k$ \textcolor{blue}{using the inner product in $\mathcal{H}$}. These scores provide a finite-dimensional representation of the functional data, capturing player-specific characteristics, and can be used as scalar variables in subsequent analyses.
+where $\mu(s, t)$ is the mean (average) function, and $c_k$ are the player-specific basis coefficients, referred to as scores. Each eigenfunction in the decomposition~\eqref{eq:kl_decomp} characterizes a variation away from the mean function, with the player-specific scores indicating the magnitude and direction of the deviation for each individual player. We estimate four components ($K = 4$), based on the approach of \cite{golovkineUseGramMatrix2024}, explaining approximately $90\%$ of the total variance in the data. The scores $c_k$ are estimated as the projection of the observations $X$ onto the eigenfunctions $\phi_k$ using the inner product in $\mathcal{H}$. These scores provide a finite-dimensional representation of the functional data, capturing player-specific characteristics, and can be used as scalar variables in subsequent analyses.
 To create a data-driven taxonomy of players based on MFPCA, we apply a $k$-medoids clustering algorithm \citep{kaufmanFindingGroupsData2009} to the normalized functional principal component scores $c_k$, using $k = 5$ clusters, as the number of players on the court.
-	{\color{blue}Moreover, we will compare the estimated clusters to the $k=5$ nominal positions provided by the NBA.
+	Moreover, we will compare the estimated clusters to the $k=5$ nominal positions provided by the NBA.
 		We do not expect perfect agreement -- defence, play-making and movement all play a role in addition to shooting.
-		However, because shooting behavior is a key component of a player's overall game, the positions comparison can help inform the labels we provide to our clusters.}
-The $k$-medoids algorithm minimizes the dissimilarity between each player's scores and the medoid of its cluster. We use the weighted {\color{blue} Euclidean} distance as the measure of dissimilarity. This method offers a practical advantage over the $k$-means clustering algorithm: the center of each cluster is an actual player from the dataset rather than an averaged representation of all players within the cluster, enhancing interpretability. In our analysis, we consider two weighting schemes to calculate the distance: one assigns equal weights to all components, and the other weights components given the proportion of variance they explain.
+		However, because shooting behavior is a key component of a player's overall game, the positions comparison can help inform the labels we provide to our clusters.
+The $k$-medoids algorithm minimizes the dissimilarity between each player's scores and the medoid of its cluster. We use the weighted Euclidean distance as the measure of dissimilarity. This method offers a practical advantage over the $k$-means clustering algorithm: the center of each cluster is an actual player from the dataset rather than an averaged representation of all players within the cluster, enhancing interpretability. In our analysis, we consider two weighting schemes to calculate the distance: one assigns equal weights to all components, and the other weights components given the proportion of variance they explain.
+%\begin{figure}
+%	\centering
+%	\includegraphics[scale=0.35]{figures/curry_density.pdf}
+%	\includegraphics[scale=0.35]{figures/tatum_density.pdf}
+%	\includegraphics[scale=0.35]{figures/james_density.pdf}
+%	\includegraphics[scale=0.35]{figures/embiid_density.pdf}
+%	\includegraphics[scale=0.35]{figures/jokic_density.pdf}
+%	\\
+%	\includegraphics[scale=0.35]{figures/colorbar.pdf}
+%	\caption{Smoothed shot chart densities for five selected NBA players. The densities have been individually normalized between $0$ and $1$.}
+%	\label{fig:examples_shooting_density}
+%\end{figure}
 \begin{figure}
 	\centering
-	\includegraphics[scale=0.35]{figures/curry_density.pdf}
-	\includegraphics[scale=0.35]{figures/tatum_density.pdf}
-	\includegraphics[scale=0.35]{figures/james_density.pdf}
-	\includegraphics[scale=0.35]{figures/embiid_density.pdf}
-	\includegraphics[scale=0.35]{figures/jokic_density.pdf}
+	\includegraphics[scale=0.35]{figures/curry_density_normalized.pdf}
+	\includegraphics[scale=0.35]{figures/tatum_density_normalized.pdf}
+	\includegraphics[scale=0.35]{figures/james_density_normalized.pdf}
+	\includegraphics[scale=0.35]{figures/embiid_density_normalized.pdf}
+	\includegraphics[scale=0.35]{figures/jokic_density_normalized.pdf}
 	\\
 	\includegraphics[scale=0.35]{figures/colorbar.pdf}
-	\caption{Smoothed shot chart densities for five selected NBA players. The densities have been individually normalized between $0$ and $1$.}
+  \caption{Smoothed shot chart densities for five selected NBA players. The densities have been normalized between $0$ and $1$. {\color{blue} The normalization has been applied to the combined data across made and missed shots.}}
 	\label{fig:examples_shooting_density}
 \end{figure}
-
 
 % section method (end)
 
@@ -182,66 +193,92 @@ The $k$-medoids algorithm minimizes the dissimilarity between each player's scor
 We apply MFPCA to estimate the mean functions and eigenfunctions, providing a description of players' shooting behavior.
 Figure~\ref{fig:mean_eigenfunctions} presents estimates of the mean functions alongside the estimated functional principal components, which capture deviations from the mean shooting density.
 Unlike the shooting densities, the functional principal components may take on negative values as they represent deviations from the mean rather than densities themselves. For presentation purposes, the functional principal components have been normalized between $-1$ and $1$. Blue areas correspond to negative values of the functional components, and represent negative deviations from the mean density, while red areas correspond to positive values of the functional components, and thus positive deviations.
-	{\color{blue}Because the individual densities have been normalized separately for each outcome (made and missed) and player, the patterns captured by the mean and functional principal components should be interpreted as reflecting where players tend to take made and missed shots, not where shots are more or less likely to be made (i.e., success probability or efficiency).}
+	Because the individual densities have been normalized separately for each outcome (made and missed) and player, the patterns captured by the mean and functional principal components should be interpreted as reflecting where players tend to take made and missed shots, not where shots are more or less likely to be made (i.e., success probability or efficiency).
 
 
-	{\color{blue}The mean chart represents the average shooting behavior of NBA players and is displayed in the first column of Figure \ref{fig:mean_eigenfunctions}.
+	The mean chart represents the average shooting behavior of NBA players and is displayed in the first column of Figure \ref{fig:mean_eigenfunctions}.
 		For shots made (second row, first column), the mean density displays very high values in the small region under the paint.
 		This indicates that a large proportion of the shots that players make successfully are taken from this area.
 		The next highest density region in the mean shots made chart is around the perimeter of the three-point line, but this density is lower than under the paint.
 		For shots missed (first row, first column), there is also a high density region under the paint, indicating that a large number of the missed shots are also taken from this area.
 		However, in comparison with the shots made density, the next highest density region -- around the perimeter of the three-point line -- is larger and closer in density values to the area under the paint.
 		Therefore, we can deduce that although a large number of both made shots and missed shots are taken from under the paint and around the three point area, a comparatively larger proportion of \emph{missed} shots are taken from the three point line.
-		This difference is intuitive, because three-point shots are inherently harder to make. Overall}, the elbows and the short-corners are less important as shooting spots {\color{blue}because these regions account for a smaller number of both missed and made shots}.
+		This difference is intuitive, because three-point shots are inherently harder to make. Overall, the elbows and the short-corners are less important as shooting spots because these regions account for a smaller number of both missed and made shots.
 
 The estimated functional components can be understood as characterizing different shooting behaviors. We first note that, except for $\phi_3$, the functional components for missed and made shots are similar.
-	{\color{blue}This suggests that the dominant patterns of player-to-player variation are driven by shot location, regardless of whether the shots are made or missed.}
+	This suggests that the dominant patterns of player-to-player variation are driven by shot location, regardless of whether the shots are made or missed.
 	%{\color{purple}To be rewritten: This suggests that players do not have specific shooting position where the percentage of missed shots significantly exceeds that of made shots.}
 	%{\color{purple}\textbf{I think this is incorrect because these densities are normalized: The first component, explains $67.9\%$ of the total variance, contrasts players based on their overall shooting frequency relative to the average NBA player.} A player with a positive score $c_1$ for $\phi_1$ will {\color{blue} shoot} more frequently, both successfully and unsuccessfully, than average. These effects are concentrated in the high-density areas of the court such as the paint and beyond the arc (i.e., $\phi_1$ has a similar shape to the mean function). Conversely, a negative score corresponds to players who shoot less frequently than the average, with effects concentrated in these same regions.}
-	{\color{blue}The first component explains $67.9\%$ of the total variance and is similar in shape to the mean densities because it assigns higher positive density values to the areas under the paint and around the outside of the perimeter arc.
+	The first component explains $67.9\%$ of the total variance and is similar in shape to the mean densities because it assigns higher positive density values to the areas under the paint and around the outside of the perimeter arc.
 		Although the average player tends to have a large proportion of their made and missed shots from this area, players with a positive score $c_1$ tend to make and miss even more of their shots than average from these regions.
         In contrast, players with a negative score $c_1$ have a smaller-than-average proportion of their made and missed shots taken from these ``typical" shooting regions.
 		In addition, for the missed shots, there is a small, compact blue area, appearing as a small dot, in the location directly under the basket.
-		This means that players with a positive score $c_1$ have fewer of their missed shots from this location.}
+		This means that players with a positive score $c_1$ have fewer of their missed shots from this location.
 The second component, explaining $8.5\%$ of the total variance, highlights a contrast between shooting inside and outside the three-point line.
 Players with a positive score $c_2$ for $\phi_2$ prefer to shoot closer to the basket, while those with negative scores prefer long-range shots.
-	{\color{blue}The third component (explaining $6.1\%$ of the total variance) contrasts players that shoot in the paint and the others, while also capturing some variation in missed shots from the corners.
+	The third component (explaining $6.1\%$ of the total variance) contrasts players that shoot in the paint and the others, while also capturing some variation in missed shots from the corners.
 		For made shots, positive scores $c_3$ are associated with frequent attempts and successes in the paint and fewer made shots from further out.
 		For missed shots, positive scores $c_3$ also indicate frequent attempts and misses from around the paint, but interestingly also capture high proportions of missed shots from the corners, indicated by the two red regions on either side.
-		This pattern indicates that these players who tend to take a large number of their shots (both made and missed) from inside the paint also tend to take shots from the corners but are generally unsuccessful (i.e., we see the high densities in the corners for the missed shots but not the made shots).}
+		This pattern indicates that these players who tend to take a large number of their shots (both made and missed) from inside the paint also tend to take shots from the corners but are generally unsuccessful (i.e., we see the high densities in the corners for the missed shots but not the made shots).
 	%{\color{purple}The fourth component (explaining $4.0\%$ of the total variance) captures differences between shooting from the wings and shooting along the axis of the hoop. Players with positive (resp. negative) score will shot in the axis of the hoop (resp. from the wing).}
-	{\color{blue}Finally, the fourth component accounts for $4.0\%$ of the total variance and characterizes differences in shooting centrally (in the paint and along the central portion of the three-point arc) and shooting from the wings.
+	Finally, the fourth component accounts for $4.0\%$ of the total variance and characterizes differences in shooting centrally (in the paint and along the central portion of the three-point arc) and shooting from the wings.
 		Players with a positive (negative) score $c_4$ tend to make and miss more of their shots from central regions of the court, and fewer of their shots from the wings.
-	}
+%\begin{figure}
+%	\centering
+%	\includegraphics[scale=0.35]{figures/mean.pdf}
+%	\includegraphics[scale=0.35]{figures/eigenfunction_1.pdf}
+%	\includegraphics[scale=0.35]{figures/eigenfunction_2.pdf}
+%	\includegraphics[scale=0.35]{figures/eigenfunction_3.pdf}
+%	\includegraphics[scale=0.35]{figures/eigenfunction_4.pdf}
+%	\\
+%	\includegraphics[scale=0.35]{figures/colorbar2.pdf}
+%	\caption{Estimates of the mean surface and the eigenfunctions of the shots density charts. The eigenfunctions represent deviations from the mean surface and are defined up to a sign, making their values at specific points not directly interpretable as densities. Note that the mean surface and eigenfunctions have been normalized to be between $-1$ and $1$ for presentation purposes.}
+%	\label{fig:mean_eigenfunctions}
+%\end{figure}
+
 \begin{figure}
 	\centering
-	\includegraphics[scale=0.35]{figures/mean.pdf}
-	\includegraphics[scale=0.35]{figures/eigenfunction_1.pdf}
-	\includegraphics[scale=0.35]{figures/eigenfunction_2.pdf}
-	\includegraphics[scale=0.35]{figures/eigenfunction_3.pdf}
-	\includegraphics[scale=0.35]{figures/eigenfunction_4.pdf}
+	\includegraphics[scale=0.35]{figures/mean_normalized.pdf}
+	\includegraphics[scale=0.35]{figures/eigenfunction_1_normalized.pdf}
+	\includegraphics[scale=0.35]{figures/eigenfunction_2_normalized.pdf}
+	\includegraphics[scale=0.35]{figures/eigenfunction_3_normalized.pdf}
+	\includegraphics[scale=0.35]{figures/eigenfunction_4_normalized.pdf}
 	\\
 	\includegraphics[scale=0.35]{figures/colorbar2.pdf}
-	\caption{Estimates of the mean surface and the eigenfunctions of the shots density charts. The eigenfunctions represent deviations from the mean surface and are defined up to a sign, making their values at specific points not directly interpretable as densities. Note that the mean surface and eigenfunctions have been normalized to be between $-1$ and $1$ for presentation purposes.}
+  \caption{Estimates of the mean surface and the eigenfunctions of the shots density charts. The eigenfunctions represent deviations from the mean surface and are defined up to a sign, making their values at specific points not directly interpretable as densities. Note that the mean surface and eigenfunctions have been normalized to be between $-1$ and $1$ for presentation purposes. {\color{blue} The normalization is applied to the combined functions across made and missed shots.}}
 	\label{fig:mean_eigenfunctions}
 \end{figure}
 
 As an example, Figure~\ref{fig:examples_players} illustrates the decomposition of Stephen Curry's density shot chart. Curry shoots more frequently than the average player, as indicated by his positive coefficient $c_1$, reflecting a higher number of both missed and made shots compared to the average player. His second coefficient $c_2$ is negative and close to zero, suggesting only a slight preference for shooting beyond the three-point line. The small negative value of his third coefficient $c_3$ indicates shooting behavior close to the average for this component. However, Curry prefers to shoot in the axis of the basket (fourth coefficient $c_4$ is positive) compared to the other players.
+%\begin{figure}
+%	\centering
+%	\includegraphics[scale=0.295]{figures/curry_reconstruction.pdf}
+%	\includegraphics[scale=0.295]{figures/mean.pdf}
+%	\includegraphics[scale=0.295]{figures/curry_eigenfunction_1.pdf}
+%	\includegraphics[scale=0.295]{figures/curry_eigenfunction_2.pdf}
+%	\includegraphics[scale=0.295]{figures/curry_eigenfunction_3.pdf}
+%	\includegraphics[scale=0.295]{figures/curry_eigenfunction_4.pdf}
+%	\\
+%	\includegraphics[scale=0.35]{figures/colorbar2.pdf}
+%	\caption{Decomposition of Stephen Curry's shot chart densities into the eigenfunctions basis.}
+%	\label{fig:examples_players}
+%\end{figure}
+
 \begin{figure}
 	\centering
-	\includegraphics[scale=0.295]{figures/curry_reconstruction.pdf}
-	\includegraphics[scale=0.295]{figures/mean.pdf}
-	\includegraphics[scale=0.295]{figures/curry_eigenfunction_1.pdf}
-	\includegraphics[scale=0.295]{figures/curry_eigenfunction_2.pdf}
-	\includegraphics[scale=0.295]{figures/curry_eigenfunction_3.pdf}
-	\includegraphics[scale=0.295]{figures/curry_eigenfunction_4.pdf}
+	\includegraphics[scale=0.295]{figures/curry_reconstruction_normalized.pdf}
+	\includegraphics[scale=0.295]{figures/mean_normalized.pdf}
+	\includegraphics[scale=0.295]{figures/curry_eigenfunction_1-normalized.pdf}
+	\includegraphics[scale=0.295]{figures/curry_eigenfunction_2-normalized.pdf}
+	\includegraphics[scale=0.295]{figures/curry_eigenfunction_3-normalized.pdf}
+	\includegraphics[scale=0.295]{figures/curry_eigenfunction_4-normalized.pdf}
 	\\
 	\includegraphics[scale=0.35]{figures/colorbar2.pdf}
-	\caption{Decomposition of Stephen Curry's shot chart densities into the eigenfunctions basis.}
+  \caption{Decomposition of Stephen Curry's shot chart densities into the eigenfunctions basis. {\color{blue} The normalization is applied to the combined functions across made and missed shots.}}
 	\label{fig:examples_players}
 \end{figure}
 
-Figure~\ref{fig:clusters} presents the estimated scores $c_k$ from~\eqref{eq:kl_decomp} colored by the NBA-defined playing positions. One representative player from each position is highlighted (same as Figures~\ref{fig:examples_shooting_charts} and~\ref{fig:examples_players}). Notably, the scores do not separate players by position. From Figure~\ref{fig:clusters}, it can be seen that some players exhibit scores (coefficients) that substantially differ from the general distribution. For example, for the second eigenfunction, Chris Paul (with a large coefficient) and Duncan Robinson (with a large negative coefficient) may be {\color{blue}designated} as outliers. Similarly, for the third eigenfunction, Chris Paul has a large negative coefficient. Although a positive $c_2$ typically indicates a preference for shooting near the basket and a negative $c_3$ suggests a preference for shooting beyond the three-point line, Chris Paul's scoring pattern appears contradictory. This inconsistency arises because Chris Paul's most common shooting position is the high post, located between the three-point line and the painted area. In this case, the eigenfunctions compensate for one another to capture his shooting style, which is relatively rare in the modern NBA. Finally, for the fourth eigenfunction, Reggie Bullock Jr. has a large negative coefficient, indicating a strong preference for shooting from the wings and corners.
+Figure~\ref{fig:clusters} presents the estimated scores $c_k$ from~\eqref{eq:kl_decomp} colored by the NBA-defined playing positions. One representative player from each position is highlighted (same as Figures~\ref{fig:examples_shooting_charts} and~\ref{fig:examples_players}). Notably, the scores do not separate players by position. From Figure~\ref{fig:clusters}, it can be seen that some players exhibit scores (coefficients) that substantially differ from the general distribution. For example, for the second eigenfunction, Chris Paul (with a large coefficient) and Duncan Robinson (with a large negative coefficient) may be designated as outliers. Similarly, for the third eigenfunction, Chris Paul has a large negative coefficient. Although a positive $c_2$ typically indicates a preference for shooting near the basket and a negative $c_3$ suggests a preference for shooting beyond the three-point line, Chris Paul's scoring pattern appears contradictory. This inconsistency arises because Chris Paul's most common shooting position is the high post, located between the three-point line and the painted area. In this case, the eigenfunctions compensate for one another to capture his shooting style, which is relatively rare in the modern NBA. Finally, for the fourth eigenfunction, Reggie Bullock Jr. has a large negative coefficient, indicating a strong preference for shooting from the wings and corners.
 \begin{figure}
 	\centering
 	\includegraphics[scale=0.95]{figures/scores_1.pdf}
@@ -249,7 +286,7 @@ Figure~\ref{fig:clusters} presents the estimated scores $c_k$ from~\eqref{eq:kl_
 	\includegraphics[scale=0.95]{figures/scores_3.pdf}
 	\includegraphics[scale=0.95]{figures/scores_4.pdf}
 	\includegraphics[scale=0.95]{figures/legend.pdf}
-	\caption{Scatter plots of the player-specific basis coefficients (scores) colored using the NBA defined typology of players. We highlighted one player per position. The scores have been standardized and jittered on the y-axis for visualization purposes. \textcolor{blue}{The first component discriminates players by their overall shooting volume, with positive scores indicating a higher-than-average number of shots. The second component contrasts between two-pointers and three-pointers, with positive scores associated with shots near the basket. The third component differentiates players that shots in the paint, combined with frequent missed shots from the corners and associated to positive scores, and the others. The fourth component contrasts between centrally located shooting and wing-area shooting, with positive scores indicating more central shooting.}}
+	\caption{Scatter plots of the player-specific basis coefficients (scores) colored using the NBA defined typology of players. We highlighted one player per position. The scores have been standardized and jittered on the y-axis for visualization purposes. The first component discriminates players by their overall shooting volume, with positive scores indicating a higher-than-average number of shots. The second component contrasts between two-pointers and three-pointers, with positive scores associated with shots near the basket. The third component differentiates players that shots in the paint, combined with frequent missed shots from the corners and associated to positive scores, and the others. The fourth component contrasts between centrally located shooting and wing-area shooting, with positive scores indicating more central shooting.}
 	\label{fig:clusters}
 \end{figure}
 
@@ -258,32 +295,52 @@ Figure~\ref{fig:clusters} presents the estimated scores $c_k$ from~\eqref{eq:kl_
 \subsection{Clustering} % (fold)
 \label{sub:clustering}
 The $k$-medoids algorithm was applied to the coefficients plotted in Figure~\ref{fig:clusters}, grouping players into five clusters using a Euclidean distance and different weighting schemes for the components. The choice of five clusters aligns with the number of players on the court for each team. Detailed clustering results, including player names and decomposition in eigenfunctions basis, are provided in Appendix~\ref{sec:clustering_results}. Figure~\ref{fig:average_cluster_no_weight} presents the medoids for each cluster when the components are weighted equally. The medoid, as the central observation in a cluster, represents the most representative player within that cluster. The decompositions of these representative players are given in Figure~\ref{fig:cluster_no_weight} in the Appendix. The clustering results can be interpreted based on shooting tendencies. Cluster $1$ groups high-volume perimeter shooters. Cluster $2$ includes players who primarily shoot from the center axis of the basket (represented by ), while players in Cluster $3$ predominantly score from the corners. Clusters $4$ and $5$ are similar, comprising players who primarily score in the paint but also attempt shots from beyond the three-point line, albeit with limited success.
+%\begin{figure}
+%	\centering
+%	\includegraphics[scale=0.35]{figures/average_player_1.pdf}
+%	\includegraphics[scale=0.35]{figures/average_player_2.pdf}
+%	\includegraphics[scale=0.35]{figures/average_player_3.pdf}
+%	\includegraphics[scale=0.35]{figures/average_player_4.pdf}
+%	\includegraphics[scale=0.35]{figures/average_player_5.pdf}
+%	\caption{Most representative player of each cluster according to the $k$-medoids algorithm using a Euclidean distance with equal weights for each component.}
+%	\label{fig:average_cluster_no_weight}
+%\end{figure}
+
 \begin{figure}
 	\centering
-	\includegraphics[scale=0.35]{figures/average_player_1.pdf}
-	\includegraphics[scale=0.35]{figures/average_player_2.pdf}
-	\includegraphics[scale=0.35]{figures/average_player_3.pdf}
-	\includegraphics[scale=0.35]{figures/average_player_4.pdf}
-	\includegraphics[scale=0.35]{figures/average_player_5.pdf}
+  \includegraphics[scale=0.35]{figures/kmedoids_average_player_1-normalized.pdf}
+	\includegraphics[scale=0.35]{figures/kmedoids_average_player_2-normalized.pdf}
+	\includegraphics[scale=0.35]{figures/kmedoids_average_player_3-normalized.pdf}
+	\includegraphics[scale=0.35]{figures/kmedoids_average_player_4-normalized.pdf}
+	\includegraphics[scale=0.35]{figures/kmedoids_average_player_5-normalized.pdf}
 	\caption{Most representative player of each cluster according to the $k$-medoids algorithm using a Euclidean distance with equal weights for each component.}
 	\label{fig:average_cluster_no_weight}
 \end{figure}
 
-
 Figure~\ref{fig:average_cluster_weight} presents the cluster medoids for the results obtained with components weighted using the percentage of variance they explain. Since the first component accounts for approximately $70\%$ of the total variance, the clusters are primarily driven by the first score $c_1$, reflecting the overall shooting frequency of the players. The clusters span a spectrum of shooting behaviors, from players who predominantly score in the paint (Cluster $3$) to those who are prolific three-point shooters (Cluster $4$). This effect is also evident in the decomposition shown in Figure~\ref{fig:cluster_weight} in the Appendix. The clusters can be ranked relative to the average player’s shooting tendencies. Compared to the average player, Cluster $1$ players shoot more frequently in the paint and attempt fewer three-pointers. Players in Cluster $2$ shoot slightly less than the average player, while those in Cluster $3$ align  with the average. Cluster $4$ comprises players who shoot slightly more than average, and Cluster $5$ players favor three-pointers significantly more.
+%begin{figure}
+% \centering
+% \includegraphics[scale=0.35]{figures/average_player_1_weighted.pdf}
+% \includegraphics[scale=0.35]{figures/average_player_2_weighted.pdf}
+% \includegraphics[scale=0.35]{figures/average_player_3_weighted.pdf}
+% \includegraphics[scale=0.35]{figures/average_player_4_weighted.pdf}
+% \includegraphics[scale=0.35]{figures/average_player_5_weighted.pdf}
+% \caption{Most representative player from each cluster according to the $k$-medoids algorithm using a Euclidean distance with weights defined using the percentage of variance explained by each component.}
+% \label{fig:average_cluster_weight}
+%end{figure}
+
 \begin{figure}
 	\centering
-	\includegraphics[scale=0.35]{figures/average_player_1_weighted.pdf}
-	\includegraphics[scale=0.35]{figures/average_player_2_weighted.pdf}
-	\includegraphics[scale=0.35]{figures/average_player_3_weighted.pdf}
-	\includegraphics[scale=0.35]{figures/average_player_4_weighted.pdf}
-	\includegraphics[scale=0.35]{figures/average_player_5_weighted.pdf}
+	\includegraphics[scale=0.35]{figures/kmedoids_average_player_1_weighted-normalized.pdf}
+	\includegraphics[scale=0.35]{figures/kmedoids_average_player_2_weighted-normalized.pdf}
+	\includegraphics[scale=0.35]{figures/kmedoids_average_player_3_weighted-normalized.pdf}
+	\includegraphics[scale=0.35]{figures/kmedoids_average_player_4_weighted-normalized.pdf}
+	\includegraphics[scale=0.35]{figures/kmedoids_average_player_5_weighted-normalized.pdf}
 	\caption{Most representative player from each cluster according to the $k$-medoids algorithm using a Euclidean distance with weights defined using the percentage of variance explained by each component.}
 	\label{fig:average_cluster_weight}
 \end{figure}
 
-
-Figure~\ref{fig:confusion_mat} presents the confusion matrices between the NBA-defined typology and the two clustering approaches we present. \textcolor{blue}{The NBA clusters are based on the usual player classification. Overall, there is minimal agreement between the NBA clusters and the $k$-medoids clusters, whether weights are equal or based on the percentage of variance explained. The Adjusted Rand Index (ARI, \cite{hubertComparingPartitions1985}) between the NBA clusters and the $k$-medoids clusters with equal weights is $0.05$ and between the NBA clusters and the $k$-medoids clusters with variance weights is $0.04$. This is expected as NBA clusters are declarative and not data-based. The only exception is the NBA-defined `center' category, which aligns with the cluster $1$ in the $k$-medoids results when weighted by the variance explained. Cluster $1$ of the weighted $k$-medoids contains players that shoot mostly under the basket, which is coherent with the usual scoring position of centers. Furthermore, there is little agreement between the two $k$-medoids clustering methods themselves. The ARI is equal to $0.1$. The Silhouette coefficient \citep{rousseeuwSilhouettesGraphicalAid1987} for the $k$-medoids with equal weights is equal to $0.04$, while the Silhouette coefficient for the $k$-medoids with variance weights is equal to $0.4$. We also computed the Silhouette coefficient of the NBA clustering using the distance matrix used for the $k$-medoids with equal weights ($-0.05$) and using the distance matrix used for the $k$-medoids with variance weights ($-0.1$).}
+Figure~\ref{fig:confusion_mat} presents the confusion matrices between the NBA-defined typology and the two clustering approaches we present. The NBA clusters are based on the usual player classification. Overall, there is minimal agreement between the NBA clusters and the $k$-medoids clusters, whether weights are equal or based on the percentage of variance explained. The Adjusted Rand Index (ARI, \cite{hubertComparingPartitions1985}) between the NBA clusters and the $k$-medoids clusters with equal weights is $0.05$ and between the NBA clusters and the $k$-medoids clusters with variance weights is $0.04$. This is expected as NBA clusters are declarative and not data-based. The only exception is the NBA-defined `center' category, which aligns with the cluster $1$ in the $k$-medoids results when weighted by the variance explained. Cluster $1$ of the weighted $k$-medoids contains players that shoot mostly under the basket, which is coherent with the usual scoring position of centers. Furthermore, there is little agreement between the two $k$-medoids clustering methods themselves. The ARI is equal to $0.1$. The Silhouette coefficient \citep{rousseeuwSilhouettesGraphicalAid1987} for the $k$-medoids with equal weights is equal to $0.04$, while the Silhouette coefficient for the $k$-medoids with variance weights is equal to $0.4$. We also computed the Silhouette coefficient of the NBA clustering using the distance matrix used for the $k$-medoids with equal weights ($-0.05$) and using the distance matrix used for the $k$-medoids with variance weights ($-0.1$).
 
 \begin{figure}
 	\centering
@@ -327,9 +384,9 @@ For example, temporal biomechanical data are now being measured by motion-tracki
 Our modeling framework could also be applied to positional data in other sports, for example, to characterize a soccer player's ``natural position'' or a boxer's ``fighting style''.
 
 Finally, some limitations of the proposed modelling framework are as follows.
-	{\color{blue}We employed standard FPCA which assumes that observations are realizations from an unconstrained space of functions.
-		However, densities are constrained because they must be non-negative and integrate to $1$. Reconstructions from standard FPCA do not necessarily satisfy the non-negativity constraint so specialized methods have been developed \citep{petersenFunctionalDataAnalysis2016}. However, these are for the univariate case. Rather than develop or extend these methodological approaches to the bivariate case, we apply the more tractable, standard FPCA approach while acknowledging its limitations. If required, reconstructions that lie outside the space of densities can be projected back into the density space.}
-	{\color{blue}Secondly, this work focused on characterising the spatial patterns of made or missed shots. The normalization in the density estimation step, performed separately for the made and missed shots, inherently removes information about total shot volume or shooting efficiency (e.g., percentage chance of success). Future work could include an overall measure of shot volume or shooting efficiency to improve the characterization of players' behaviors.}
+	We employed standard FPCA which assumes that observations are realizations from an unconstrained space of functions.
+		However, densities are constrained because they must be non-negative and integrate to $1$. Reconstructions from standard FPCA do not necessarily satisfy the non-negativity constraint so specialized methods have been developed \citep{petersenFunctionalDataAnalysis2016}. However, these are for the univariate case. Rather than develop or extend these methodological approaches to the bivariate case, we apply the more tractable, standard FPCA approach while acknowledging its limitations. If required, reconstructions that lie outside the space of densities can be projected back into the density space.
+	Secondly, this work focused on characterising the spatial patterns of made or missed shots. The normalization in the density estimation step, performed separately for the made and missed shots, inherently removes information about total shot volume or shooting efficiency (e.g., percentage chance of success). Future work could include an overall measure of shot volume or shooting efficiency to improve the characterization of players' behaviors.
 
 
 
@@ -345,7 +402,7 @@ Finally, some limitations of the proposed modelling framework are as follows.
 \section{Court description} % (fold)
 \label{sec:description}
 
-\textcolor{blue}{Here, we present a description of the spatial regions of the basketball court referenced throughout the main text. These regions correspond to functionally important areas of play. Figure~\ref{fig:court_desc} presents the important locations on the offensive half-court. The basket is located at the center of the baseline, with the low-post regions surrounding it on both the left and right sides. Above these areas, the high-post zones are located near the free-throw line. The three-point line is the line that separates the two-point area from the three-point area, i.e, any shot made beyond this line counts as three point. The zone located between the free-throw line and the three-point line is commonly referred to as the top of the key. The corners of the court are divided into short-corner zones, that are closer to the basket, and corner three-point zones along the baseline. Finally, the wing areas are located on the side of the court between the sidelines and the extension of the free-throw line.}
+Here, we present a description of the spatial regions of the basketball court referenced throughout the main text. These regions correspond to functionally important areas of play. Figure~\ref{fig:court_desc} presents the important locations on the offensive half-court. The basket is located at the center of the baseline, with the low-post regions surrounding it on both the left and right sides. Above these areas, the high-post zones are located near the free-throw line. The three-point line is the line that separates the two-point area from the three-point area, i.e, any shot made beyond this line counts as three point. The zone located between the free-throw line and the three-point line is commonly referred to as the top of the key. The corners of the court are divided into short-corner zones, that are closer to the basket, and corner three-point zones along the baseline. Finally, the wing areas are located on the side of the court between the sidelines and the extension of the free-throw line.
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.75\textwidth]{figures/court_description.pdf}
@@ -358,7 +415,7 @@ Finally, some limitations of the proposed modelling framework are as follows.
 \section{Bootstrap results} % (fold)
 \label{sec:bootstrap_results}
 
-\textcolor{blue}{As a sensitivity check, we performed the following exercise:
+As a sensitivity check, we performed the following exercise:
 	\begin{itemize}
 		\item Construct $5$ bootstrap samples.
 		\item For each bootstrap sample, compute the MFPCA.
@@ -366,7 +423,7 @@ Finally, some limitations of the proposed modelling framework are as follows.
 	\end{itemize}
 	The shapes of the resulting mean functions and the first two principal components are very consistent.
 	There is slight sample-to-sample variability for the third component.
-	This result is intuitive. The mean and leading components, explaining the most variability, represent the most common modes of variation in the data and hence are more stable from sample to sample. Overall, this simple sensitivity check indicates that the prominent modes of variation are stable.}
+	This result is intuitive. The mean and leading components, explaining the most variability, represent the most common modes of variation in the data and hence are more stable from sample to sample. Overall, this simple sensitivity check indicates that the prominent modes of variation are stable.
 
 \begin{figure}
 	\centering
@@ -587,7 +644,7 @@ Second, we present in which cluster each of the $173$ players belong when we ass
 		\includegraphics[scale=0.2]{figures/kmedoids_weighted_5_eigenfunction_4.pdf}
 		\caption{Cluster 5}
 	\end{subfigure}
-	\caption{\textcolor{blue}{MFPCA decompositions from the clustering using variance weights for each component.}}
+	\caption{MFPCA decompositions from the clustering using variance weights for each component.}
 	\label{fig:cluster_weight}
 \end{figure}
 
