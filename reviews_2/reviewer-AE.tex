@@ -7,7 +7,7 @@ In addition, the authors should consider the following points.
 }
 
 \reply{
-	We thank the associate editor for the careful consideration of our manuscript. We have addressed their points and those of the two reviewers and greatly improved the manuscript as a result. Our responses are presented in a point-by-point fashion below.
+	We thank the associate editor for the careful consideration of our manuscript. We have addressed their points and those of the two reviewers and improved the manuscript as a result. Our responses are presented in a point-by-point fashion below.
 }
 
 \comment{
@@ -29,42 +29,44 @@ reported.
 }
 
 \reply{
+  We agree with this comment. The separate normalization of each panel is useful for visualizing spatial patterns, but hides the relative magnitude of the made-shot and missed-shot components. We have therefore change the visualization. The normalization is now applied jointly to the made-shot and missed-shot surfaces within each principal components. More precisely, for each column of the figures, we computed the maximum value of the densities and divided the made-shot and missed-shot densities by this value.We do not see much difference with the previous version, indicating that the load of each eigenfunction onto made and missed shots is balanced.
 
+  \textcolor{blue}{I am not sure to understand the last sentence of the comment.}
 }
 
 \comment{
-Although the author has argued that lack of consensus in a suitable spatial grid leads
-to subjectivity in previous analyses, there is no apparent justification for the choice of
-a $201 \times 201$, equally spaced grid for the MFPCA. In addition, the density estimation
-induces further subjectivity by choice of a bandwidth. Is there a way to assess sensitivity of the results and interpretations to these choices? It seems the choice is no less
-arbitrary for density representations compared to previous methods.
+Although the author has argued that lack of consensus in a suitable spatial grid leads to subjectivity in previous analyses, there is no apparent justification for the choice of a $201 \times 201$, equally spaced grid for the MFPCA. In addition, the density estimation induces further subjectivity by choice of a bandwidth. Is there a way to assess sensitivity of the results and interpretations to these choices? It seems the choice is no less arbitrary for density representations compared to previous methods.
 }
 
 \reply{
+  The $201 \times 201$ grid is a device used to evaluate smooth density functions and approximate eigenfunctions. Thus, the grid is not used to define regions, impose boundaries or create discrete shooting categories. The considered data are smooth functional dentisities over the offensive half-court. The grid is the resolution at which those smooth functions are representated computationally. The arbitrariness, mentioned in the manuscript, is numerical and not conceptual. At this resolution, the grid is sufficiently dense to represent the smoothed density surfaces while remaining computationally efficient. Increasing the grid resolution would mainly refine the numerical approxmation of the same continuous objects. 
 
+  Regarding the bandwidth, Silverman's rule is a standard bandwidth selection method. \textcolor{blue}{Any idea of what to do, except cross-validation?}
+
+  In our approach, the grid is merely an implementation tool, and the bandwidth is chosen by a standard automatic rule.
+
+  \textcolor{blue}{Should we show different grids? Or different bandwidth? It will be quite long to do so.}
 }
 
 \comment{
-Related to the previous point, it is clear that densities are able to examine patterns
-without the influence of volume. However, how would removing volume information
-prove valuable in making performance-related decisions in terms of coaching, scouting,
-or training, for example? Are there other solutions that could be more eﬀective, such
-as stratifying by volume rather than removing it altogether? Please address this more
-completely in the discussion.
+Related to the previous point, it is clear that densities are able to examine patterns without the influence of volume. However, how would removing volume information prove valuable in making performance-related decisions in terms of coaching, scouting, or training, for example? Are there other solutions that could be more eﬀective, such as stratifying by volume rather than removing it altogether? Please address this more completely in the discussion.
 }
 
 \reply{
+  Our density-based representation is intented to characterize where a player tends to shoot, conditional on the player having taken shots, rather than how often the player shot shoots overall. This is useful in making performance-related decisions when the goal is to compare spatial shooting tendencies independently of playing time, number of games or usage. For exemple, two players with very different total shot counts can still have similar spatial tendencies. Our approach allows this to be detected.
 
+  \textcolor{blue}{We should add something in the discussion.}
+
+  We could add intensity surfaces as a third coordinate in the vector-valued stochastic process. \textcolor{blue}{I am not sure it is a good idea to stratify by volume, because the estimation of the densities depend on the number of shots we have for the player. So, players with less shots will have their densities less accurately estimated. Also, how do we choose the strate?} Alternatively, shot volume could also be included as an additional feature in the clustering step.
 }
 
 \comment{
-The choice of $k= 5$ is clearly not data-driven. What would a true data-driven clustering
-look like? Certainly there are more than 5 shot pattern styles, so what information can
-we really gather from the clustering beyond observing that they clusters with $k= 5$ are
-poorly aligned with player position? Also, although several metrics on the clustering
-are reported (ARI, Silhouette score), the relevance of the values is not discussed or
-their bearing on the reliability and impact of the clustering results.}
+The choice of $k= 5$ is clearly not data-driven. What would a true data-driven clustering look like? Certainly there are more than 5 shot pattern styles, so what information can we really gather from the clustering beyond observing that they clusters with $k= 5$ are poorly aligned with player position? Also, although several metrics on the clustering are reported (ARI, Silhouette score), the relevance of the values is not discussed or their bearing on the reliability and impact of the clustering results.}
 
 \reply{
+  \textcolor{blue}{Why should everything be data-driven? I think it makes sense to have $k=5$...}
 
+  The choice of $k = 5$ is motivated by the comparison with the five NBA defined positions, not by a data-driven cluster-selection criterion. The clustering should be interpreted as an illustrative topology of players and not as evidence that there are exactly five natural shooting styles in the NBA.
+
+  \textcolor{blue}{Here, we'll probably have to add some silhouette plot and return the number of clusters that maximise the silhouette.}
 }
