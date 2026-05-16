@@ -7,7 +7,15 @@ in the main text (or in the appendix).
 }
 
 \reply{
+  We thank the reviewer for the suggestion. In the revised manuscript, we have added a discussion of alternative clustering approaches. We also clarified why the $k$-medoids algorithm was selected for the main analysis. Specifically, the $k$-medoids algorithm has the advantage that each cluster center is an actual player rather than an artificial average point. This makes the resulting clusters easier to interpret in this context, because each cluster can be summarized by a representative player. 
 
+  We have also clarified that the choice of the method is not intrinsic to the proposed framework. The representation provides a general low-dimensional summary of each player's shooting pattern and different clustering algorithms could be used depending on the goal of the analysis. For example, hierarchical clustering is useful when we want to study nested similarities between players; mixture models is useful when a probabilistic assigmnent is desired and density-based method is useful to identify outliers.
+
+  We have added the following sentences to the Discussion section:
+
+\begin{quote}
+\textcolor{blue}{Although, we use the $k$-medoids clustering algorithm in our analysis, the MFPCA representation is not tied to a particular clustering algorithm. ACtually, once each player's shot chart has been summarized by a finite vector of scores, all of the standard clustering algorithms could be applied. For exemple, $k$-means clustering could be used to identify groups around average score profiles, hierarchical clustering could show nested similarities among players, mixture models could provide probabilistic cluster memberships and density-based methods could be use in case of outliers. We use the $k$-medoids algorithm because the center of each cluster is an actual player from the NBA, rather than an artificial mean profile. This provides a direct basketball interpretation of each cluster through its medoid.}
+\end{quote}
 }
 
 \comment{
@@ -33,4 +41,11 @@ role/positional evolution of a player (related to what I described above).
 
 \reply{
 
+  We thank the reviewer for this suggestion. We agree that aggregating shots across multiple seasons, while providing a stable summary, may hide potentially meaningful temporal changes. A similar procedure could be applied after redefining each observational unit from ``player'' to ``player-season''. The resulting MFPCA scores could then be analyzed longitudinally, considering that the observations are not independant. We could then model score trajectories as a function of age or something else. Clustering the player-season scores would also allow players to move between shooting-style groups over time and quantifying role evolution. While being outside the scope of the paper, we added a paragraph in the Discussion section explaining how the proposed method could be extended to account for season-to-season variability.
+
+We have added the following sentences to the Discussion section:
+
+  \begin{quote}
+\textcolor{blue}{We aggregated shooting behavior across the 2018-2019 through 2023-2024 regular season. However, this aggregation may mask meaningful season-to-season changes in shooting behavior, as a player's shot selection can evolve with time due to development, injuries, coaching strategy, etc. A natural extension of our framework would be to perform the analysis at the player-season level rather than at the aggregated player level. In this setting, the MFPCA scores could be used to represents the evolution of shooting-style over time. This could help to quantify the temporal evolution of a player's role, identify players whose shooting patterns change across seasons, and examine whether these changes correspond to team changes, coaching changes or something else. This could also strengthen the comparison between empirical shooting-pattern clusters and conventional NBA positions. We could assign a cluster to each player-season and study the stability of these assignments.}
+  \end{quote}
 }
