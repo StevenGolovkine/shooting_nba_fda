@@ -32,6 +32,19 @@ reported.
   We agree with this comment. The separate normalization of each panel is useful for visualizing spatial patterns, but hides the relative magnitude of the made-shot and missed-shot components. We have therefore change the visualization. The normalization is now applied jointly to the made-shot and missed-shot surfaces within each principal components. More precisely, for each column of the figures, we computed the maximum value of the densities and divided the made-shot and missed-shot densities by this value.We do not see much difference with the previous version, indicating that the load of each eigenfunction onto made and missed shots is balanced.
 
   \textcolor{blue}{I am not sure to understand the last sentence of the comment.}
+  \textcolor{purple}{I believe we do not need to do anything except report the loading. Ramsay and Silverman (2005) do this very simply. If $\boldsymbol{\phi}(t)= (\phi^{(1)}(t), \phi^{(2)}(t))^2$ is a bivariate eigenfunction, then they worked out that an appropriate ``relative contribution" in each dimension was:
+  $$
+  \int_{\mathcal{T}} (\phi^{(1)}(t))^2 \mathrm{d}t \quad \text{and}  \quad
+  \int_{\mathcal{T}} (\phi^{(2)}(t))^2 \mathrm{d}t
+  $$
+  which is already a relative measure since
+  $$
+  \int_{\mathcal{T}} (\phi^{(1)}(t))^2 \mathrm{d}t +
+  \int_{\mathcal{T}} (\phi^{(2)}(t))^2 \mathrm{d}t = 1
+  $$
+  by the orthonormality property. I think all you need would be to display these numbers on the plot.
+  }
+  \textbf{To Discuss -- why do we need to normalize at all?}
 }
 
 \comment{
@@ -39,9 +52,18 @@ Although the author has argued that lack of consensus in a suitable spatial grid
 }
 
 \reply{
-  The $201 \times 201$ grid is a device used to evaluate smooth density functions and approximate eigenfunctions. Thus, the grid is not used to define regions, impose boundaries or create discrete shooting categories. The considered data are smooth functional dentisities over the offensive half-court. The grid is the resolution at which those smooth functions are representated computationally. The arbitrariness, mentioned in the manuscript, is numerical and not conceptual. At this resolution, the grid is sufficiently dense to represent the smoothed density surfaces while remaining computationally efficient. Increasing the grid resolution would mainly refine the numerical approxmation of the same continuous objects. 
+  The $201 \times 201$ grid is a device used to evaluate smooth density functions and approximate eigenfunctions. Thus, the grid is not used to define regions, impose boundaries or create discrete shooting categories. The considered data are smooth functional densities over the offensive half-court. 
+  {\color{purple}The chosen grid is sufficiently fine such that any discretization error is negligible in the context of our statistical analysis.}
 
-  Regarding the bandwidth, Silverman's rule is a standard bandwidth selection method. \textcolor{blue}{Any idea of what to do, except cross-validation?}
+  {\color{purple}I would reduce/ remove below, and yes do a sensitivity to Grid size but just in calculating the PCs.}
+  The grid is the resolution at which those smooth functions are representative computationally. The arbitrariness, mentioned in the manuscript, is numerical and not conceptual. At this resolution, the grid is sufficiently dense to represent the smoothed density surfaces while remaining computationally efficient. Increasing the grid resolution would mainly refine the numerical approximation of the same continuous objects. 
+
+  {\color{purple}Regarding the bandwidth, Silverman's rule is a standard, well-established and regularly-used bandwidth selection method.
+  It is theoretically grounded and avoids the computational expense of re-smoothing a number of times as is required in resampling approaches (e.g., cross-validation)}
+  
+  
+  \textcolor{blue}{Any idea of what to do, except cross-validation?}
+  {\color{purple}I would do a MINIMAL sensitivity -- maybe a couple of observations via CV, and just trial one larger grid for FPCA and show results are near identical}
 
   In our approach, the grid is merely an implementation tool, and the bandwidth is chosen by a standard automatic rule.
 
@@ -53,7 +75,8 @@ Related to the previous point, it is clear that densities are able to examine pa
 }
 
 \reply{
-  Our density-based representation is intented to characterize where a player tends to shoot, conditional on the player having taken shots, rather than how often the player shot shoots overall. This is useful in making performance-related decisions when the goal is to compare spatial shooting tendencies independently of playing time, number of games or usage. For exemple, two players with very different total shot counts can still have similar spatial tendencies. Our approach allows this to be detected.
+{\color{purple}\textbf{Ed To Do}: Double check and either reference discussion or add part.}
+  Our density-based representation is intended to characterize where a player tends to shoot, conditional on the player having taken shots, rather than how often the player shot shoots overall. This is useful in making performance-related decisions when the goal is to compare spatial shooting tendencies independently of playing time, number of games or usage. For example, two players with very different total shot counts can still have similar spatial tendencies. Our approach allows this to be detected.
 
   \textcolor{blue}{We should add something in the discussion.}
 
@@ -65,8 +88,17 @@ The choice of $k= 5$ is clearly not data-driven. What would a true data-driven c
 
 \reply{
   \textcolor{blue}{Why should everything be data-driven? I think it makes sense to have $k=5$...}
+  {\color{purple}I agree..}
 
-  The choice of $k = 5$ is motivated by the comparison with the five NBA defined positions, not by a data-driven cluster-selection criterion. The clustering should be interpreted as an illustrative topology of players and not as evidence that there are exactly five natural shooting styles in the NBA.
+  The choice of $k = 5$ is motivated by the comparison with the five NBA defined positions, not by a data-driven cluster-selection criterion.
+  {\color{purple}Generally, it is accepted that the five players on the NBA court occupy five distinct positions. We use this knowledge to constrain our problem which facilitates a comparison of our five-class, data-driven taxonomy with the conventional five-class NBA typology.
+  While our methodology itself is empirical and data driven, the five-cluster constraint is informed by sport-specific knowledge, which we see as a benefit in practical data analysis settings.
+  That being said, we now provide a sensitivity analysis to the number of clusters in the revised supplement...
+  }
+  
+  
+  The clustering should be interpreted as an illustrative topology of players and not as evidence that there are exactly five natural shooting styles in the NBA.
 
   \textcolor{blue}{Here, we'll probably have to add some silhouette plot and return the number of clusters that maximise the silhouette.}
+  {\color{purple}I think so, just to appease reviewer!}
 }
