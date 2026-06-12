@@ -33,3 +33,9 @@ code/__pycache__/*.pyc
 # Data
 *.pkl
 *.pickle
+
+# Others
+*.zip 
+main.pdf
+journal-article.pdf
+
