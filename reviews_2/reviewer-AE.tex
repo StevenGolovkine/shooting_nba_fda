@@ -29,22 +29,12 @@ reported.
 }
 
 \reply{
-  We agree with this comment. The separate normalization of each panel is useful for visualizing spatial patterns, but hides the relative magnitude of the made-shot and missed-shot components. We have therefore change the visualization. The normalization is now applied jointly to the made-shot and missed-shot surfaces within each principal components. More precisely, for each column of the figures, we computed the maximum value of the densities and divided the made-shot and missed-shot densities by this value.We do not see much difference with the previous version, indicating that the load of each eigenfunction onto made and missed shots is balanced.
+  We agree with this comment. The separate normalization of each panel is useful for visualizing spatial patterns, but hides the relative magnitude of the made-shot and missed-shot components. We have therefore change the visualization. The normalization is now applied jointly to the made-shot and missed-shot surfaces within each principal components. More precisely, for each column of the figures, we computed the maximum value of the densities and divided the made-shot and missed-shot densities by this value. We do not see much difference with the previous version, indicating that the load of each eigenfunction onto made and missed shots is balanced.
 
-  \textcolor{blue}{I am not sure to understand the last sentence of the comment.}
-  \textcolor{purple}{I believe we do not need to do anything except report the loading. Ramsay and Silverman (2005) do this very simply. If $\boldsymbol{\phi}(t)= (\phi^{(1)}(t), \phi^{(2)}(t))^2$ is a bivariate eigenfunction, then they worked out that an appropriate ``relative contribution" in each dimension was:
-  $$
-  \int_{\mathcal{T}} (\phi^{(1)}(t))^2 \mathrm{d}t \quad \text{and}  \quad
-  \int_{\mathcal{T}} (\phi^{(2)}(t))^2 \mathrm{d}t
-  $$
-  which is already a relative measure since
-  $$
-  \int_{\mathcal{T}} (\phi^{(1)}(t))^2 \mathrm{d}t +
-  \int_{\mathcal{T}} (\phi^{(2)}(t))^2 \mathrm{d}t = 1
-  $$
-  by the orthonormality property. I think all you need would be to display these numbers on the plot.
-  }
-  \textbf{To Discuss -- why do we need to normalize at all?}
+
+Following \cite{ramsayFunctionalDataAnalysis2005}, we reported $\|\phi_{k \text{missed}}\|^2$ and $\|\phi_{k, \text{made}}\|^2$ to show how much each component contributes to the variability explained in made/missed shot. These quantities show the relative contribution in each dimension. This is a relative measure because
+$$ \|\phi_{k,\text{missed}}\|^2 + \|\phi_{k, \text{made}}\|^2 = 1,$$
+by the orthonormality property.
 }
 
 \comment{

@@ -1,47 +1,140 @@
-\section{}
+ \section{}
 
-\comment{The current research is characterizing NBA player shooting behavior using functional data analysis. The authors treat made and missed shot locations as bivariate functional data on the offensive half-court and perform a multivariate functional principal component analysis to extract dominant shooting patterns. Then, using k-medoids clustering on the resulting player-specific scores, they generate a data-driven typology of player shooting styles, questioning the validity of traditional NBA positional labels. Several conceptual and technical issues limit both the novelty and the inferential credibility of the results. I therefore recommend a revision before the paper can be considered for publication.}
+We thank the reviewer for their thorough and detailed comments. Below is our point-by-point reply.
 
-\reply{
-	Thank you for the detailed review of the manuscript. We have addressed each of the concerns point by point below.
+\comment{Abstract
+\begin{itemize}
+\item Overclaims novelty; FDA-based spatial modeling exists and differentiation from prior intensity-surface approaches is insufficiently clarified.
+\item No explicit statement of key methodological limitations (e.g., normalization removing volume/efficiency information).
+\item Practical contribution vs methodological novelty not clearly separated.
+\end{itemize}
 }
 
-\comment{While the paper is intended for a quantitative audience, some statistical steps, especially the MFPCA, are described at a relatively informal level. There is no discussion of convergence or uncertainty in the functional principal components.}
-
 \reply{
-	Given the applied nature of the paper, we have not presented convergence results for MFPCA. However, a full theoretical treatment of the method can be found in \cite{happMultivariateFunctionalPrincipal2018}.
-	While we are primarily concerned with describing the variation in an entire population of NBA players, rather than making inferences using a sample, uncertainty quantification for the MFPCs is not of primary concern either. However, to assess stability/ sensitivity of our approach, we added a simple bootstrap step (see comment $0.6$).
+  \begin{itemize}
+    \item {\color{purple}The paper does not claim to invent FDA, spatial smoothing or basketball shot-chart modelling in general. Rather, it presents a novel application of the FDA approaches in an NBA data analysis setting (i.e., the representation of NBA shot charts as bivariate functional data on a two-dimensional domain). The Introduction section explicitly positions the work within the context of other approaches to statistical modelling in applications of this type.} 
+    \item We address the limitations comprehensively in the Discussion section (with some thought on how they can be addressed going forward). 
+    We believe that it is reasonable for such limitations to appear in the Discussion section rather than in the Abstract.
+    \item \textcolor{blue}{I don't understand the comment.}
+    {\color{purple}\textbf{Ed}: I can add a comment to main text abstract to satisfy this}
+  \end{itemize}
+
 }
 
-\comment{The authors do not evaluate the stability of their clustering. Furthermore, they do not provide external validation (e.g., prediction, test–train splits, comparison with existing clustering approaches). Please consider using metrics such as Adjusted Rand Index or Silhouette scores to assess cluster quality. Alternatively, compare results with simpler clustering methods (e.g., k-means on shooting frequency by location bins) to demonstrate added value.}
-
-\reply{
-	Adjusted Rand Index (ARI) and Silhouette coefficients have been computed. ARI between the NBA clusters and the proposed clusters are close to $0$ but this is expected as we are looking for another typology than usual NBA players. The Silhouette coefficient for the $k$-medoids with equal weights is equal to $0.04$, while the Silhouette coefficient for the $k$-medoids with variance weights is equal to $0.4$. We also computed the Silhouette coefficient of the NBA clustering using the distance matrix used for the $k$-medoids with equal weights ($-0.05$) and using the distance matrix used for the $k$-medoids with variance weights ($-0.1$).
+\comment{Introduction and Background
+\begin{itemize}
+	\item Motivation for density representation vs intensity-based models is weakly justified; discretization critique is not convincing since FDA also requires discretization.
+	\item Limited positioning within modern representation learning or embedding-based player typologies.
+	\item Missing discussion of role-dependent contextual factors (pace, lineup context, possessions, play types).
+	\item Additional reference that could be added to the manuscript is: https://www.mdpi.com/2504-4990/6/3/102 and https://www.mdpi.com/2078-2489/16/8/699
+\end{itemize}
 }
 
-\comment{While contrasting the clusters with NBA-defined positions is informative, the resulting disagreement is not deeply analyzed. Are there specific cases where agreement is worse?}
-
 \reply{
-	We do highlight that there is agreement for the center category:
-	\begin{quote}
-		\emph{``The only exception is the NBA-defined `center' category, which aligns with the cluster $1$ in the $k$-medoids results when weighted by the variance explained."}
-	\end{quote}
-	Since the majority of both clusters and positions (each axis of the confusion matrix) disagree, it is difficult to pinpoint the most disagreement.
+  \begin{itemize}
+    \item Our point is not that numerical evaluation on a grid disappears. Actually, any practical implementation of a continuous model requires numerical evaluation. The distinction is instead about the object that is being modeled. {\color{purple}Yes, this is the key FDA thing -- I am happy to revise this comment.}
+    \item We propose a paper focused on functional representations of shot charts, not a survey of all modern embedding methods for player representation. The Introduction section situates the work in the relevant basketball literatures.  
+    \item We say explicitly that the paper focuses on shooting behaviour. The absence of role-dependent contextual factors is stated in the Discussion section. 
+    \item \textcolor{blue}{We don't see the connection between the proposed articles and ours, except they are talking about basketball. Also, we won't cite predatory journals.}
+  \end{itemize}
 }
 
-\comment{The paper uses a 2D KDE with Gaussian kernel and Silverman’s rule but does not specify whether the bandwidth is optimized globally, per player, or per component.}
-
-\reply{
-	A different bandwidth is considered for each component (missed and made shots chart) of each player. We have added a sentence to the main text to clarify this.
+\comment{
+Methodology
+\begin{itemize}
+	\item Kernel density estimation choices (Gaussian kernel, Silverman bandwidth) insufficiently validated or sensitivity-tested.
+	\item Grid resolution arbitrary without robustness analysis.
+	\item Normalization removes shot volume and efficiency, limiting interpretability of components.
+	\item MFPCA assumptions may violate density constraints (non-negativity, unit integral) — acknowledged but not resolved.
+	\item Choice of $k=5$ clusters driven by court positions rather than data-driven criteria.
+	\item Limited justification for $k$-medoids vs alternative clustering or manifold methods.
+\end{itemize}
 }
 
-\comment{The model jointly treats made and missed shots, but no attention is given to efficiency metrics (i.e., shooting percentage), which are arguably central to evaluating shot quality.}
+\reply{
+  \begin{itemize}
+    \item A Gaussian kernel with Silverman bandwith is a standard default for smooth density estimation. As paper's primary methodological contribution is not a new KDE procedure, we consider the density estimation step as a reasonable preprocessing device.
+    \item Our grid is adjustable, which is the appropriate way to present an implementation parameter. {\color{purple}Ed to add.}
+    \item Our goal is to compare spatial shot patterns across players, not to conflate style with playing time, shot volume, ... We state this explicitly in the paper and that we prefer the normalized representation for fair comparison. Volume and efficiency are important, but they are different objects. 
+    \item We agree with the mathematical point, but we disagree that it undermines the results of the paper. Principal components are deviations from the mean and make take negative values. We explicitly acknowledges the density-constraint issue by citing relevant work, and note that reconstructions can be projected back into density space if required. 
+    \item \textcolor{blue}{OK, what's your point?}
+    \item We do not agree that the choice is under-justified. We gave a practical reason: the $k$-medoids algorithm returns actual players as cluster representatives, which improves interpretability here. This is aligned with the emphasis of the paper on interpretable player typologies.
+  \end{itemize}
+}
+
+\comment{
+Results
+\begin{itemize}
+	\item Interpretation largely descriptive; lacks statistical validation or hypothesis testing.
+	\item Low cluster agreement (ARI = 0.04–0.05) not deeply analyzed — could indicate model inadequacy rather than novel insight.
+	\item Silhouette scores suggest weak cluster structure but implications are under-discussed.
+	\item No external validation (e.g., predictive performance, downstream task).
+\end{itemize}
+}
 
 \reply{
-	We have now added the following to the discussion to acknowledge this point:
-	\begin{quote}
-		\emph{\color{blue}``Secondly, this work focused on characterising the spatial patterns of made or missed shots. The normalization in the density estimation step, performed separately for the made and missed shots, inherently removes information about total shot volume or shooting efficiency (e.g., percentage chance of success). Future work could include an overall measure of shot volume or shooting efficiency to improve the characterization of players' behaviours."}
-	\end{quote}
+  \begin{itemize}
+    \item The paper is exploratory. The goal of MFPCA is to produce interpretable dominant modes of spatial variation, not to test a null hypothesis. The results are not merely narrative: we report the variance explained by each component, ARI values, Silhouette coefficients, cluster compositions and representative medoids.
+    \item \textcolor{blue}{I don't know what to say.} {\color{purple}\textbf{Ed}I am happy to take this comment and expand on it.}
+    \item The equal-weight solution has a low silhouette score, but the variance-weighted solution has a silhouette of $0.4$, which is better than the NBA labellings using the same distance matrices, which are negative. The results show that the apparent structure depends on the weighting scheme, which is itself informative. The manuscript already reports those values. 
+    \item This is not a predictive paper. We are not concerned by that. {\color{purple}Edd to add short point on how we might validate clusters.}
+  \end{itemize}
+}
+
+\comment{
+Discussion
+\begin{itemize}
+	\item Claims of interpretability and practical relevance not empirically demonstrated (e.g., coaching decisions, scouting outcomes).
+	\item Limited comparison against baseline models or alternative representations.
+	\item Absence of multimodal or contextual variables despite acknowledging importance.
+\end{itemize}
+}
+
+\reply{
+  \begin{itemize}
+    \item Interpretability is demonstrated in the way the method is constructed and presented. We do not claim validated front-office performance gains. We claim potential uses, which is appropriate here. {\color{purple}We don't really have the resources or scope to do this... we don't work in a basketball club.}
+    \item We reviewed the main other approaches and explained the differences with ours. We consider that conceptual differentiation with empirical illustration is adequate here.
+    \item The aim of the paper is to build a typology of players based on their shooting behaviour. While it would be interesting to add other variables, it will require to develop another method.
+  \end{itemize}
+}
+
+\comment{
+Conclusion and future work
+\begin{itemize}
+	\item Future work suggestions are broad but not technically grounded (e.g., multimodal integration lacks methodological direction).
+	\item Does not address scalability, computational complexity, or real-time applicability.
+	\item Key methodological limitation (density normalization) insufficiently emphasized.
+\end{itemize}
+}
+
+\reply{
+{\color{red}\textbf{Ed}: Again, I can make these a little more gentle, but to be honest this reviewer is wrong here.}
+  \begin{itemize}
+    \item We do not agree. It is not the purpose of the paper to give methodological direction on how to integrate multi-model data.
+    \item We do not believe real-time applicability is required here. Moreover, we make no such claims. 
+    \item This limitation is acknowledged in the Results section and in the last paragraph of the Discussion section. We also discuss how it can be addressed going forward.
+  \end{itemize}
+}
+
+\comment{
+Technical Writing
+\begin{itemize}
+	\item Some redundancy in explaining FPCA concepts.
+	\item Overly descriptive narrative in results; could benefit from more concise statistical framing.
+	\item Terminology occasionally inconsistent between “shooting frequency,” “density,” and “intensity.”
+	\item Figures interpretation sometimes qualitative rather than quantitative.
+	\item Keywords are not precise and should be in alphabetical order.
+\end{itemize}
+}
+
+\reply{
+  \begin{itemize}
+    \item Some repetition are intentional because the paper sits at the intersection of functional data analysis and sports analytics. Not all readers will be equally comfortable with FDA terminology, so moderate repetition improves accessibility.
+    \item Spatial principal components are inherently geometric objects, and the dominant modes of variation can be read and interpreted on the court.   
+    \item The word ``intensity'' is only used in the Introduction and refer to the intensity surfaces developed in other papers. \textcolor{blue}{The term ``shooting frequency'' appears three times to describe the first components.}
+    \item The figures are intended to make the functional components and cluster medoids interpretable. Interpretable spatial representation are a core of FDA representation.
+    \item The revised keywords, now listed in alphabetical order, are: \emph{Basketball analytics}, \emph{Clustering}, \emph{Functional data analysis}, \emph{Shot charts} and \emph{Shot-density estimation}.
+  \end{itemize}
 }
 
 
