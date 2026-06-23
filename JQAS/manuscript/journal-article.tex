@@ -134,7 +134,7 @@ We model both the locations of successful shots and unsuccessful shots for each 
 
 
 
-The first step in our approach is to convert the raw shot charts into smooth functions suitable for analysis. To achieve this, we use a two-dimensional kernel density estimator with a Gaussian kernel for both missed and made shots. After normalizing the court to the $[0, 1] \times [0, 1]$ range, bandwidth estimation is performed utilizing Silverman's rule \citep{silvermanDensityEstimationStatistics1986} for each component of each player. The density estimation is conducted on a regularly sampled grid of $201 \times 201$ points. We then represent the smoothed densities of missed and made shots for each player as the two features of a bivariate functional observation. Both features are defined on the same two-dimensional rectangular domain and observed over the $201 \times 201$ grid. Note that the choice of the grid resolution is arbitrary and can be adjusted as needed. Figure~\ref{fig:examples_shooting_density} shows the density estimates of the same five players whose shot charts are presented in Figure~\ref{fig:examples_shooting_charts}.
+The first step in our approach is to convert the raw shot charts into smooth functions suitable for analysis. To achieve this, we use a two-dimensional kernel density estimator with a Gaussian kernel for both missed and made shots. After normalizing the court to the $[0, 1] \times [0, 1]$ range, bandwidth estimation is performed utilizing Silverman's rule \citep{silvermanDensityEstimationStatistics1986} for each component of each player. \textcolor{blue}{The bandwidth is set to $n^{-1/6}$ using the Silverman's rule, where $n$ is the number of shots the player has missed or made.} The density estimation is conducted on a regularly sampled grid of $201 \times 201$ points. We then represent the smoothed densities of missed and made shots for each player as the two features of a bivariate functional observation. Both features are defined on the same two-dimensional rectangular domain and observed over the $201 \times 201$ grid. Note that the choice of the grid resolution is arbitrary and can be adjusted as needed. Figure~\ref{fig:examples_shooting_density} shows the density estimates of the same five players whose shot charts are presented in Figure~\ref{fig:examples_shooting_charts}.
 
 After the density estimation, our data consist of independent trajectories of a vector-valued stochastic process $X = (X^{(1)}, X^{(2)})^{\top}$. Let $\mathcal{T} = [0, 1] \times [0, 1]$. The first coordinate $X^{(1)}$ corresponds to the density of missed shots and the second coordinate $X^{(2)}$ corresponds to the density of made shots. Both of them are assumed to belong to $\mathcal{L}^2(\mathcal{T})$, the Hilbert space of square-integrable real-valued functions defined on $\mathcal{T}$ having the usual inner product. Thus, $X$ is a stochastic process indexed by $\mathbf{t} = (t_1, t_2)$ belonging to the $2$-fold Cartesian product $\mathcal{T} \times \mathcal{T}$ and taking values in the $2$-fold Cartesian product space $\mathcal{H} = \mathcal{L}^2(\mathcal{T}) \times \mathcal{L}^2(\mathcal{T})$. In this space, we define the inner product as the sum of the inner products in $\mathcal{L}^2(\mathcal{T})$. Let $\mu: \mathcal{T} \times \mathcal{T} \rightarrow \mathcal{H}$ denote the mean function of the process $X$ and let $C$ denote the matrix-valued covariance function of the process $X$. We can then define the covariance operator of $X$, $\Gamma: \mathcal{H} \rightarrow \mathcal{H}$, as an integral operator with kernel $C$.
 Assuming that the covariance operator $\Gamma$ is a compact positive operator on $\mathcal{H}$ and using the results in \cite{happMultivariateFunctionalPrincipal2018}, there exists a complete orthonormal basis, the eigenfunctions, $\{\phi_k\}_{k \geq 1} \subset \mathcal{H}$ associated to a set of real numbers, the eigenvalues, $\{\lambda_k\}_{k \geq 1}$ that satisfy
@@ -426,7 +426,51 @@ Here, we present a description of the spatial regions of the basketball court re
 
 % section description (end)
 
-\section{Bootstrap results} % (fold)
+\section{Sensitivity analysis}
+
+\subsection{Grid} % (fold)
+\label{sec:grid}
+
+\textcolor{blue}{We conduct a sensitivity check concerning the grid resolution used to evaluate the kernel density estimates and to compute the MFPCA. We repeat the complete estimation procedure using two coarser grids, $51 \times 51$ and $101 \times 101$, and one finer grid, $401 \times 401$. The resulting mean functions and eigenfunctions are shown in Figures~\ref{fig:grid-51}--\ref{fig:grid-401}. Overall, the dominant spatial structures are consistent across the different resolutions. The mean functions and the first eigenfunctions are very similar to those obtained with the $201 \times 201$ grid, indicating that the main conclusions concerning average shooting behavior and the leading mode of variation are not driven by the chosen discretization. The second eigenfunction obtained with the $51 \times 51$ grid is different from the one obtained with the $201 \times 201$ grid. The third and fourth eigenfunctions obtained with the $51 \times 51$ grid are very similar to the second and third eigenfunctions, respectively, obtained with the $201 \times 201$ grid. The results obtained with the $101 \times 101$ grid are very similar to those obtained with the $201 \times 201$ grid, except for the fourth eigenfunction. The results obtained with the $401 \times 401$ grid are nearly indistinguishable from the main analysis, suggesting that the $201 \times 201$ grid provides a sufficiently fine approximation while avoiding unnecessary computational cost. This behavior is expected, as components that explain less variation are more sensitive to numerical approximation errors.}
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.2]{figures/grid-51/mean_normalized_51.pdf}
+	\includegraphics[scale=0.2]{figures/grid-51/eigenfunction_1_normalized_51.pdf}
+	\includegraphics[scale=0.2]{figures/grid-51/eigenfunction_2_normalized_51.pdf}
+	\includegraphics[scale=0.2]{figures/grid-51/eigenfunction_3_normalized_51.pdf}
+	\includegraphics[scale=0.2]{figures/grid-51/eigenfunction_4_normalized_51.pdf}
+	\\
+	\includegraphics[scale=0.35]{figures/colorbar2.pdf}
+	\caption{{\color{blue} Estimation of the eigencomponents using a grid of $51 \times 51$.}}
+	\label{fig:grid-51}
+\end{figure}
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.2]{figures/grid-101/mean_normalized_101.pdf}
+	\includegraphics[scale=0.2]{figures/grid-101/eigenfunction_1_normalized_101.pdf}
+	\includegraphics[scale=0.2]{figures/grid-101/eigenfunction_2_normalized_101.pdf}
+	\includegraphics[scale=0.2]{figures/grid-101/eigenfunction_3_normalized_101.pdf}
+	\includegraphics[scale=0.2]{figures/grid-101/eigenfunction_4_normalized_101.pdf}
+	\\
+	\includegraphics[scale=0.35]{figures/colorbar2.pdf}
+	\caption{{\color{blue} Estimation of the eigencomponents using a grid of $101 \times 101$.}}
+	\label{fig:grid-101}
+\end{figure}
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.2]{figures/grid-401/mean_normalized_401.pdf}
+	\includegraphics[scale=0.2]{figures/grid-401/eigenfunction_1_normalized_401.pdf}
+	\includegraphics[scale=0.2]{figures/grid-401/eigenfunction_2_normalized_401.pdf}
+	\includegraphics[scale=0.2]{figures/grid-401/eigenfunction_3_normalized_401.pdf}
+	\includegraphics[scale=0.2]{figures/grid-401/eigenfunction_4_normalized_401.pdf}
+	\\
+	\includegraphics[scale=0.35]{figures/colorbar2.pdf}
+	\caption{{\color{blue} Estimation of the eigencomponents using a grid of $401 \times 401$.}}
+	\label{fig:grid-401}
+\end{figure}
+
+\subsection{Bootstrap results} % (fold)
 \label{sec:bootstrap_results}
 
 As a sensitivity check, we performed the following exercise:
