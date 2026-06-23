@@ -435,7 +435,8 @@ class ShotCharts:
         ax_mean_2: mpl.axes,
         mfpca: MFPCA,
         title_1: str,
-        title_2: str
+        title_2: str,
+        n_points: int = 201
     ) -> tuple[mpl.axes, mpl.axes]:
         if isinstance(mfpca, MFPCA):
             mean_1 = mfpca.mean.data[0][0].values.squeeze()
@@ -451,7 +452,7 @@ class ShotCharts:
 
         X_MIN, X_MAX = (-250, 250)
         Y_MIN, Y_MAX = (0, 470)
-        XX, YY = np.mgrid[X_MIN:X_MAX:201j, Y_MIN:Y_MAX:201j]
+        XX, YY = np.mgrid[X_MIN:X_MAX:n_points*1j, Y_MIN:Y_MAX:n_points*1j]
 
         midnorm = MidpointNormalize(vmin=-1., vcenter=0, vmax=1)
 
@@ -519,7 +520,8 @@ class ShotCharts:
         mfpca: MFPCA,
         idx: int,
         title_1: str,
-        title_2: str
+        title_2: str,
+        n_points: int = 201
     ) -> tuple[mpl.axes, mpl.axes]:
         if isinstance(mfpca, MFPCA):
             if isinstance(mfpca.eigenfunctions.data[0], BasisFunctionalData):
@@ -545,7 +547,7 @@ class ShotCharts:
 
         X_MIN, X_MAX = (-250, 250)
         Y_MIN, Y_MAX = (0, 470)
-        XX, YY = np.mgrid[X_MIN:X_MAX:201j, Y_MIN:Y_MAX:201j]
+        XX, YY = np.mgrid[X_MIN:X_MAX:n_points*1j, Y_MIN:Y_MAX:n_points*1j]
 
         midnorm = MidpointNormalize(vmin=-1., vcenter=0, vmax=1)
 
