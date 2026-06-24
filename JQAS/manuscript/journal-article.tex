@@ -428,6 +428,36 @@ Here, we present a description of the spatial regions of the basketball court re
 
 \section{Sensitivity analysis}
 
+\subsection{Bandwidth selection} % (fold)
+\label{sec:bandwidth}
+
+\textcolor{blue}{We conducted a sensitivity check concerning the selection of  the smoothing bandwidth using cross-validation rather than fixing it through Silverman's rule. For each player and for each shot outcome (missed and made), the shot locations were first rescaled to $[0, 1] \times [0, 1]$, as in the main analysis. We then fitted Gaussian kernel density estimators over a $20$-point logarithmic grid of candidate bandwidths from $10^{-3}$ to $1$, using the same scalar bandwidth in both spatial directions. Each candidate bandwidth was evaluated using five-fold cross-validation: within each fold, the kernel density estimator was estimated from the training shots and the held-out shots were scored by their log predictive density. The selected bandwidth was the value that maximized the average held-out log-likelihood. This criterion balances local detail and smoothness by favoring bandwidths that predict unseen shot locations well, rather than bandwidths that only reproduce the observed sample. After selecting the bandwidth separately for each player and shot outcome, we repeated the density estimation. The resulting densities show spatial patterns similar to those obtained with Silverman's rule, indicating that the main features of the analysis are not driven by the particular rule-of-thumb bandwidth used in the primary results.}
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.35]{figures/CV/curry_density_normalized_cv.pdf}
+	\includegraphics[scale=0.35]{figures/CV/tatum_density_normalized_cv.pdf}
+	\includegraphics[scale=0.35]{figures/CV/james_density_normalized_cv.pdf}
+	\includegraphics[scale=0.35]{figures/CV/embiid_density_normalized_cv.pdf}
+	\includegraphics[scale=0.35]{figures/CV/jokic_density_normalized_cv.pdf}
+	\\
+	\includegraphics[scale=0.35]{figures/colorbar.pdf}
+  \caption{{\color{blue} Smoothed shot chart densities for five selected NBA players with a bandwitdh selected by cross-validation. The densities have been normalized between $0$ and $1$. The normalization has been applied to the combined data across made and missed shots.}}
+	\label{fig:examples_shooting_density}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.5]{figures/CV/curry_density_normalized_cv.pdf}
+	\includegraphics[scale=0.5]{figures/CV/tatum_density_normalized_cv.pdf}
+	\includegraphics[scale=0.5]{figures/CV/james_density_normalized_cv.pdf}
+	\includegraphics[scale=0.5]{figures/CV/embiid_density_normalized_cv.pdf}
+	\includegraphics[scale=0.5]{figures/CV/jokic_density_normalized_cv.pdf}
+	\caption{Shots charts for five selected NBA players.}
+	\label{fig:examples_shooting_charts}
+\end{figure}
+
+
 \subsection{Grid} % (fold)
 \label{sec:grid}
 
