@@ -307,6 +307,9 @@ Figure~\ref{fig:clusters} presents the estimated scores $c_k$ from~\eqref{eq:kl_
 
 \subsection{Clustering} % (fold)
 \label{sub:clustering}
+
+\subsubsection{Comparison with the five NBA positions}
+
 The $k$-medoids algorithm was applied to the coefficients plotted in Figure~\ref{fig:clusters}, grouping players into five clusters using a Euclidean distance and different weighting schemes for the components. The choice of five clusters aligns with the number of players on the court for each team. Detailed clustering results, including player names and decomposition in eigenfunctions basis, are provided in Appendix~\ref{sec:clustering_results}. Figure~\ref{fig:average_cluster_no_weight} presents the medoids for each cluster when the components are weighted equally. The medoid, as the central observation in a cluster, represents the most representative player within that cluster. The decompositions of these representative players are given in Figure~\ref{fig:cluster_no_weight} in the Appendix. The clustering results can be interpreted based on shooting tendencies. Cluster $1$ groups high-volume perimeter shooters. Cluster $2$ includes players who primarily shoot from the center axis of the basket (represented by ), while players in Cluster $3$ predominantly score from the corners. Clusters $4$ and $5$ are similar, comprising players who primarily score in the paint but also attempt shots from beyond the three-point line, albeit with limited success.
 %\begin{figure}
 %	\centering
@@ -353,7 +356,10 @@ Figure~\ref{fig:average_cluster_weight} presents the cluster medoids for the res
 	\label{fig:average_cluster_weight}
 \end{figure}
 
-Figure~\ref{fig:confusion_mat} presents the confusion matrices between the NBA-defined typology and the two clustering approaches we present. The NBA clusters are based on the usual player classification. Overall, there is minimal agreement between the NBA clusters and the $k$-medoids clusters, whether weights are equal or based on the percentage of variance explained. The Adjusted Rand Index (ARI, \cite{hubertComparingPartitions1985}) between the NBA clusters and the $k$-medoids clusters with equal weights is $0.05$ and between the NBA clusters and the $k$-medoids clusters with variance weights is $0.04$. This is expected as NBA clusters are declarative and not data-based. The only exception is the NBA-defined `center' category, which aligns with the cluster $1$ in the $k$-medoids results when weighted by the variance explained. Cluster $1$ of the weighted $k$-medoids contains players that shoot mostly under the basket, which is coherent with the usual scoring position of centers. Furthermore, there is little agreement between the two $k$-medoids clustering methods themselves. The ARI is equal to $0.1$. The Silhouette coefficient \citep{rousseeuwSilhouettesGraphicalAid1987} for the $k$-medoids with equal weights is equal to $0.04$, while the Silhouette coefficient for the $k$-medoids with variance weights is equal to $0.4$. We also computed the Silhouette coefficient of the NBA clustering using the distance matrix used for the $k$-medoids with equal weights ($-0.05$) and using the distance matrix used for the $k$-medoids with variance weights ($-0.1$).
+Figure~\ref{fig:confusion_mat} presents the confusion matrices between the NBA-defined typology and the two clustering approaches we present. The NBA clusters are based on the usual player classification. Overall, there is minimal agreement between the NBA clusters and the $k$-medoids clusters, whether weights are equal or based on the percentage of variance explained. The Adjusted Rand Index (ARI, \cite{hubertComparingPartitions1985}) between the NBA clusters and the $k$-medoids clusters with equal weights is $0.05$ and between the NBA clusters and the $k$-medoids clusters with variance weights is $0.04$. This is expected as NBA clusters are declarative and not data-based. The only exception is the NBA-defined `center' category, which aligns with the cluster $1$ in the $k$-medoids results when weighted by the variance explained. Cluster $1$ of the weighted $k$-medoids contains players that shoot mostly under the basket, which is coherent with the usual scoring position of centers. Furthermore, there is little agreement between the two $k$-medoids clustering methods themselves. The ARI is equal to $0.1$. The Silhouette coefficient \citep{rousseeuwSilhouettesGraphicalAid1987} for the $k$-medoids with equal weights is equal to $0.04$, while the Silhouette coefficient for the $k$-medoids with variance weights is equal to $0.4$.
+\textcolor{blue}{The Silhouette coefficient for the equal-weighted $k$-medoids partition indicates that the five groups are not clearly separated in the MFPCA score space. Most of the players lie close to the boundary between clusters, and their assignments should therefore be interpreted as descriptive summaries rather than as evidence for five naturally isolated shooting types. The one obtained with variance weights suggests a clearer partition, but this separation is driven mainly by the dominant components and therefore gives less emphasis to subtler spatial contrasts captured by the other components.}
+We also computed the Silhouette coefficient of the NBA clustering using the distance matrix used for the $k$-medoids with equal weights ($-0.05$) and using the distance matrix used for the $k$-medoids with variance weights ($-0.1$).
+\textcolor{blue}{The negative Silhouette coefficients for the NBA position labels reinforce the same conclusion. The conventional positions do not form compact or well-separated groups when evaluated using shooting-pattern distances.}
 
 \begin{figure}
 	\centering
@@ -366,6 +372,22 @@ Figure~\ref{fig:confusion_mat} presents the confusion matrices between the NBA-d
 	\label{fig:confusion_mat}
 \end{figure}
 
+
+\subsubsection{Data-driven clustering}
+
+\textcolor{blue}{The previous clustering analysis fixed $k = 5$ in order to compare the empirical taxonomy with the five conventional NBA position groups. We also considered a fully data-driven choice of $k$ by computing the average Silhouette coefficient for $k = 2, \ldots, 10$, using the same $k$-medoids algorithm and the same distance matrices as above. The Silhouette coefficient compares, for each player, the average distance to players in the same cluster with the average distance to players in the closest competing cluster. Values close to $1$ indicate well-separated clusters, values close to $0$ indicate overlapping clusters, and negative values indicate that some players are closer to another cluster than to their assigned cluster. Thus, this criterion selects the number of clusters that gives the clearest separation in the MFPCA score space, without imposing the basketball-motivated choice $k = 5$.}
+
+\textcolor{blue}{The resulting curves are shown in Figure~\ref{fig:silhouette_plots}. With equal weights for the four MFPCA scores, the maximum Silhouette coefficient is obtained for $k = 3$, but the value is only $0.18$ and is nearly identical to the value obtained for $k = 2$. This indicates that, when all components are treated equally, the data support only a weakly separated low-dimensional clustering structure. The corresponding three clusters contain $41$, $57$ and $75$ players, with Norman Powell, Coby White and Dennis Schröder as medoids. These groups reflect combinations of the secondary shooting-pattern contrasts represented by the later components, such as central versus wing shooting and paint versus perimeter tendencies. In contrast, when the scores are weighted by the proportion of variance explained, the maximum Silhouette coefficient is much larger ($0.54$) and occurs at $k = 2$. The two clusters contain $99$ and $74$ players, with Julius Randle and Jordan Poole as medoids. Because the first component explains most of the variation, the variance-weighted data-driven clustering is mainly a coarse split along the dominant first score rather than a finer taxonomy of shooting styles. Overall, the data-driven analysis suggests that the five-cluster solution is useful for comparison with NBA positions, but the strongest intrinsic grouping in the score space is coarser, especially when the leading component is given its variance-based weight.}
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.5]{figures/silhouette_kmedoids_no_weights.pdf}
+	\hfill
+	\includegraphics[scale=0.5]{figures/silhouette_kmedoids_variance_weights.pdf}
+	\hfill
+	\caption{\textcolor{blue}{Silhouette coefficients for the $k$-medoids clustering with equal weights (left) and variance weights (right), computed for $k = 2, \ldots, 10$.}}
+	\label{fig:silhouette_plots}
+\end{figure}
 
 
 % subsection clustering (end)
@@ -443,19 +465,9 @@ Here, we present a description of the spatial regions of the basketball court re
 	\\
 	\includegraphics[scale=0.35]{figures/colorbar.pdf}
   \caption{{\color{blue} Smoothed shot chart densities for five selected NBA players with a bandwitdh selected by cross-validation. The densities have been normalized between $0$ and $1$. The normalization has been applied to the combined data across made and missed shots.}}
-	\label{fig:examples_shooting_density}
+	\label{fig:examples_shooting_density_cv}
 \end{figure}
 
-\begin{figure}
-	\centering
-	\includegraphics[scale=0.5]{figures/CV/curry_density_normalized_cv.pdf}
-	\includegraphics[scale=0.5]{figures/CV/tatum_density_normalized_cv.pdf}
-	\includegraphics[scale=0.5]{figures/CV/james_density_normalized_cv.pdf}
-	\includegraphics[scale=0.5]{figures/CV/embiid_density_normalized_cv.pdf}
-	\includegraphics[scale=0.5]{figures/CV/jokic_density_normalized_cv.pdf}
-	\caption{Shots charts for five selected NBA players.}
-	\label{fig:examples_shooting_charts}
-\end{figure}
 
 
 \subsection{Grid} % (fold)
@@ -465,11 +477,11 @@ Here, we present a description of the spatial regions of the basketball court re
 
 \begin{figure}
 	\centering
-	\includegraphics[scale=0.2]{figures/grid-51/mean_normalized_51.pdf}
-	\includegraphics[scale=0.2]{figures/grid-51/eigenfunction_1_normalized_51.pdf}
-	\includegraphics[scale=0.2]{figures/grid-51/eigenfunction_2_normalized_51.pdf}
-	\includegraphics[scale=0.2]{figures/grid-51/eigenfunction_3_normalized_51.pdf}
-	\includegraphics[scale=0.2]{figures/grid-51/eigenfunction_4_normalized_51.pdf}
+	\includegraphics[scale=0.35]{figures/grid-51/mean_normalized_51.pdf}
+	\includegraphics[scale=0.35]{figures/grid-51/eigenfunction_1_normalized_51.pdf}
+	\includegraphics[scale=0.35]{figures/grid-51/eigenfunction_2_normalized_51.pdf}
+	\includegraphics[scale=0.35]{figures/grid-51/eigenfunction_3_normalized_51.pdf}
+	\includegraphics[scale=0.35]{figures/grid-51/eigenfunction_4_normalized_51.pdf}
 	\\
 	\includegraphics[scale=0.35]{figures/colorbar2.pdf}
 	\caption{{\color{blue} Estimation of the eigencomponents using a grid of $51 \times 51$.}}
@@ -477,11 +489,11 @@ Here, we present a description of the spatial regions of the basketball court re
 \end{figure}
 \begin{figure}
 	\centering
-	\includegraphics[scale=0.2]{figures/grid-101/mean_normalized_101.pdf}
-	\includegraphics[scale=0.2]{figures/grid-101/eigenfunction_1_normalized_101.pdf}
-	\includegraphics[scale=0.2]{figures/grid-101/eigenfunction_2_normalized_101.pdf}
-	\includegraphics[scale=0.2]{figures/grid-101/eigenfunction_3_normalized_101.pdf}
-	\includegraphics[scale=0.2]{figures/grid-101/eigenfunction_4_normalized_101.pdf}
+	\includegraphics[scale=0.35]{figures/grid-101/mean_normalized_101.pdf}
+	\includegraphics[scale=0.35]{figures/grid-101/eigenfunction_1_normalized_101.pdf}
+	\includegraphics[scale=0.35]{figures/grid-101/eigenfunction_2_normalized_101.pdf}
+	\includegraphics[scale=0.35]{figures/grid-101/eigenfunction_3_normalized_101.pdf}
+	\includegraphics[scale=0.35]{figures/grid-101/eigenfunction_4_normalized_101.pdf}
 	\\
 	\includegraphics[scale=0.35]{figures/colorbar2.pdf}
 	\caption{{\color{blue} Estimation of the eigencomponents using a grid of $101 \times 101$.}}
@@ -489,11 +501,11 @@ Here, we present a description of the spatial regions of the basketball court re
 \end{figure}
 \begin{figure}
 	\centering
-	\includegraphics[scale=0.2]{figures/grid-401/mean_normalized_401.pdf}
-	\includegraphics[scale=0.2]{figures/grid-401/eigenfunction_1_normalized_401.pdf}
-	\includegraphics[scale=0.2]{figures/grid-401/eigenfunction_2_normalized_401.pdf}
-	\includegraphics[scale=0.2]{figures/grid-401/eigenfunction_3_normalized_401.pdf}
-	\includegraphics[scale=0.2]{figures/grid-401/eigenfunction_4_normalized_401.pdf}
+	\includegraphics[scale=0.35]{figures/grid-401/mean_normalized_401.pdf}
+	\includegraphics[scale=0.35]{figures/grid-401/eigenfunction_1_normalized_401.pdf}
+	\includegraphics[scale=0.35]{figures/grid-401/eigenfunction_2_normalized_401.pdf}
+	\includegraphics[scale=0.35]{figures/grid-401/eigenfunction_3_normalized_401.pdf}
+	\includegraphics[scale=0.35]{figures/grid-401/eigenfunction_4_normalized_401.pdf}
 	\\
 	\includegraphics[scale=0.35]{figures/colorbar2.pdf}
 	\caption{{\color{blue} Estimation of the eigencomponents using a grid of $401 \times 401$.}}
@@ -515,11 +527,11 @@ As a sensitivity check, we performed the following exercise:
 
 \begin{figure}
 	\centering
-	\includegraphics[scale=0.2]{figures/bootstrap/bootstrap0_mean-normalized.pdf}
-	\includegraphics[scale=0.2]{figures/bootstrap/bootstrap0_eigenfunction_1-normalized.pdf}
-	\includegraphics[scale=0.2]{figures/bootstrap/bootstrap0_eigenfunction_2-normalized.pdf}
-	\includegraphics[scale=0.2]{figures/bootstrap/bootstrap0_eigenfunction_3-normalized.pdf}
-	\includegraphics[scale=0.2]{figures/bootstrap/bootstrap0_eigenfunction_4-normalized.pdf}
+	\includegraphics[scale=0.35]{figures/bootstrap/bootstrap0_mean-normalized.pdf}
+	\includegraphics[scale=0.35]{figures/bootstrap/bootstrap0_eigenfunction_1-normalized.pdf}
+	\includegraphics[scale=0.35]{figures/bootstrap/bootstrap0_eigenfunction_2-normalized.pdf}
+	\includegraphics[scale=0.35]{figures/bootstrap/bootstrap0_eigenfunction_3-normalized.pdf}
+	\includegraphics[scale=0.35]{figures/bootstrap/bootstrap0_eigenfunction_4-normalized.pdf}
 	\\
 	\includegraphics[scale=0.35]{figures/colorbar2.pdf}
 	\caption{Bootstrap: First sample results. {\color{blue} The normalization is applied to the combined functions across made and missed shots.}}
@@ -527,11 +539,11 @@ As a sensitivity check, we performed the following exercise:
 \end{figure}
 \begin{figure}
 	\centering
-	\includegraphics[scale=0.2]{figures/bootstrap/bootstrap1_mean-normalized.pdf}
-	\includegraphics[scale=0.2]{figures/bootstrap/bootstrap1_eigenfunction_1-normalized.pdf}
-	\includegraphics[scale=0.2]{figures/bootstrap/bootstrap1_eigenfunction_2-normalized.pdf}
-	\includegraphics[scale=0.2]{figures/bootstrap/bootstrap1_eigenfunction_3-normalized.pdf}
-	\includegraphics[scale=0.2]{figures/bootstrap/bootstrap1_eigenfunction_4-normalized.pdf}
+	\includegraphics[scale=0.35]{figures/bootstrap/bootstrap1_mean-normalized.pdf}
+	\includegraphics[scale=0.35]{figures/bootstrap/bootstrap1_eigenfunction_1-normalized.pdf}
+	\includegraphics[scale=0.35]{figures/bootstrap/bootstrap1_eigenfunction_2-normalized.pdf}
+	\includegraphics[scale=0.35]{figures/bootstrap/bootstrap1_eigenfunction_3-normalized.pdf}
+	\includegraphics[scale=0.35]{figures/bootstrap/bootstrap1_eigenfunction_4-normalized.pdf}
 	\\
 	\includegraphics[scale=0.35]{figures/colorbar2.pdf}
 	\caption{Bootstrap: Second sample results. {\color{blue} The normalization is applied to the combined functions across made and missed shots.}}
@@ -539,11 +551,11 @@ As a sensitivity check, we performed the following exercise:
 \end{figure}
 \begin{figure}
 	\centering
-	\includegraphics[scale=0.2]{figures/bootstrap/bootstrap3_mean-normalized.pdf}
-	\includegraphics[scale=0.2]{figures/bootstrap/bootstrap3_eigenfunction_1-normalized.pdf}
-	\includegraphics[scale=0.2]{figures/bootstrap/bootstrap3_eigenfunction_2-normalized.pdf}
-	\includegraphics[scale=0.2]{figures/bootstrap/bootstrap3_eigenfunction_3-normalized.pdf}
-	\includegraphics[scale=0.2]{figures/bootstrap/bootstrap3_eigenfunction_4-normalized.pdf}
+	\includegraphics[scale=0.35]{figures/bootstrap/bootstrap3_mean-normalized.pdf}
+	\includegraphics[scale=0.35]{figures/bootstrap/bootstrap3_eigenfunction_1-normalized.pdf}
+	\includegraphics[scale=0.35]{figures/bootstrap/bootstrap3_eigenfunction_2-normalized.pdf}
+	\includegraphics[scale=0.35]{figures/bootstrap/bootstrap3_eigenfunction_3-normalized.pdf}
+	\includegraphics[scale=0.35]{figures/bootstrap/bootstrap3_eigenfunction_4-normalized.pdf}
 	\\
 	\includegraphics[scale=0.35]{figures/colorbar2.pdf}
 	\caption{Bootstrap: Third sample results. {\color{blue} The normalization is applied to the combined functions across made and missed shots.}}
@@ -551,11 +563,11 @@ As a sensitivity check, we performed the following exercise:
 \end{figure}
 \begin{figure}
 	\centering
-	\includegraphics[scale=0.2]{figures/bootstrap/bootstrap4_mean-normalized.pdf}
-	\includegraphics[scale=0.2]{figures/bootstrap/bootstrap4_eigenfunction_1-normalized.pdf}
-	\includegraphics[scale=0.2]{figures/bootstrap/bootstrap4_eigenfunction_2-normalized.pdf}
-	\includegraphics[scale=0.2]{figures/bootstrap/bootstrap4_eigenfunction_3-normalized.pdf}
-	\includegraphics[scale=0.2]{figures/bootstrap/bootstrap4_eigenfunction_4-normalized.pdf}
+	\includegraphics[scale=0.35]{figures/bootstrap/bootstrap4_mean-normalized.pdf}
+	\includegraphics[scale=0.35]{figures/bootstrap/bootstrap4_eigenfunction_1-normalized.pdf}
+	\includegraphics[scale=0.35]{figures/bootstrap/bootstrap4_eigenfunction_2-normalized.pdf}
+	\includegraphics[scale=0.35]{figures/bootstrap/bootstrap4_eigenfunction_3-normalized.pdf}
+	\includegraphics[scale=0.35]{figures/bootstrap/bootstrap4_eigenfunction_4-normalized.pdf}
 	\\
 	\includegraphics[scale=0.35]{figures/colorbar2.pdf}
 	\caption{Bootstrap: Fourth sample results. {\color{blue} The normalization is applied to the combined functions across made and missed shots.}}
@@ -563,11 +575,11 @@ As a sensitivity check, we performed the following exercise:
 \end{figure}
 \begin{figure}
 	\centering
-	\includegraphics[scale=0.2]{figures/bootstrap/bootstrap2_mean-normalized.pdf}
-	\includegraphics[scale=0.2]{figures/bootstrap/bootstrap2_eigenfunction_1-normalized.pdf}
-	\includegraphics[scale=0.2]{figures/bootstrap/bootstrap2_eigenfunction_2-normalized.pdf}
-	\includegraphics[scale=0.2]{figures/bootstrap/bootstrap2_eigenfunction_3-normalized.pdf}
-	\includegraphics[scale=0.2]{figures/bootstrap/bootstrap2_eigenfunction_4-normalized.pdf}
+	\includegraphics[scale=0.35]{figures/bootstrap/bootstrap2_mean-normalized.pdf}
+	\includegraphics[scale=0.35]{figures/bootstrap/bootstrap2_eigenfunction_1-normalized.pdf}
+	\includegraphics[scale=0.35]{figures/bootstrap/bootstrap2_eigenfunction_2-normalized.pdf}
+	\includegraphics[scale=0.35]{figures/bootstrap/bootstrap2_eigenfunction_3-normalized.pdf}
+	\includegraphics[scale=0.35]{figures/bootstrap/bootstrap2_eigenfunction_4-normalized.pdf}
 	\\
 	\includegraphics[scale=0.35]{figures/colorbar2.pdf}
 	\caption{Bootstrap: Fifth sample results. {\color{blue} The normalization is applied to the combined functions across made and missed shots.}}
