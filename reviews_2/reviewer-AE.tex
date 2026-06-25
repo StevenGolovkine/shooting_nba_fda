@@ -42,22 +42,12 @@ Although the author has argued that lack of consensus in a suitable spatial grid
 }
 
 \reply{
-  The $201 \times 201$ grid is a device used to evaluate smooth density functions and approximate eigenfunctions. Thus, the grid is not used to define regions, impose boundaries or create discrete shooting categories. The considered data are smooth functional densities over the offensive half-court. 
-  {\color{purple}The chosen grid is sufficiently fine such that any discretization error is negligible in the context of our statistical analysis.}
+  We have added a sensitivity analysis to the revised manuscript. The $201 \times 201$ grid is used to evaluate the smooth kernel density estimates and approximate the MFPCA eigenfunctions. It does not define shooting regions, impose boundaries or create discrete shooting categories. To assess the numerical effect of this choice, we repeated the complete estimation procedure using two coarser grids, $51 \times 51$ and $101 \times 101$, and one finer grid, $401 \times 401$.
+  The dominant spatial structures were stable across these resolutions. The mean functions and first eigenfunctions were very similar to those obtained with the $201 \times 201$ grid, and the $401 \times 401$ results were nearly indistinguishable from the main analysis. Some differences appeared for the coarsest $51 \times 51$ grid and for lower-variance components, which is expected because later components are more sensitive to numerical approximation. These results support the use of the $201 \times 201$ grid as a sufficiently fine approximation while avoiding unnecessary computational cost.
 
-  {\color{purple}I would reduce/ remove below, and yes do a sensitivity to Grid size but just in calculating the PCs.}
-  The grid is the resolution at which those smooth functions are representative computationally. The arbitrariness, mentioned in the manuscript, is numerical and not conceptual. At this resolution, the grid is sufficiently dense to represent the smoothed density surfaces while remaining computationally efficient. Increasing the grid resolution would mainly refine the numerical approximation of the same continuous objects. 
+  We also added a bandwidth sensitivity check based on cross-validation. For each player and shot outcome, shot locations were rescaled to $[0,1] \times [0,1]$, and Gaussian kernel density estimators were fitted over a $20$-point logarithmic grid of candidate bandwidths from $10^{-3}$ to $1$. Each candidate bandwidth was evaluated using five-fold cross-validation, with the selected bandwidth maximizing the average held-out log predictive density. The resulting densities showed spatial patterns similar to those obtained with Silverman's rule, indicating that the main features of the analysis are not driven by the particular rule-of-thumb bandwidth used in the primary results.
 
-  {\color{purple}Regarding the bandwidth, Silverman's rule is a standard, well-established and regularly-used bandwidth selection method.
-  It is theoretically grounded and avoids the computational expense of re-smoothing a number of times as is required in resampling approaches (e.g., cross-validation)}
-  
-  
-  \textcolor{blue}{Any idea of what to do, except cross-validation?}
-  {\color{purple}I would do a MINIMAL sensitivity -- maybe a couple of observations via CV, and just trial one larger grid for FPCA and show results are near identical}
-
-  In our approach, the grid is merely an implementation tool, and the bandwidth is chosen by a standard automatic rule.
-
-  \textcolor{blue}{Should we show different grids? Or different bandwidth? It will be quite long to do so.}
+  We have therefore clarified that the grid and bandwidth are numerical implementation choices in the functional-density representation. Unlike fixed spatial bins or manually defined shot zones, they do not determine the substantive categories being analyzed, and the added sensitivity checks show that the main interpretations are stable to reasonable alternatives.
 }
 
 \comment{
@@ -77,18 +67,9 @@ Related to the previous point, it is clear that densities are able to examine pa
 The choice of $k= 5$ is clearly not data-driven. What would a true data-driven clustering look like? Certainly there are more than 5 shot pattern styles, so what information can we really gather from the clustering beyond observing that they clusters with $k= 5$ are poorly aligned with player position? Also, although several metrics on the clustering are reported (ARI, Silhouette score), the relevance of the values is not discussed or their bearing on the reliability and impact of the clustering results.}
 
 \reply{
-  \textcolor{blue}{Why should everything be data-driven? I think it makes sense to have $k=5$...}
-  {\color{purple}I agree..}
+  We agree that the choice of $k = 5$ is not data-driven. Its purpose is to provide a controlled comparison with the five conventional NBA position groups, not to claim that there are exactly five natural shooting styles. We have clarified this point in the revised manuscript and added a new \emph{Data-driven clustering} subsection.
 
-  The choice of $k = 5$ is motivated by the comparison with the five NBA defined positions, not by a data-driven cluster-selection criterion.
-  {\color{purple}Generally, it is accepted that the five players on the NBA court occupy five distinct positions. We use this knowledge to constrain our problem which facilitates a comparison of our five-class, data-driven taxonomy with the conventional five-class NBA typology.
-  While our methodology itself is empirical and data driven, the five-cluster constraint is informed by sport-specific knowledge, which we see as a benefit in practical data analysis settings.
-  That being said, we now provide a sensitivity analysis to the number of clusters in the revised supplement...
-  }
-  
-  
-  The clustering should be interpreted as an illustrative topology of players and not as evidence that there are exactly five natural shooting styles in the NBA.
+  In that subsection, a fully data-driven version of the clustering keeps the same MFPCA score representation, the same $k$-medoids algorithm and the same distance matrices, but selects the number of clusters by maximizing the average Silhouette coefficient over $k = 2, \ldots, 10$. With equal weights for the four MFPCA scores, the maximum Silhouette coefficient is $0.18$ and is obtained for $k = 3$. The three clusters contain $41$, $57$ and $75$ players, with Norman Powell, Coby White and Dennis Schröder as medoids. With variance-based weights, the maximum Silhouette coefficient is $0.54$ and is obtained for $k = 2$. The two clusters contain $99$ and $74$ players, with Julius Randle and Jordan Poole as medoids. Because the first component explains most of the variation, the variance-weighted data-driven clustering is mainly a split along the first score.
 
-  \textcolor{blue}{Here, we'll probably have to add some silhouette plot and return the number of clusters that maximise the silhouette.}
-  {\color{purple}I think so, just to appease reviewer!}
+  The negative Silhouette coefficients for the NBA position labels ($-0.05$ and $-0.1$, depending on the distance matrix) reinforce that conventional positions are not compact or well-separated groups when evaluated using shooting-pattern distances. For the five-cluster $k$-medoids solutions, the equal-weighted Silhouette coefficient of $0.04$ indicates weak separation and supports interpreting those clusters as descriptive summaries rather than as reliable evidence of five isolated shooting types. The variance-weighted Silhouette coefficient of $0.4$ indicates a clearer partition, but one driven mainly by the dominant components. Thus, the $k = 5$ analysis is useful for comparison with NBA positions, while the data-driven analysis suggests that the strongest intrinsic grouping in the MFPCA score space is coarser.
 }
