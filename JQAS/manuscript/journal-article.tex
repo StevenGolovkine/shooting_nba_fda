@@ -375,9 +375,8 @@ We also computed the Silhouette coefficient of the NBA clustering using the dist
 
 \subsubsection{Data-driven clustering}
 
-\textcolor{blue}{The previous clustering analysis fixed $k = 5$ in order to compare the empirical taxonomy with the five conventional NBA position groups. We also considered a fully data-driven choice of $k$ by computing the average Silhouette coefficient for $k = 2, \ldots, 10$, using the same $k$-medoids algorithm and the same distance matrices as above. The Silhouette coefficient compares, for each player, the average distance to players in the same cluster with the average distance to players in the closest competing cluster. Values close to $1$ indicate well-separated clusters, values close to $0$ indicate overlapping clusters, and negative values indicate that some players are closer to another cluster than to their assigned cluster. Thus, this criterion selects the number of clusters that gives the clearest separation in the MFPCA score space, without imposing the basketball-motivated choice $k = 5$.}
+\textcolor{blue}{The previous clustering analysis fixed $k = 5$ in order to compare the empirical taxonomy with the five conventional NBA position groups. We also considered a fully data-driven choice of $k$ by computing the average Silhouette coefficient for $k = 2, \ldots, 10$, using the same $k$-medoids algorithm and the same distance matrices as above. This criterion selects the number of clusters that gives the clearest separation in the MFPCA score space, without imposing the basketball-motivated choice $k = 5$. The results are shown in Figure~\ref{fig:silhouette_plots}.}
 
-\textcolor{blue}{The resulting curves are shown in Figure~\ref{fig:silhouette_plots}. With equal weights for the four MFPCA scores, the maximum Silhouette coefficient is obtained for $k = 3$, but the value is only $0.18$ and is nearly identical to the value obtained for $k = 2$. This indicates that, when all components are treated equally, the data support only a weakly separated low-dimensional clustering structure. The corresponding three clusters contain $41$, $57$ and $75$ players, with Norman Powell, Coby White and Dennis Schröder as medoids. These groups reflect combinations of the secondary shooting-pattern contrasts represented by the later components, such as central versus wing shooting and paint versus perimeter tendencies. In contrast, when the scores are weighted by the proportion of variance explained, the maximum Silhouette coefficient is much larger ($0.54$) and occurs at $k = 2$. The two clusters contain $99$ and $74$ players, with Julius Randle and Jordan Poole as medoids. Because the first component explains most of the variation, the variance-weighted data-driven clustering is mainly a coarse split along the dominant first score rather than a finer taxonomy of shooting styles. Overall, the data-driven analysis suggests that the five-cluster solution is useful for comparison with NBA positions, but the strongest intrinsic grouping in the score space is coarser, especially when the leading component is given its variance-based weight.}
 
 \begin{figure}
 	\centering
@@ -389,6 +388,29 @@ We also computed the Silhouette coefficient of the NBA clustering using the dist
 	\label{fig:silhouette_plots}
 \end{figure}
 
+\textcolor{blue}{With equal weights for the four MFPCA scores, the maximum Silhouette coefficient is $0.18$ and is obtained for $k = 3$. The corresponding three clusters contain $41$, $57$ and $75$ players, with Norman Powell, Coby White and Dennis Schröder as medoids respectively. These groups reflect combinations of the secondary shooting-pattern contrasts represented by the later components, such as central versus wing shooting and paint versus perimeter tendencies.}
+
+\begin{figure}
+  \centering
+  \includegraphics[scale=0.35]{figures/data-driven/kmedoids_average_player_1-normalized-data.pdf}
+  \includegraphics[scale=0.35]{figures/data-driven/kmedoids_average_player_2-normalized-data.pdf}
+  \includegraphics[scale=0.35]{figures/data-driven/kmedoids_average_player_3-normalized-data.pdf}
+  \caption{\textcolor{blue}{Most representative player from each cluster according to the $k$-medoids algorithm using a Euclidean distance with equal weights for each component and the number of clusters selected as the maximiser of the Silhouette coefficients. The normalization is applied to the combined functions across made and missed shots.}}
+  \label{fig:clustering_k3}
+\end{figure}
+
+\textcolor{blue}{In contrast, when the scores are weighted by the proportion of variance explained, the maximum Silhouette coefficient is $0.54$ and is obtained for $k = 2$. The two clusters contain $99$ and $74$ players, with Julius Randle and Jordan Poole as medoids respectively. Because the first component explains most of the variation, the variance-weighted data-driven clustering is mainly a split along the first score.}
+
+
+\begin{figure}
+  \centering
+  \includegraphics[scale=0.35]{figures/data-driven/kmedoids_average_player_1_weighted-normalized-data-driven.pdf}
+  \includegraphics[scale=0.35]{figures/data-driven/kmedoids_average_player_2_weighted-normalized-data-driven.pdf}
+  \caption{\textcolor{blue}{Most representative player from each cluster according to the $k$-medoids algorithm using a Euclidean distance with weights defined using the percentage of variance explained by each component and the number of clusters selected as the maximiser of the Silhouette coefficients. The normalization is applied to the combined functions across made and missed shots.}}
+  \label{fig:clustering_k3}
+\end{figure}
+
+\textcolor{blue}{Overall, the data-driven analysis suggests that the five-cluster solution is useful for comparison with NBA positions, but the strongest intrinsic grouping in the score space is coarser, especially when the leading component is given its variance-based weight.}
 
 % subsection clustering (end)
 
